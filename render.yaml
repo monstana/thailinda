@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: thailinda-api
+    runtime: ruby
+    region: singapore
+    rootDir: backend
+    buildCommand: bundle install
+    preDeployCommand: bin/rails db:migrate && bin/rails db:seed
+    startCommand: bundle exec puma -C config/puma.rb
+    healthCheckPath: /up
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: thailinda-db
+          property: connectionString
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: TYPHOON_API_KEY
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+
+databases:
+  - name: thailinda-db
+    region: singapore
+    databaseName: thailinda_production
+    user: thailinda

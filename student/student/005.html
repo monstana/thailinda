@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="light" lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 8px 0 0 rgba(112, 93, 0, 1);
+        }
+
+        .chunky-shadow-active:active {
+            box-shadow: 0 0px 0 0 rgba(112, 93, 0, 1);
+            transform: translateY(8px);
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            top: -20px;
+            animation: fall linear forwards;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .bounce-slow {
+            animation: bounce 3s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .star-burst {
+            filter: drop-shadow(0 0 15px rgba(255, 217, 61, 0.6));
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#e8c426",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#221b00",
+                        "primary-fixed": "#ffe173",
+                        "surface-variant": "#dbe1ff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "on-secondary-container": "#002e60",
+                        "tertiary-container": "#8ff199",
+                        "surface-container": "#ebedff",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "on-tertiary-container": "#00702a",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-background": "#131a32",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d2d9f8",
+                        "on-primary-container": "#725e00",
+                        "background": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary": "#005db8",
+                        "on-surface": "#131a32",
+                        "surface-container-low": "#f3f3ff",
+                        "surface-tint": "#705d00",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#282f48",
+                        "primary-container": "#ffd93d",
+                        "outline": "#7e7761",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#e8c426",
+                        "tertiary-fixed": "#96f89f",
+                        "on-tertiary-fixed": "#002107",
+                        "secondary-container": "#4c96fe",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#705d00",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-surface-variant": "#4d4633",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e3e7ff",
+                        "on-secondary-fixed": "#001b3e",
+                        "surface-bright": "#faf8ff",
+                        "inverse-on-surface": "#eff0ff",
+                        "tertiary": "#006e29",
+                        "outline-variant": "#d0c6ad"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "20px",
+                        "touch-target-min": "56px",
+                        "gutter": "24px",
+                        "margin-mobile": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-x-hidden">
+    <!-- Header -->
+    <header
+        class="flex justify-between items-center w-full px-margin-mobile py-6 sticky top-0 z-40 bg-background/80 backdrop-blur-sm">
+        <div class="flex items-center gap-2">
+            <div class="bg-primary-container p-2 rounded-full shadow-sm">
+                <span class="material-symbols-outlined text-primary" data-icon="stars">stars</span>
+            </div>
+            <h1 class="text-primary font-headline-md text-2xl tracking-tight">ไทยลินดา</h1>
+        </div>
+        <button
+            class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-high text-primary hover:bg-surface-container-highest transition-colors">
+            <span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
+        </button>
+    </header>
+    <main class="flex-grow flex flex-col items-center px-margin-mobile py-4 relative overflow-hidden">
+        <!-- Confetti Container -->
+        <div class="absolute inset-0 pointer-events-none" id="confetti-container"></div>
+        <!-- Celebration Section -->
+        <div class="w-full max-w-md flex flex-col items-center text-center space-y-8 z-10">
+            <!-- Congratulatory Title -->
+            <h2 class="font-display-thai text-display-thai text-primary drop-shadow-sm">เก่งมากเลย!</h2>
+            <!-- Score Badge (Star Shape Effect) -->
+            <div class="flex flex-col items-center space-y-4 py-4">
+                <div class="relative">
+                    <div
+                        class="w-48 h-48 rounded-full border-8 border-white shadow-xl overflow-hidden bg-surface-container">
+                        <img alt="Student Profile" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida/ADBb0ujGZ49jTpHps0P26ZDddd1m88JThiVOBecNJ7AS6x9XZvKSAY4c_7TsxRHASInXxqABvNeoe25Lu2vmDYy58jFY5NyO6h9j4ZTp0H84KT2QByVTavO0RxNR3sWNhc2-GpGFURPokCsgX_Lbqyg3Sv3pPdeVPQ328bhzmfadR8uG9qvPd3-_LOG5ylbijyGKZ79mpTPUp8IHEeTTmYb47A7LZeId1DBxAJwh-xr-Tn7uQYamHFwA6gR4zA">
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-primary text-4xl absolute -top-2 -right-2 star-burst bg-white rounded-full p-1"
+                        data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="font-headline-md text-headline-md text-on-surface">น้องมานะ</h3>
+                    <p class="font-label-lg text-label-lg text-on-surface-variant opacity-70">ID: 6601001</p>
+                </div>
+            </div>
+            <!-- Mascot / Decoration Area -->
+            <div
+                class="bg-secondary-container text-on-secondary text-center px-8 py-4 rounded-full shadow-[0_4px_0_0_#00468c] inline-block animate-bounce">
+                <p class="font-headline-md text-headline-md">คุณทำได้ 8/10 คะแนน</p>
+            </div>
+            <!-- Recommendation Card -->
+            <div
+                class="bg-surface-container-lowest w-full p-8 rounded-xl border-4 border-dashed border-outline-variant/30 shadow-sm space-y-4">
+                <div class="flex items-center justify-center gap-2 text-tertiary">
+                    <span class="material-symbols-outlined animate-bounce" data-icon="tips_and_updates"
+                        style="font-variation-settings: 'FILL' 1;">tips_and_updates</span>
+                    <span class="font-headline-md text-xl">คำแนะนำสำหรับคุณ</span>
+                </div>
+                <div class="space-y-1">
+                    <p class="font-body-lg text-on-surface-variant">ระดับของคุณคือ:</p>
+                    <div class="bg-tertiary/5 py-2 px-4 rounded-full border border-tertiary/20 inline-block">
+                        <span class="font-headline-md text-primary">เริ่มเรียนที่ บทที่ 1 พยัญชนะไทย</span>
+                    </div>
+                </div>
+            </div>
+            <!-- CTA Button -->
+            <div class="w-full pb-8">
+                <button
+                    class="w-full bg-primary-container text-on-primary-container font-headline-md text-2xl py-6 rounded-full chunky-shadow chunky-shadow-active transition-all duration-100 flex items-center justify-center gap-4 hover:scale-[1.02] active:scale-95 group">
+                    <span>เริ่มเรียนเลย!</span>
+                    <span class="material-symbols-outlined text-3xl group-hover:translate-x-2 transition-transform"
+                        data-icon="rocket_launch">rocket_launch</span>
+                </button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const container = document.getElementById('confetti-container');
+        const colors = ['#ffd93d', '#4c96fe', '#8ff199', '#705d00', '#005db8', '#ba1a1a'];
+
+        function createConfetti(amount = 30) {
+            for (let i = 0; i < amount; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 12 + 8 + 'px';
+                piece.style.width = size;
+                piece.style.height = size;
+                piece.style.animationDuration = Math.random() * 2 + 1.5 + 's';
+                piece.style.animationDelay = Math.random() * 0.8 + 's';
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+                container.appendChild(piece);
+
+                setTimeout(() => piece.remove(), 4000);
+            }
+        }
+
+        window.onload = () => {
+            // Multi-burst effect
+            createConfetti(40);
+            setTimeout(() => createConfetti(20), 500);
+            setTimeout(() => createConfetti(20), 1000);
+
+            // Periodic subtle bursts
+            setInterval(() => createConfetti(15), 5000);
+        };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="th" style="">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-press:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        body {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf8ff",
+                        "outline": "#7e7761",
+                        "on-surface-variant": "#4d4633",
+                        "inverse-surface": "#282f48",
+                        "surface-container-highest": "#dbe1ff",
+                        "on-primary-container": "#725e00",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "surface-tint": "#705d00",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#8ff199",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-primary-fixed": "#221b00",
+                        "outline-variant": "#d0c6ad",
+                        "on-secondary-container": "#002e60",
+                        "primary-fixed": "#ffe173",
+                        "surface-container-high": "#e3e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "on-secondary-fixed": "#001b3e",
+                        "tertiary": "#006e29",
+                        "background": "#faf8ff",
+                        "primary-container": "#ffd93d",
+                        "on-background": "#131a32",
+                        "on-tertiary-fixed": "#002107",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-surface": "#131a32",
+                        "secondary-container": "#4c96fe",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "error": "#ba1a1a",
+                        "secondary": "#005db8",
+                        "on-tertiary-container": "#00702a",
+                        "surface-container": "#ebedff",
+                        "inverse-primary": "#e8c426",
+                        "primary": "#705d00",
+                        "tertiary-fixed": "#96f89f",
+                        "surface-dim": "#d2d9f8",
+                        "surface-variant": "#dbe1ff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "touch-target-min": "56px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+    <!-- Top App Bar -->
+    <header
+        class="docked full-width top-0 bg-background flex justify-between items-center w-full px-margin-mobile py-4 sticky z-50">
+        <div class="flex items-center gap-3">
+            <div
+                class="w-12 h-12 bg-primary-container rounded-full overflow-hidden flex items-center justify-center border-2 border-primary">
+                <img alt="Mascot" class="w-full h-full object-cover"
+                    data-alt="A cheerful and friendly cartoon tiger mascot with large expressive eyes and a warm smile, wearing a small student cap. The illustration is vibrant and playful, designed with soft 3D-like shading in a bright educational setting. The style is joyful and tactile, perfectly suited for a 7-year-old child's learning app interface."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYNVrsb9Tav4oLhsODnx9aQ4WLivWlOAoEuxMgZF35QoLNCp-AQeNEjd6RJhWourBqPVvCjhsYrRzk7PwXcp5KqCglnUF-v8uIlQtOVyBJDBLU0shTuAn5wSIhFi2ILIqtgJ75dFp-TPiX0CfQ0TJx54KcRL3f5yXKInqU6JDb4s0Q8vI2rdHpLOsy6vIm6sdcE8LVaTy9OYgpYzg-wPyYANs5rVR6OP2XBe-7uU5vmiHJ18xAZAJVlXSHWHg02FUl7WdpjSkwS1A">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">ไทยลินดา</h1>
+        </div>
+        <button
+            class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container-highest text-primary transition-transform active:scale-90">
+            <span class="material-symbols-outlined" style="font-variation-settings: &quot;FILL&quot; 1;">stars</span>
+        </button>
+    </header>
+    <main class="px-margin-mobile pt-4 space-y-8">
+        <!-- Hero Classroom Card -->
+        <section class="relative group">
+            <div class="bg-primary-container rounded-lg p-6 chunky-shadow border-b-4 border-primary/20 relative overflow-hidden"
+                style="opacity: 1; transform: translateY(0px); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                <div class="relative z-10">
+                    <span
+                        class="bg-on-primary-container text-primary-container px-3 py-1 rounded-full font-label-lg text-[12px] mb-2 inline-block">ชั้นประถมศึกษาปีที่
+                        1</span>
+                    <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary-container mb-2">
+                        กลุ่มเรียนภาษาไทย ป.1/2</h2>
+                    <div class="flex items-center gap-2 mt-4">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                        <p class="font-body-md text-on-primary-container">ครูประจำชั้น: <span
+                                class="font-bold">คุณครูใจดี มีสุข</span></p>
+                    </div>
+                </div>
+                <!-- Background Decorative Elements -->
+                <div class="absolute -right-4 -bottom-4 opacity-20">
+                    <span class="material-symbols-outlined text-[120px]">school</span>
+                </div>
+            </div>
+        </section>
+        <!-- Assignments Section -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-end">
+                <h3 class="font-headline-md text-headline-md text-on-surface">ภาระงาน</h3>
+                <span class="font-label-lg text-primary">ดูทั้งหมด</span>
+            </div>
+            <div class="grid gap-6">
+                <!-- Task Card 1 -->
+                <div class="bg-surface-container-lowest p-5 rounded-xl border-2 border-outline-variant chunky-shadow transition-all active:translate-y-1 active:shadow-none cursor-pointer"
+                    style="opacity: 1; transform: translateY(0px); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="flex gap-4">
+                        <div
+                            class="w-14 h-14 bg-secondary-container rounded-xl flex items-center justify-center text-white shrink-0">
+                            <span class="material-symbols-outlined text-[32px]">menu_book</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-headline-md text-[20px] text-on-surface">ฝึกอ่านสระอา</h4>
+                                <span
+                                    class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-[12px] font-bold">ต้องทำ</span>
+                            </div>
+                            <p class="font-body-md text-on-surface-variant text-[16px] mt-1">
+                                อ่านออกเสียงคำที่มีสระอาในหน้า 12-15</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Task Card 2 -->
+                <div class="bg-surface-container-lowest p-5 rounded-xl border-2 border-outline-variant chunky-shadow transition-all active:translate-y-1 active:shadow-none cursor-pointer"
+                    style="opacity: 1; transform: translateY(0px); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="flex gap-4">
+                        <div
+                            class="w-14 h-14 bg-tertiary-container rounded-xl flex items-center justify-center text-on-tertiary-container shrink-0">
+                            <span class="material-symbols-outlined text-[32px]">edit</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-headline-md text-[20px] text-on-surface">คัดลายมือ ก-ฮ</h4>
+                                <span
+                                    class="bg-tertiary-fixed text-on-tertiary-fixed-variant px-3 py-1 rounded-full text-[12px] font-bold">เสร็จแล้ว</span>
+                            </div>
+                            <p class="font-body-md text-on-surface-variant text-[16px] mt-1">
+                                คัดพยัญชนะไทยตัวบรรจงเต็มบรรทัด</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Task Card 3 -->
+                <div class="bg-surface-container-lowest p-5 rounded-xl border-2 border-outline-variant chunky-shadow transition-all active:translate-y-1 active:shadow-none cursor-pointer"
+                    style="opacity: 1; transform: translateY(0px); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                    <div class="flex gap-4">
+                        <div
+                            class="w-14 h-14 bg-primary-container rounded-xl flex items-center justify-center text-on-primary-container shrink-0">
+                            <span class="material-symbols-outlined text-[32px]">spellcheck</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start">
+                                <h4 class="font-headline-md text-[20px] text-on-surface">เขียนตามคำบอก</h4>
+                                <span
+                                    class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-[12px] font-bold">ต้องทำ</span>
+                            </div>
+                            <p class="font-body-md text-on-surface-variant text-[16px] mt-1">ทดสอบการเขียนคำง่ายๆ 10 คำ
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Bottom Navigation Bar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-[0_-4px_0_0_rgba(0,0,0,0.05)] border-t-4 border-outline-variant rounded-t-lg">
+        <!-- บทเรียน -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">menu_book</span>
+            <span class="text-[12px] font-label-lg">บทเรียน</span>
+        </a>
+        <!-- ห้องเรียน (Active) -->
+        <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-2 py-2 transition-all flex-1 font-bold"
+            href="#">
+            <span class="material-symbols-outlined mb-1">school</span>
+            <span class="text-[12px] font-label-lg">ห้องเรียน</span>
+        </a>
+        <!-- ผลการเรียน -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">star</span>
+            <span class="text-[12px] font-label-lg">ผลการเรียน</span>
+        </a>
+        <!-- โปรไฟล์ -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">person</span>
+            <span class="text-[12px] font-label-lg">โปรไฟล์</span>
+        </a>
+    </nav>
+    <script>
+        // Micro-interactions for tactile feedback
+        document.querySelectorAll('button, a, .cursor-pointer').forEach(el => {
+            el.addEventListener('touchstart', function () {
+                this.classList.add('opacity-80');
+            });
+            el.addEventListener('touchend', function () {
+                this.classList.remove('opacity-80');
+            });
+        });
+
+        // Simple animation for progress or greeting
+        window.onload = () => {
+            const cards = document.querySelectorAll('.chunky-shadow');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        };
+    </script>
+
+
+</body>
+
+</html>

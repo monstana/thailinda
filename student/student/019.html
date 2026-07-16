@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+    <title>Thai Linda - ฝึกพูดและประเมินผล</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .bg-dots {
+            background-image: radial-gradient(circle, currentColor 2px, transparent 2px);
+            background-size: 24px 24px;
+        }
+
+        .wave-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .mic-active {
+            animation: pulse-ring 1.5s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(232, 196, 38, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 20px rgba(232, 196, 38, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(232, 196, 38, 0);
+            }
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#96f89f",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "outline": "#7e7761",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#725e00",
+                        "background": "#faf8ff",
+                        "on-surface-variant": "#4d4633",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#006e29",
+                        "on-surface": "#131a32",
+                        "secondary": "#005db8",
+                        "tertiary-container": "#8ff199",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-background": "#131a32",
+                        "on-secondary-fixed": "#001b3e",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#705d00",
+                        "on-primary-fixed": "#221b00",
+                        "surface-variant": "#dbe1ff",
+                        "surface-container": "#ebedff",
+                        "on-primary-fixed-variant": "#554500",
+                        "surface-container-high": "#e3e7ff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#d6e3ff",
+                        "primary-fixed": "#ffe173",
+                        "outline-variant": "#d0c6ad",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#002e60",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#d2d9f8",
+                        "surface-container-low": "#f3f3ff",
+                        "inverse-primary": "#e8c426",
+                        "inverse-surface": "#282f48",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "primary": "#705d00",
+                        "on-tertiary-container": "#00702a",
+                        "primary-container": "#ffd93d",
+                        "secondary-container": "#4c96fe",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#002107",
+                        "surface": "#faf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "56px",
+                        "gutter": "24px",
+                        "margin-mobile": "24px",
+                        "card-padding": "20px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md min-h-screen relative overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface flex justify-between items-center px-margin-mobile h-[64px] shadow-[0_4px_0_0_rgba(0,0,0,0.05)]">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+                <img alt="Mascot" class="w-8 h-8 object-contain"
+                    data-alt="A friendly and cute cartoon elephant character with large expressive eyes and a warm smile, wearing a traditional Thai silk scarf. The character is rendered in a soft 3D claymorphic style with bright, cheerful colors against a warm off-white background, embodying the 'Educational Joy' brand identity. The lighting is high-key and soft, creating a welcoming and safe atmosphere for young learners."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGxRMTy1gtO_IIGih1QfCYRS2kRb9lPf7K19e5ZlxeMaNtxHcVthnrSWOCvL5o426Nr5RyP9AAUcwD3ZHlnwVkUX3f4YSxYYurqmofNK3ALP0DBH--5AZ2VhPomZwnjF6wAxpw8x1CZ7v-kx-BiDlmB_Oym_JqwvsOz2DmSESb89ZmWHv6BCC2tFYjoPEI9Krd4pgFSPHX0XJInSakkZa1jLxDzODxYkL2wvEPe83dHocQMpz5O4rufg4jt_fNQw7-jE__GOtNNt0">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">ไทยลินดา</h1>
+        </div>
+        <button
+            class="material-symbols-outlined text-primary hover:opacity-80 active:translate-y-1 transition-transform"
+            data-icon="stars">stars</button>
+    </header>
+    <!-- Main Content -->
+    <main class="pt-24 pb-32 px-margin-mobile max-w-4xl mx-auto relative min-h-screen">
+        <!-- Playful Background Decorations -->
+        <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+            <div class="absolute top-20 left-10 text-primary-fixed-dim opacity-10 bg-dots w-40 h-40"></div>
+            <div
+                class="absolute bottom-40 right-[-20px] text-secondary-fixed opacity-10 bg-dots w-64 h-64 rounded-full">
+            </div>
+            <div class="wave-container">
+                <svg class="w-full h-full fill-surface-container" viewBox="0 0 1440 320">
+                    <path
+                        d="M0,192L48,197.3C96,203,192,213,288,192C384,171,480,117,576,112C672,107,768,149,864,165.3C960,181,1056,171,1152,144C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Speaking Bubbles Grid -->
+        <div class="flex flex-wrap justify-center gap-6 mb-12" id="word-container">
+            <!-- Word: ตา -->
+            <div class="group cursor-pointer relative" onclick="toggleWord(this)">
+                <div
+                    class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-white border-4 border-secondary-fixed rounded-full shadow-md transition-all active:scale-95">
+                    <span class="font-display-thai text-4xl text-secondary">ตา</span>
+                </div>
+                <div class="absolute -top-2 -right-2 opacity-0 group-[.completed]:opacity-100 transition-opacity">
+                    <span class="material-symbols-outlined text-tertiary text-3xl"
+                        style="font-variation-settings: 'FILL' 1;">stars</span>
+                </div>
+            </div>
+            <!-- Word: กา (Active Example) -->
+            <div class="group cursor-pointer relative active-word" onclick="toggleWord(this)">
+                <div
+                    class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-primary-container border-4 border-primary-fixed rounded-full shadow-md transition-all ring-4 ring-primary-fixed/30 animate-pulse">
+                    <span class="font-display-thai text-4xl text-on-primary-container">กา</span>
+                </div>
+            </div>
+            <!-- Word: มา -->
+            <div class="group cursor-pointer relative" onclick="toggleWord(this)">
+                <div
+                    class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-white border-4 border-tertiary-fixed rounded-full shadow-md transition-all active:scale-95">
+                    <span class="font-display-thai text-4xl text-tertiary">มา</span>
+                </div>
+            </div>
+            <!-- Word: หา -->
+            <div class="group cursor-pointer relative" onclick="toggleWord(this)">
+                <div
+                    class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-white border-4 border-primary-fixed rounded-full shadow-md transition-all active:scale-95">
+                    <span class="font-display-thai text-4xl text-primary">หา</span>
+                </div>
+            </div>
+            <!-- Word: ปลา -->
+            <div class="group cursor-pointer relative" onclick="toggleWord(this)">
+                <div
+                    class="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-white border-4 border-outline-variant rounded-full shadow-md transition-all active:scale-95">
+                    <span class="font-display-thai text-4xl text-on-surface-variant">ปลา</span>
+                </div>
+            </div>
+        </div>
+        <!-- Evaluation Feedback -->
+        <div class="hidden text-center animate-bounce mb-8" id="feedback">
+            <span class="font-headline-md text-tertiary">เก่งมาก! ออกเสียงชัดเจนสุดๆ</span>
+        </div>
+        <!-- Microphone Button Area -->
+        <div class="flex flex-col items-center gap-4 mt-8 pb-12">
+            <button
+                class="w-24 h-24 md:w-32 md:h-32 bg-primary-container rounded-full flex items-center justify-center shadow-[0_8px_0_0_rgba(114,94,0,0.2)] border-2 border-primary-fixed transition-all active:translate-y-2 active:shadow-none hover:brightness-105 group relative"
+                id="mic-btn" onclick="toggleMic()">
+                <span class="material-symbols-outlined text-on-primary-container text-5xl"
+                    style="font-variation-settings: 'FILL' 1;">mic</span>
+            </button>
+            <p class="font-label-lg text-label-lg text-primary uppercase tracking-widest mt-2">แตะเพื่อพูด</p>
+        </div>
+    </main>
+
+    <script>
+        let isRecording = false;
+
+        function toggleMic() {
+            const btn = document.getElementById('mic-btn');
+            isRecording = !isRecording;
+
+            if (isRecording) {
+                btn.classList.add('mic-active');
+                btn.querySelector('span').innerText = 'graphic_eq';
+                document.getElementById('feedback').classList.add('hidden');
+            } else {
+                btn.classList.remove('mic-active');
+                btn.querySelector('span').innerText = 'mic';
+                completeSession();
+            }
+        }
+
+        function toggleWord(el) {
+            el.classList.toggle('completed');
+            const inner = el.querySelector('div');
+            if (el.classList.contains('completed')) {
+                inner.classList.remove('bg-white');
+                inner.classList.add('bg-tertiary-container', 'border-tertiary');
+                inner.querySelector('span').classList.add('text-on-tertiary-container');
+            } else {
+                inner.classList.add('bg-white');
+                inner.classList.remove('bg-tertiary-container', 'border-tertiary');
+                inner.querySelector('span').classList.remove('text-on-tertiary-container');
+            }
+        }
+
+        function completeSession() {
+            const words = document.querySelectorAll('#word-container > div');
+            words.forEach((w, index) => {
+                setTimeout(() => {
+                    w.classList.add('completed');
+                    const inner = w.querySelector('div');
+                    inner.classList.remove('bg-white', 'animate-pulse', 'ring-4');
+                    inner.classList.add('bg-tertiary-container', 'border-tertiary', 'transition-all', 'duration-500');
+                    inner.querySelector('span').classList.add('text-on-tertiary-container');
+
+                    if (index === words.length - 1) {
+                        document.getElementById('feedback').classList.remove('hidden');
+                    }
+                }, index * 200);
+            });
+        }
+    </script>
+</body>
+
+</html>

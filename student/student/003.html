@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="th" style="">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Thai Linda - Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "secondary": "#005db8",
+                        "tertiary-container": "#8ff199",
+                        "outline": "#7e7761",
+                        "surface-tint": "#705d00",
+                        "surface-variant": "#dbe1ff",
+                        "surface": "#faf8ff",
+                        "primary-fixed": "#ffe173",
+                        "outline-variant": "#d0c6ad",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-background": "#131a32",
+                        "tertiary-fixed": "#96f89f",
+                        "surface-container-low": "#f3f3ff",
+                        "on-surface-variant": "#4d4633",
+                        "surface-container": "#ebedff",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "on-surface": "#131a32",
+                        "inverse-surface": "#282f48",
+                        "inverse-primary": "#e8c426",
+                        "background": "#faf8ff",
+                        "tertiary": "#006e29",
+                        "primary": "#705d00",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff0ff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-container": "#4c96fe",
+                        "surface-container-high": "#e3e7ff",
+                        "primary-container": "#ffd93d",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#554500",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#002e60",
+                        "surface-dim": "#d2d9f8",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-container": "#00702a",
+                        "on-tertiary-fixed": "#002107",
+                        "on-primary-container": "#725e00",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed": "#001b3e",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "56px",
+                        "margin-mobile": "24px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .chunky-button {
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .chunky-button:active {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        body {
+            background-color: #faf8ff;
+            background-image: radial-gradient(#dbe1ff 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .input-focus-ring:focus-within {
+            box-shadow: 0 0 0 4px rgba(112, 93, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-body-md text-on-surface min-h-screen flex flex-col items-center justify-center p-margin-mobile">
+    <!-- Top App Bar (Simplified for Login) -->
+    <header class="w-full top-0 absolute flex items-center justify-center px-margin-mobile h-touch-target-min">
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">Thai Linda</h1>
+    </header>
+    <main class="w-full max-w-md flex flex-col gap-unit * 4 mt-12">
+        <!-- Mascot Section -->
+        <div class="flex flex-col items-center gap-4 relative">
+
+            <!-- Character Speech Bubble -->
+            <div class="bg-surface-container-highest p-4 rounded-xl relative shadow-sm max-w-[280px]">
+                <p class="font-body-md text-on-surface text-center">สวัสดีครับ! มาเรียนภาษาไทยกันเถอะ</p>
+                <!-- Bubble Tail -->
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-highest rotate-45">
+                </div>
+            </div>
+        </div>
+        <!-- Login Form Card -->
+        <div
+            class="bg-surface-container-lowest rounded-lg p-margin-mobile shadow-[0_4px_0_0_rgba(219,225,255,1)] flex flex-col gap-6">
+            <div class="flex flex-col gap-2">
+                <h2 class="font-headline-md text-headline-md text-primary">เข้าสู่ระบบ</h2>
+                <p class="font-body-md text-on-surface-variant">ใส่ข้อมูลของคุณเพื่อเริ่มเรียนรู้</p>
+            </div>
+            <!-- Email Input -->
+            <div class="flex flex-col gap-2">
+                <label class="font-label-lg text-label-lg text-on-surface ml-2" for="email">อีเมล</label>
+                <div
+                    class="relative flex items-center input-focus-ring rounded-lg overflow-hidden border-2 border-outline-variant bg-surface">
+                    <span class="material-symbols-outlined absolute left-4 text-on-surface-variant">mail</span>
+                    <input
+                        class="w-full h-touch-target-min pl-12 pr-4 bg-transparent border-none focus:ring-0 font-body-lg"
+                        id="email" placeholder="example@mail.com" type="email">
+                </div>
+            </div>
+            <!-- Password Input -->
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-between items-center px-2">
+                    <label class="font-label-lg text-label-lg text-on-surface" for="password">รหัสผ่าน</label>
+                    <a class="font-label-lg text-label-lg text-secondary hover:underline" href="#">ลืมรหัสผ่าน?</a>
+                </div>
+                <div
+                    class="relative flex items-center input-focus-ring rounded-lg overflow-hidden border-2 border-outline-variant bg-surface">
+                    <span class="material-symbols-outlined absolute left-4 text-on-surface-variant">lock</span>
+                    <input
+                        class="w-full h-touch-target-min pl-12 pr-4 bg-transparent border-none focus:ring-0 font-body-lg"
+                        id="password" placeholder="••••••••" type="password">
+                    <button class="absolute right-4 text-on-surface-variant" type="button">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Login Button -->
+            <button
+                class="chunky-button w-full h-touch-target-min bg-primary-container text-on-primary-container font-headline-md text-headline-md rounded-lg shadow-[0_4px_0_0_#725e00] flex items-center justify-center gap-2">
+                <span class="">เข้าสู่ระบบ</span>
+                <span class="material-symbols-outlined">login</span>
+            </button>
+            <!-- Social/Alternative Login (Visual Flair) -->
+
+
+        </div>
+
+    </main>
+    <!-- Decorative Elements (Lanna Style Bubbles) -->
+    <div class="fixed top-20 -left-10 w-32 h-32 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
+    <div class="fixed bottom-10 -right-10 w-48 h-48 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+    <script>
+        // Simple Interaction Script
+        document.querySelector('.chunky-button').addEventListener('click', function () {
+            // Visual feedback handled by CSS active state
+            console.log('Login attempt...');
+        });
+
+        // Toggle Password Visibility
+        const passToggle = document.querySelector('button span[data-icon="visibility"]');
+        const passInput = document.getElementById('password');
+
+        // Note: The data-icon logic is handled by standard class in this manual implementation
+        // but adding for completeness of UI logic
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.textContent === 'visibility') {
+                icon.parentElement.addEventListener('click', () => {
+                    const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passInput.setAttribute('type', type);
+                    icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+                });
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html class="light" lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>บทเรียน: สระอา (-า)</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        body {
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .vowel-container {
+            background-image: radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#96f89f",
+                        "surface-bright": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#e8c426",
+                        "secondary-container": "#4c96fe",
+                        "surface": "#faf8ff",
+                        "on-surface-variant": "#4d4633",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dbe1ff",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "surface-container-low": "#f3f3ff",
+                        "outline": "#7e7761",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "on-primary-container": "#725e00",
+                        "on-secondary-fixed": "#001b3e",
+                        "background": "#faf8ff",
+                        "on-secondary-container": "#002e60",
+                        "inverse-primary": "#e8c426",
+                        "surface-container": "#ebedff",
+                        "secondary": "#005db8",
+                        "secondary-fixed": "#d6e3ff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#ffd93d",
+                        "surface-tint": "#705d00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002107",
+                        "on-background": "#131a32",
+                        "surface-dim": "#d2d9f8",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "primary": "#705d00",
+                        "tertiary-container": "#8ff199",
+                        "tertiary": "#006e29",
+                        "on-surface": "#131a32",
+                        "surface-variant": "#dbe1ff",
+                        "primary-fixed": "#ffe173",
+                        "on-tertiary-container": "#00702a",
+                        "inverse-surface": "#282f48",
+                        "surface-container-high": "#e3e7ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "outline-variant": "#d0c6ad"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "card-padding": "20px",
+                        "gutter": "24px",
+                        "margin-mobile": "24px",
+                        "touch-target-min": "56px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen pb-[100px]">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface flex justify-between items-center px-margin-mobile h-[64px] shadow-[0_4px_0_0_rgba(0,0,0,0.05)]">
+        <div class="flex items-center gap-3">
+            <div
+                class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-primary">
+                <img alt="Elephant Mascot" class="w-full h-full object-cover"
+                    data-alt="A friendly and cute cartoon elephant mascot with a wide smile and sparkling eyes, designed in a soft 3D claymorphic style. The character is set against a warm sunbeam yellow background, fitting a playful and safe educational theme for children. The lighting is soft and cheerful, emphasizing the vibrant and encouraging mood of the brand."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC7nJYZHYaYKgMKuUJqsNZiIqncADF_SzxpoXpXQ__nwOM-PElC9QD2q8Z6elwQsakE6GofqpwFBgZMrnXDfFigOO8jA2tO8aGiwOV5NSv0JaGSJ3PluLcEWD3J2NZLqTLmZD_23jUBcOhyxAEvJY--t_gwH4Y-Ab8MJCPe8Xm5WyR7NhkmG-HDNdTMWa0DylOkWHL4QxhT41KtdtO43g2D1ZDo33XG2xGe3WnsiW400ZqzPvf7IeEuYm2O4-mijFfpRmKZZimELw">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">ไทยลินดา</h1>
+        </div>
+        <button class="w-12 h-12 flex items-center justify-center text-primary hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-[32px]" data-icon="stars"
+                style="font-variation-settings: 'FILL' 1;">stars</span>
+        </button>
+    </header>
+    <!-- Main Content -->
+    <!-- Quiz Progress Header -->
+    <header class="px-margin-mobile pt-4 pb-2">
+        <div class="flex items-center justify-between mb-2">
+            <span class="font-label-lg text-label-lg text-primary">ความคืบหน้า</span>
+            <span class="font-label-lg text-label-lg text-secondary">3/10</span>
+        </div>
+        <!-- Progress Bar Component -->
+        <div class="h-4 w-full bg-surface-container rounded-full overflow-hidden relative">
+            <div class="h-full bg-tertiary-fixed-dim rounded-full transition-all duration-500 flex items-center justify-end"
+                style="width: 30%;">
+                <div
+                    class="w-6 h-6 bg-tertiary rounded-full border-2 border-on-primary transform translate-x-2 shadow-sm flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[14px] text-on-tertiary" data-icon="auto_awesome"
+                        style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="px-margin-mobile py-6 flex flex-col gap-gutter">
+        <!-- Question Section -->
+        <section class="text-center space-y-4">
+            <p class="font-headline-md text-headline-md text-on-surface-variant">คำนี้อ่านออกเสียงว่าอย่างไร?</p>
+            <!-- Word Display Card -->
+            <div
+                class="bg-surface-container-lowest border-2 border-outline-variant rounded-xl p-8 shadow-sm flex flex-col items-center justify-center min-h-[200px]">
+                <h2 class="font-display-thai text-[80px] leading-none text-primary mb-4">-า</h2>
+                <p class="font-headline-md text-2xl text-on-surface-variant">สระอา (อา)</p>
+                <div class="flex items-center gap-2 text-on-surface-variant opacity-60"></div>
+            </div>
+        </section>
+        <!-- Voice Interaction Block -->
+        <section class="flex flex-col items-center py-8">
+            <div class="flex gap-8 items-center justify-center">
+                <div class="flex flex-col items-center gap-2">
+                    <button
+                        class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center chunky-shadow-secondary transition-all group active:translate-y-1">
+                        <span
+                            class="material-symbols-outlined text-on-secondary-container text-4xl group-hover:scale-110 transition-transform"
+                            data-icon="volume_up">volume_up</span>
+                    </button>
+                    <span class="font-label-lg text-label-lg text-secondary">ฟัง</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <button
+                        class="relative mic-pulse w-20 h-20 bg-primary-container rounded-full flex items-center justify-center chunky-shadow transition-all group active:translate-y-1"
+                        id="micButton">
+                        <span
+                            class="material-symbols-outlined text-on-primary-container text-4xl group-hover:scale-110 transition-transform"
+                            data-icon="mic" style="font-variation-settings: &quot;FILL&quot; 1;">mic</span>
+                    </button>
+                    <span class="font-label-lg text-label-lg text-primary">พูด</span>
+                </div>
+            </div>
+            <p class="mt-6 font-label-lg text-label-lg text-on-surface-variant animate-pulse">กำลังฟังอยู่...</p>
+        </section>
+        <!-- Options Bento Grid -->
+
+    </main>
+
+    <script>
+        // Simple micro-interaction for button press
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('touchstart', () => {
+                btn.style.transform = 'translateY(4px)';
+            });
+            btn.addEventListener('touchend', () => {
+                btn.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add fun floating animation to the vowel character
+        const vowel = document.querySelector('.vowel-container span');
+        if (vowel) {
+            let angle = 0;
+            setInterval(() => {
+                angle += 0.05;
+                const y = Math.sin(angle) * 5;
+                vowel.style.transform = `translateY(${y}px)`;
+            }, 20);
+        }
+    </script>
+</body>
+
+</html>

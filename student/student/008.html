@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ไทยลินดา - ห้องเรียนของฉัน</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(112, 93, 0, 0.2);
+        }
+
+        .chunky-button-shadow {
+            box-shadow: 0 4px 0 0 #554500;
+        }
+
+        .chunky-button-active:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 transparent;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface": "#faf8ff",
+                        "outline": "#7e7761",
+                        "on-surface-variant": "#4d4633",
+                        "inverse-surface": "#282f48",
+                        "surface-container-highest": "#dbe1ff",
+                        "on-primary-container": "#725e00",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "surface-tint": "#705d00",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#8ff199",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-primary-fixed": "#221b00",
+                        "outline-variant": "#d0c6ad",
+                        "on-secondary-container": "#002e60",
+                        "primary-fixed": "#ffe173",
+                        "surface-container-high": "#e3e7ff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "on-secondary-fixed": "#001b3e",
+                        "tertiary": "#006e29",
+                        "background": "#faf8ff",
+                        "primary-container": "#ffd93d",
+                        "on-background": "#131a32",
+                        "on-tertiary-fixed": "#002107",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-surface": "#131a32",
+                        "secondary-container": "#4c96fe",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "error": "#ba1a1a",
+                        "secondary": "#005db8",
+                        "on-tertiary-container": "#00702a",
+                        "surface-container": "#ebedff",
+                        "inverse-primary": "#e8c426",
+                        "primary": "#705d00",
+                        "tertiary-fixed": "#96f89f",
+                        "surface-dim": "#d2d9f8",
+                        "surface-variant": "#dbe1ff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "touch-target-min": "56px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+    <!-- Top App Bar -->
+    <header
+        class="docked full-width top-0 bg-background flex justify-between items-center w-full px-margin-mobile py-4 sticky z-40">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-full overflow-hidden border-4 border-primary-container bg-surface-container">
+                <img alt="Friendly mascot elephant" class="w-full h-full object-cover"
+                    data-alt="A charming and friendly cartoon elephant mascot with large sparkling eyes and a wide, cheerful smile. The character is rendered in a soft, 3D claymation style with vibrant blue and yellow accents. The background is a clean, bright white space typical of a modern educational app, illuminated by soft, warm lighting that emphasizes the tactile, rounded quality of the mascot."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnj4TuQw8nSUGnaHbfgHbPYQvbDAo1rufb3lvwrwZQFTt-pbsojfnCpi77DauHp9borM8pYoyDbh7_rFlgf83V2qwZyToge0vA8CLQoodYpZm-FuVvOJQx-GtIwIwXPkfi-oQmNsFxsCeCfkOBUUhqvJILfwee83RAZVOOhUByKDQPyopwYFErTnAynfguBHm7-VsEfRt3TvezpwjP6NF3Y5tEuPya3tdlR4eC3-6FjD0dwHpUTQEI0to8BhwqmEDQnKeCtwJvzB0">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">ไทยลินดา</h1>
+        </div>
+        <button
+            class="w-12 h-12 flex items-center justify-center rounded-xl bg-surface-container hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined text-primary text-3xl" data-icon="stars">stars</span>
+        </button>
+    </header>
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col items-center justify-center px-margin-mobile pb-24">
+        <!-- Header Title -->
+        <div class="w-full text-center mb-8">
+            <h2 class="font-headline-md text-headline-md text-on-surface">ห้องเรียนของฉัน</h2>
+        </div>
+        <!-- Empty State Illustration & Message -->
+        <div class="flex-1 flex flex-col items-center justify-center space-y-8 animate-fade-in">
+            <div class="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+                <!-- Background decorative elements -->
+                <div class="absolute inset-0 bg-primary-container opacity-20 rounded-full blur-3xl"></div>
+                <div
+                    class="z-10 bg-white p-6 rounded-xl chunky-shadow transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                    <img class="w-48 h-48 rounded-lg"
+                        data-alt="A whimsical and vibrant 3D illustration of a school building with oversized, rounded windows and a friendly yellow door. The style is tactile and playful, resembling a high-quality physical toy set made of smooth, semi-matte plastic. The colors are dominated by bright primary yellow and soft blue, set against a warm off-white background with gentle ambient shadows that make the schoolhouse feel solid and pressable."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBllVO8fQZivh6D88_f4CoUFHBGwAu3DXi31mOq-NM96bjVBPmapwPsJFbmWKXJp1LK7sJ8yWDOmxXITtzQKvhOKaeeKSrbSyR5GHDJD7JAUXE-C3ewyenLG_pVYa0e5FK9fIaAmUKwbnL1XLI3aFayMNq4-biZ6Bd7jCiLj-cw5clP78Hqr4esq8pakRJFOEbWA_T1SKmwarzYYpoYN0Clmy9weU8fV0xhbfE-5KWmJlc1N6sk6ExEHf9H24RG1oqE3-7akUy_Jrk">
+                </div>
+                <!-- Small character popping up -->
+                <div class="absolute -bottom-4 -right-4 z-20">
+                    <div
+                        class="bg-tertiary-container text-on-tertiary-container px-4 py-2 rounded-xl chunky-shadow font-label-lg text-label-lg flex items-center gap-2">
+                        <span class="">มาเริ่มกันเถอะ!</span>
+                        <span class="material-symbols-outlined" data-icon="waving_hand">waving_hand</span>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center max-w-xs space-y-4">
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    เธอยังไม่ได้เข้าร่วมห้องเรียนเลยนะจ๊ะ มาหาคุณครูและเพื่อนๆ กันเถอะ!
+                </p>
+            </div>
+        </div>
+
+    </main>
+    <!-- Bottom Navigation Bar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-[0_-4px_0_0_rgba(0,0,0,0.05)] border-t-4 border-outline-variant rounded-t-lg">
+        <!-- บทเรียน -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">menu_book</span>
+            <span class="text-[12px] font-label-lg">บทเรียน</span>
+        </a>
+        <!-- ห้องเรียน (Active) -->
+        <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl px-2 py-2 transition-all flex-1 font-bold"
+            href="#">
+            <span class="material-symbols-outlined mb-1">school</span>
+            <span class="text-[12px] font-label-lg">ห้องเรียน</span>
+        </a>
+        <!-- ผลการเรียน -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">star</span>
+            <span class="text-[12px] font-label-lg">ผลการเรียน</span>
+        </a>
+        <!-- โปรไฟล์ -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant px-2 py-2 transition-all flex-1"
+            href="#">
+            <span class="material-symbols-outlined mb-1">person</span>
+            <span class="text-[12px] font-label-lg">โปรไฟล์</span>
+        </a>
+    </nav>
+    <script>
+        // Micro-interactions for tactile buttons
+        document.querySelectorAll('button, a').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.classList.add('scale-95');
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.classList.remove('scale-95');
+            });
+            btn.addEventListener('touchstart', () => {
+                btn.classList.add('scale-95');
+            });
+            btn.addEventListener('touchend', () => {
+                btn.classList.remove('scale-95');
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

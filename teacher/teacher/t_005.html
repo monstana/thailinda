@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="light" lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ไทยลินดา - การสั่งงาน</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #f8f9ff;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .custom-shadow {
+            box-shadow: 0 20px 30px -10px rgba(0, 102, 134, 0.04);
+        }
+
+        .status-stripe {
+            width: 4px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-radius: 4px 0 0 4px;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#211b00",
+                        "secondary": "#396a1f",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed-variant": "#514700",
+                        "secondary-fixed": "#b9f396",
+                        "primary": "#006686",
+                        "tertiary-fixed": "#f8e377",
+                        "tertiary": "#6c5e00",
+                        "on-background": "#0b1c30",
+                        "on-primary-container": "#00536d",
+                        "inverse-surface": "#213145",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#cbdbf5",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eff4ff",
+                        "on-surface-variant": "#3f484d",
+                        "on-secondary-fixed-variant": "#215106",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container": "#e5eeff",
+                        "primary-container": "#76c7ed",
+                        "on-primary-fixed-variant": "#004d65",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#006686",
+                        "primary-fixed": "#bfe8ff",
+                        "tertiary-container": "#d1be56",
+                        "on-surface": "#0b1c30",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed": "#082100",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#9ed67d",
+                        "surface-container-high": "#dce9ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "outline-variant": "#bfc8ce",
+                        "tertiary-fixed-dim": "#dbc75e",
+                        "inverse-primary": "#80d1f7",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#584c00",
+                        "on-secondary-container": "#3f7024",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#b9f396",
+                        "primary-fixed-dim": "#80d1f7",
+                        "outline": "#6f787e",
+                        "on-primary-fixed": "#001f2b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "container-padding": "32px",
+                        "md": "24px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen pb-32">
+    <!-- Top App Bar -->
+    <header class="fixed top-0 w-full z-50 bg-surface shadow-sm flex justify-between items-center px-gutter h-16">
+        <div class="flex items-center gap-4">
+            <button
+                class="material-symbols-outlined text-primary hover:bg-primary-container/10 transition-colors p-2 rounded-full active:scale-95 duration-150">menu</button>
+            <h1 class="font-headline-md text-headline-md font-bold text-primary">การสั่งงาน</h1>
+        </div>
+        <div class="flex items-center gap-2">
+            <button
+                class="material-symbols-outlined text-primary hover:bg-primary-container/10 transition-colors p-2 rounded-full active:scale-95 duration-150">notifications</button>
+            <div
+                class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border-2 border-primary/10">
+                <img alt="Profile"
+                    data-alt="A professional and friendly portrait of a female teacher with a warm smile, wearing a modern professional blouse. The illustration is in a clean, high-quality vector style with a soft pastel color palette of blues and creams, representing an encouraging and methodical educator persona."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9B7piiD0laN75NHNJm20rEzmCbKB4HBkNONN8-EkNptPInChsA0o788UXq0D4CDkONDcl2kIW2Y97UR81AxKB981tW_26lSoPo5z_ZXZ3pvLQsCdwexnLsxlB0vmHdvVhX4X7BpjMUvjTTiGJd4VCeFKUZfxS_vkCgQ--AOkMBrDDA3aLhj972gn7Lm18meFOoWwFJ0BdON8XDbkLR4Afvkqe6f1K75cYsD9FBOMzU8lR-sFoZhyhIt1hXxGKqG5KRtAT9-wJ-gE">
+            </div>
+        </div>
+    </header>
+    <main class="pt-24 px-gutter max-w-5xl mx-auto">
+        <!-- Search & Filter Section -->
+        <div class="mb-lg">
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                    <span
+                        class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">search</span>
+                </div>
+                <input
+                    class="w-full bg-white border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-xl py-4 pl-12 pr-4 font-body-md text-body-md transition-all custom-shadow"
+                    placeholder="ค้นหางานที่มอบหมาย..." type="text">
+            </div>
+            <div class="flex gap-2 mt-4 overflow-x-auto pb-2 no-scrollbar">
+                <span
+                    class="px-4 py-1.5 bg-primary text-on-primary rounded-full font-label-md text-label-md cursor-pointer transition-transform active:scale-95">ทั้งหมด</span>
+                <span
+                    class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant rounded-full font-label-md text-label-md cursor-pointer hover:bg-primary-container/20 transition-all active:scale-95">กำลังดำเนินการ</span>
+                <span
+                    class="px-4 py-1.5 bg-surface-container-highest text-on-surface-variant rounded-full font-label-md text-label-md cursor-pointer hover:bg-primary-container/20 transition-all active:scale-95">เสร็จสิ้น</span>
+            </div>
+        </div>
+        <!-- Assignment Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-lg">
+            <div
+                class="bg-white p-md rounded-xl custom-shadow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="material-symbols-outlined text-6xl text-primary">assignment</span>
+                </div>
+                <p class="font-label-md text-label-md text-on-surface-variant mb-1">งานทั้งหมด</p>
+                <p class="font-display-lg text-primary text-[32px]">12</p>
+            </div>
+            <div
+                class="bg-white p-md rounded-xl custom-shadow relative overflow-hidden group hover:scale-[1.02] transition-transform duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="material-symbols-outlined text-6xl text-secondary">check_circle</span>
+                </div>
+                <p class="font-label-md text-label-md text-on-surface-variant mb-1">ส่งครบแล้ว</p>
+                <p class="font-display-lg text-secondary text-[32px]">3</p>
+            </div>
+        </div>
+        <!-- Assignment List -->
+        <div class="space-y-4">
+            <h2 class="font-headline-md text-on-surface mb-4">งานปัจจุบัน</h2>
+            <!-- Assignment Item 1 -->
+            <div
+                class="relative bg-white p-md pl-8 rounded-xl custom-shadow hover:shadow-lg transition-all group cursor-pointer border-transparent border-2 hover:border-primary/20">
+                <div class="status-stripe bg-tertiary"></div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-tertiary-container/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-tertiary text-sm">edit_note</span>
+                            </div>
+                            <h3 class="font-headline-md text-primary text-body-lg font-bold">ฝึกอ่านสระอา</h3>
+                        </div>
+                        <p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            กำหนดส่ง: 24 ต.ค. 2566
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div class="flex flex-col items-end">
+                            <span class="font-label-md text-label-md text-on-surface-variant">สถานะการส่ง</span>
+                            <span class="font-body-md text-body-md font-bold text-primary">ส่งแล้ว 20/30</span>
+                        </div>
+                        <div class="w-px h-8 bg-outline-variant hidden md:block"></div>
+                        <span
+                            class="px-4 py-1.5 bg-tertiary-container text-on-tertiary-container rounded-full font-label-md text-label-md">กำลังดำเนินการ</span>
+                        <button
+                            class="material-symbols-outlined text-outline hover:text-primary transition-colors">chevron_right</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Assignment Item 2 -->
+            <div
+                class="relative bg-white p-md pl-8 rounded-xl custom-shadow hover:shadow-lg transition-all group cursor-pointer border-transparent border-2 hover:border-primary/20">
+                <div class="status-stripe bg-primary"></div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary text-sm">draw</span>
+                            </div>
+                            <h3 class="font-headline-md text-primary text-body-lg font-bold">คัดลายมือ ก-ฮ</h3>
+                        </div>
+                        <p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            กำหนดส่ง: 20 ต.ค. 2566
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div class="flex flex-col items-end">
+                            <span class="font-label-md text-label-md text-on-surface-variant">ตรวจแล้ว</span>
+                            <span class="font-body-md text-body-md font-bold text-primary">15/20</span>
+                        </div>
+                        <span
+                            class="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md">รอการตรวจ</span>
+                        <button
+                            class="material-symbols-outlined text-outline hover:text-primary transition-colors">chevron_right</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Assignment Item 3 -->
+            <div
+                class="relative bg-white p-md pl-8 rounded-xl custom-shadow hover:shadow-lg transition-all group cursor-pointer border-transparent border-2 hover:border-primary/20">
+                <div class="status-stripe bg-secondary"></div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-secondary text-sm">menu_book</span>
+                            </div>
+                            <h3 class="font-headline-md text-primary text-body-lg font-bold">บททดสอบการอ่านบทที่ ๑</h3>
+                        </div>
+                        <p class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span>
+                            กำหนดส่ง: 15 ต.ค. 2566
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <div class="flex flex-col items-end">
+                            <span class="font-label-md text-label-md text-on-surface-variant">ส่งแล้ว</span>
+                            <span class="font-body-md text-body-md font-bold text-primary">30/30</span>
+                        </div>
+                        <span
+                            class="px-4 py-1.5 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md">เสร็จสิ้น</span>
+                        <button
+                            class="material-symbols-outlined text-outline hover:text-primary transition-colors">chevron_right</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Create New FAB -->
+    <button
+        class="fixed bottom-28 right-gutter md:right-xl w-14 h-14 md:w-auto md:px-6 md:rounded-2xl rounded-full bg-primary text-on-primary flex items-center justify-center gap-3 shadow-xl hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all z-40 group">
+        <span class="material-symbols-outlined">add</span>
+        <span class="hidden md:inline font-label-md">สร้างงานใหม่</span>
+    </button>
+    <!-- Bottom Navigation Bar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md py-sm bg-surface-container-lowest shadow-[0_-4px_20px_0_rgba(0,102,134,0.04)] rounded-t-xl border-t border-outline-variant">
+        <!-- Home/Classroom -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="school">school</span>
+            <span class="font-label-md text-label-md">ห้องเรียน</span>
+        </a>
+        <!-- Assignments - ACTIVE -->
+        <a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="assignment"
+                style="font-variation-settings: 'FILL' 1;">assignment</span>
+            <span class="font-label-md text-label-md">การสั่งงาน</span>
+        </a>
+        <!-- Profile -->
+        <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+            <span class="font-label-md text-label-md">โปรไฟล์</span>
+        </a>
+    </nav>
+    <script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) icon.style.transform = 'translateY(-2px) scale(1.1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                const icon = card.querySelector('.material-symbols-outlined');
+                if (icon) icon.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Search bar interaction
+        const searchInput = document.querySelector('input');
+        searchInput.addEventListener('focus', () => {
+            searchInput.closest('.relative').classList.add('scale-[1.01]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.closest('.relative').classList.remove('scale-[1.01]');
+        });
+    </script>
+</body>
+
+</html>

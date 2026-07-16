@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ภาพรวมห้องเรียน | ThaiLinda</title>
+  <link rel="stylesheet" href="../assets/css/teacher.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="t_001.html"><img src="../../assets/images/thailinda-mascot.png" alt=""><span><strong>ThaiLinda</strong><small>พื้นที่คุณครู</small></span></a>
+      <nav class="sidebar-nav" aria-label="เมนูคุณครู">
+        <a class="is-active" href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวมห้องเรียน</a>
+        <a href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a>
+        <a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลของนักเรียน</a>
+      </nav>
+      <div class="sidebar-user"><strong data-teacher-name></strong><span data-school-name></span></div>
+    </aside>
+    <header class="topbar">
+      <div class="topbar__title"><h1>ภาพรวมห้องเรียน</h1><p data-school-name></p></div>
+      <div class="topbar__actions"><div class="teacher-pill"><span class="avatar avatar--teacher material-symbols-rounded" aria-hidden="true">school</span><span data-teacher-name></span></div><button class="icon-button" type="button" data-logout title="ออกจากระบบ" aria-label="ออกจากระบบ"><span class="material-symbols-rounded" aria-hidden="true">logout</span></button></div>
+    </header>
+    <main class="page">
+      <div class="page-head"><div><p class="eyebrow">ห้อง <span id="classroomName">ป.1/2</span></p><h2>สวัสดี <span data-teacher-name></span></h2><p>ติดตามการฝึกออกเสียงคำพื้นฐาน 10 คำ</p></div><a class="button button--primary" href="t_006.html"><span class="material-symbols-rounded" aria-hidden="true">add</span><span>สร้างการสั่งงาน</span></a></div>
+      <section class="metric-grid" aria-label="ตัวเลขภาพรวม">
+        <article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">groups</span></span><div class="metric__copy"><strong id="studentCount">0</strong><span>นักเรียนที่เชื่อมแล้ว</span></div></article>
+        <article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">assignment</span></span><div class="metric__copy"><strong id="activeAssignmentCount">0</strong><span>งานที่กำลังดำเนินการ</span></div></article>
+        <article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">verified</span></span><div class="metric__copy"><strong id="passedCount">0</strong><span>คำที่ผ่านจากเสียงจริง</span></div></article>
+        <article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">record_voice_over</span></span><div class="metric__copy"><strong id="practiceCount">0</strong><span>คำที่ควรฝึกเพิ่ม</span></div></article>
+      </section>
+      <div class="dashboard-grid">
+        <section class="panel"><div class="panel-head"><div><h2>งานที่กำลังดำเนินการ</h2><p>ติดตามกำหนดส่งของห้องเรียน</p></div><a class="text-link" href="t_002.html">ดูทั้งหมด</a></div><div id="assignmentRows"></div></section>
+        <section class="panel"><div class="panel-head"><div><h2>คำที่ควรทบทวน</h2><p id="classProgress">กำลังโหลด</p></div><a class="text-link" href="t_003.html">ดูรายคน</a></div><div id="practiceWords"></div></section>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="เมนูคุณครูบนมือถือ"><a class="is-active" href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลนักเรียน</a></nav>
+  <script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>

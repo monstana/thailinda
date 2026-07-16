@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1559c7">
+  <title>บทเรียนของฉัน | ThaiLinda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/student.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__inner">
+      <a class="brand" href="007.html" aria-label="ThaiLinda หน้าบทเรียน">
+        <span class="brand__mascot"><img src="../../assets/images/thailinda-mascot.png" alt=""></span>
+        <span>ThaiLinda</span>
+      </a>
+      <div class="student-pill">
+        <span class="material-symbols-rounded" aria-hidden="true">waving_hand</span>
+        <span>สวัสดี <span data-student-name></span></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero-band" aria-labelledby="welcomeTitle">
+      <div class="hero-band__copy">
+        <p class="eyebrow">บทเรียนของฉัน</p>
+        <h1 id="welcomeTitle">พร้อมฝึกคำใหม่ไหม <span id="welcomeName"></span></h1>
+        <p>ฟังให้ชัด แล้วลองพูดทีละคำ ทำได้แน่นอน</p>
+      </div>
+      <img class="hero-band__image" src="../../assets/images/thailinda-mascot.png" alt="ลินดาชวนฝึกออกเสียง">
+    </section>
+
+    <div class="dashboard-grid">
+      <section class="lesson-card" aria-labelledby="lessonTitle">
+        <div class="lesson-card__top">
+          <div>
+            <span class="eyebrow">บทเรียนหลัก</span>
+            <h2 id="lessonTitle">คำศัพท์พื้นฐาน 10 คำ</h2>
+            <p>ฝึกฟังและออกเสียง ตั้งแต่ “กา” ถึง “เสือ”</p>
+          </div>
+          <div class="lesson-icon" aria-hidden="true"><span class="material-symbols-rounded">record_voice_over</span></div>
+        </div>
+        <div class="progress-label"><span>ความคืบหน้า</span><strong id="progressText">0/10 คำ</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="ความคืบหน้าบทเรียน" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progressBar"></span>
+        </div>
+        <a class="primary-button button-wide" id="lessonCta" href="012.html">
+          <span>เริ่มบทเรียน</span><span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+        </a>
+      </section>
+
+      <aside class="metric-stack" aria-label="สรุปการเรียน">
+        <div class="metric">
+          <span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">check_circle</span></span>
+          <div><strong id="passedCount">0</strong><span>คำที่ผ่านจริง</span></div>
+        </div>
+        <div class="metric metric--orange">
+          <span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">refresh</span></span>
+          <div><strong id="practiceCount">0</strong><span>คำที่ควรฝึกเพิ่ม</span></div>
+        </div>
+        <div class="metric metric--yellow">
+          <span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">play_circle</span></span>
+          <div><strong id="nextWord">กา</strong><span>คำถัดไป</span></div>
+        </div>
+      </aside>
+    </div>
+
+    <section aria-labelledby="allWordsTitle">
+      <div class="section-heading">
+        <div><h2 id="allWordsTitle">คำศัพท์ทั้งหมด</h2><p>แตะคำที่อยากฝึกได้เลย</p></div>
+      </div>
+      <div class="word-preview" id="wordPreview"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="เมนูนักเรียน">
+    <a href="007.html" aria-current="page"><span class="material-symbols-rounded" aria-hidden="true">menu_book</span><span>บทเรียน</span></a>
+    <a href="010.html"><span class="material-symbols-rounded" aria-hidden="true">monitoring</span><span>ผลการเรียน</span></a>
+    <a href="011.html"><span class="material-symbols-rounded" aria-hidden="true">person</span><span>โปรไฟล์</span></a>
+  </nav>
+
+  <script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>
+

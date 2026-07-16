@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="th" style="">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#e8c426",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#221b00",
+                        "primary-fixed": "#ffe173",
+                        "surface-variant": "#dbe1ff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "on-secondary-container": "#002e60",
+                        "tertiary-container": "#8ff199",
+                        "surface-container": "#ebedff",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "on-tertiary-container": "#00702a",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "secondary-fixed": "#d6e3ff",
+                        "on-background": "#131a32",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d2d9f8",
+                        "on-primary-container": "#725e00",
+                        "background": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary": "#005db8",
+                        "on-surface": "#131a32",
+                        "surface-container-low": "#f3f3ff",
+                        "surface-tint": "#705d00",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#282f48",
+                        "primary-container": "#ffd93d",
+                        "outline": "#7e7761",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#e8c426",
+                        "tertiary-fixed": "#96f89f",
+                        "on-tertiary-fixed": "#002107",
+                        "secondary-container": "#4c96fe",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#705d00",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-surface-variant": "#4d4633",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e3e7ff",
+                        "on-secondary-fixed": "#001b3e",
+                        "surface-bright": "#faf8ff",
+                        "inverse-on-surface": "#eff0ff",
+                        "tertiary": "#006e29",
+                        "outline-variant": "#d0c6ad"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "card-padding": "20px",
+                        "touch-target-min": "56px",
+                        "gutter": "24px",
+                        "margin-mobile": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .chunky-shadow-primary {
+            box-shadow: 0 6px 0 0 #b38f00;
+        }
+
+        .chunky-shadow-secondary {
+            box-shadow: 0 6px 0 0 #00468c;
+        }
+
+        .chunky-shadow-tertiary {
+            box-shadow: 0 6px 0 0 #00531d;
+        }
+
+        .btn-active:active {
+            transform: translateY(6px);
+            box-shadow: none !important;
+        }
+
+        .bg-pattern {
+            background-color: #faf8ff;
+            background-image: radial-gradient(#dbe1ff 1.5px, transparent 1.5px), radial-gradient(#dbe1ff 1.5px, #faf8ff 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-pattern min-h-screen flex flex-col items-center justify-center font-body-md text-on-background selection:bg-primary-container">
+    <main class="w-full max-w-md px-margin-mobile py-8 flex flex-col gap-8">
+        <header class="flex flex-col items-center gap-6 animate-bounce-subtle">
+            <div class="relative w-48 h-48">
+                <div class="absolute inset-0 bg-primary-container rounded-full scale-110 blur-xl opacity-20"></div>
+
+            </div>
+            <div
+                class="bg-surface-container-lowest px-8 py-4 rounded-xl chunky-shadow border-2 border-outline-variant relative">
+                <div
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 bg-surface-container-lowest rotate-45 border-t-2 border-l-2 border-outline-variant">
+                </div>
+                <h1 class="font-display-thai text-display-thai text-on-surface-variant text-center">
+                    สวัสดี !</h1>
+            </div>
+        </header>
+        <section class="flex flex-col gap-6 w-full">
+            <h2 class="font-headline-md text-headline-md text-on-background text-center px-4">
+                เลือกบทบาทของคุณเพื่อเริ่มต้น
+            </h2>
+            <div class="grid grid-cols-1 gap-6">
+                <a href="003.html"
+                    class="group flex items-center justify-between w-full bg-primary-container p-6 rounded-xl border-2 border-primary chunky-shadow-primary btn-active transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-surface-container-lowest p-3 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-primary text-4xl" data-icon="school"
+                                style="font-variation-settings: 'FILL' 1;">school</span>
+                        </div>
+                        <span class="font-headline-md text-headline-md text-on-primary-container">ครู</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-primary-container text-3xl group-hover:translate-x-1 transition-transform"
+                        data-icon="arrow_forward">arrow_forward</span>
+                </a>
+                <a href="003.html"
+                    class="group flex items-center justify-between w-full bg-secondary-container p-6 rounded-xl border-2 border-secondary chunky-shadow-secondary btn-active transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-surface-container-lowest p-3 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-secondary text-4xl" data-icon="child_care"
+                                style="font-variation-settings: 'FILL' 1;">child_care</span>
+                        </div>
+                        <span class="font-headline-md text-headline-md text-on-secondary-container">นักเรียน</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-secondary-container text-3xl group-hover:translate-x-1 transition-transform"
+                        data-icon="arrow_forward">arrow_forward</span>
+                </a>
+                <a href="003.html"
+                    class="group flex items-center justify-between w-full bg-tertiary-container p-6 rounded-xl border-2 border-tertiary chunky-shadow-tertiary btn-active transition-all"
+                    style="transform: scale(1);">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-surface-container-lowest p-3 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-tertiary text-4xl" data-icon="family_restroom"
+                                style="font-variation-settings: 'FILL' 1;">family_restroom</span>
+                        </div>
+                        <span class="font-headline-md text-headline-md text-on-tertiary-container">ผู้ปกครอง</span>
+                    </div>
+                    <span
+                        class="material-symbols-outlined text-on-tertiary-container text-3xl group-hover:translate-x-1 transition-transform"
+                        data-icon="arrow_forward">arrow_forward</span>
+                </a>
+            </div>
+        </section>
+        <footer class="mt-4 flex flex-col items-center gap-2">
+            <p class="text-center font-body-md text-on-surface-variant">
+                ยังไม่มีบัญชี?
+                <a class="text-secondary font-label-lg text-label-lg hover:underline ml-1" href="002.html">สมัครสมาชิก</a>
+            </p>
+        </footer>
+    </main>
+    <script>
+        // Micro-interaction for mascot eyes following mouse movement slightly
+        document.addEventListener('mousemove', (e) => {
+            const mascot = document.querySelector('img[data-alt*="mascot"]');
+            if (mascot) {
+                const rect = mascot.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const moveX = (e.clientX - centerX) / 50;
+                const moveY = (e.clientY - centerY) / 50;
+                mascot.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+
+        // Add haptic-like scale effect to buttons and links
+        const buttons = document.querySelectorAll('a.group, button');
+        buttons.forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.98)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

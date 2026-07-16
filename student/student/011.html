@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1559c7">
+  <title>โปรไฟล์ | ThaiLinda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/student.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__inner">
+      <a class="brand" href="007.html" aria-label="ThaiLinda หน้าบทเรียน">
+        <span class="brand__mascot"><img src="../../assets/images/thailinda-mascot.png" alt=""></span><span>ThaiLinda</span>
+      </a>
+      <div class="student-pill"><span class="material-symbols-rounded" aria-hidden="true">waving_hand</span><span>สวัสดี <span data-student-name></span></span></div>
+    </div>
+  </header>
+
+  <main class="page-shell page-shell--narrow">
+    <p class="eyebrow">บัญชีนักเรียน</p>
+    <h1 class="page-title">โปรไฟล์ของฉัน</h1>
+
+    <section class="profile-card" aria-label="ข้อมูลนักเรียน">
+      <div class="profile-avatar"><img src="../../assets/images/thailinda-mascot.png" alt="รูปประจำตัวนักเรียน"></div>
+      <div class="profile-copy">
+        <h2 id="profileName"></h2>
+        <p id="profileSchool"></p>
+        <p id="profileEmail"></p>
+      </div>
+    </section>
+
+    <section class="profile-stats" aria-label="สถิติของฉัน">
+      <div class="profile-stat"><strong id="profilePassed">0</strong><span>คำที่ผ่านจริง</span></div>
+      <div class="profile-stat"><strong id="profilePracticed">0</strong><span>คำที่ฝึกแล้ว</span></div>
+    </section>
+
+    <section class="settings-panel" aria-labelledby="settingsTitle">
+      <h2 id="settingsTitle">ตั้งค่าการเรียน</h2>
+      <div class="settings-row">
+        <span class="settings-row__icon"><span class="material-symbols-rounded" aria-hidden="true">volume_up</span></span>
+        <div class="settings-row__copy"><strong>ระดับเสียงตัวอย่าง</strong><span id="volumeValue">80%</span></div>
+        <input id="volumeControl" type="range" min="0" max="100" step="5" value="80" aria-label="ระดับเสียงตัวอย่าง">
+      </div>
+      <div class="profile-actions">
+        <button class="ghost-button" id="logoutButton" type="button"><span class="material-symbols-rounded" aria-hidden="true">logout</span>ออกจากระบบ</button>
+        <button class="danger-button" id="openResetDialog" type="button"><span class="material-symbols-rounded" aria-hidden="true">restart_alt</span>ล้างความก้าวหน้า</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav" aria-label="เมนูนักเรียน">
+    <a href="007.html"><span class="material-symbols-rounded" aria-hidden="true">menu_book</span><span>บทเรียน</span></a>
+    <a href="010.html"><span class="material-symbols-rounded" aria-hidden="true">monitoring</span><span>ผลการเรียน</span></a>
+    <a href="011.html" aria-current="page"><span class="material-symbols-rounded" aria-hidden="true">person</span><span>โปรไฟล์</span></a>
+  </nav>
+
+  <dialog id="resetDialog" aria-labelledby="resetTitle">
+    <div class="dialog-body">
+      <div class="dialog-icon"><span class="material-symbols-rounded" aria-hidden="true">restart_alt</span></div>
+      <h2 id="resetTitle">ล้างความก้าวหน้าทั้งหมด?</h2>
+      <p>ผลการฝึกคำศัพท์ทั้ง 10 คำของบัญชีนี้จะเริ่มใหม่ การทำรายการนี้ย้อนกลับไม่ได้</p>
+      <div class="dialog-actions">
+        <button class="ghost-button" id="cancelReset" type="button">ยกเลิก</button>
+        <button class="danger-button" id="confirmReset" type="button">ยืนยันการล้าง</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="../assets/js/profile.js"></script>
+</body>
+</html>
+

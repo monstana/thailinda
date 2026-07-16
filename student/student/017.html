@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .pressed {
+            transform: translateY(4px);
+            box-shadow: none !important;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#96f89f",
+                        "surface-bright": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#e8c426",
+                        "secondary-container": "#4c96fe",
+                        "surface": "#faf8ff",
+                        "on-surface-variant": "#4d4633",
+                        "inverse-on-surface": "#eff0ff",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#dbe1ff",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "surface-container-low": "#f3f3ff",
+                        "outline": "#7e7761",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "on-primary-container": "#725e00",
+                        "on-secondary-fixed": "#001b3e",
+                        "background": "#faf8ff",
+                        "on-secondary-container": "#002e60",
+                        "inverse-primary": "#e8c426",
+                        "surface-container": "#ebedff",
+                        "secondary": "#005db8",
+                        "secondary-fixed": "#d6e3ff",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#ffd93d",
+                        "surface-tint": "#705d00",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002107",
+                        "on-background": "#131a32",
+                        "surface-dim": "#d2d9f8",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "primary": "#705d00",
+                        "tertiary-container": "#8ff199",
+                        "tertiary": "#006e29",
+                        "on-surface": "#131a32",
+                        "surface-variant": "#dbe1ff",
+                        "primary-fixed": "#ffe173",
+                        "on-tertiary-container": "#00702a",
+                        "inverse-surface": "#282f48",
+                        "surface-container-high": "#e3e7ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "outline-variant": "#d0c6ad"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "card-padding": "20px",
+                        "gutter": "24px",
+                        "margin-mobile": "24px",
+                        "touch-target-min": "56px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface flex justify-between items-center px-margin-mobile h-[64px] shadow-[0_4px_0_0_rgba(0,0,0,0.05)]">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+                <img alt="Mascot" class="w-8 h-8 object-contain"
+                    data-alt="A friendly and cute cartoon elephant character with large expressive eyes and a warm smile, designed in a soft 3D claymorphic style. The elephant is wearing a small academic cap, sitting in a bright playroom environment with soft, warm lighting and a pastel yellow background that matches the educational joy brand aesthetic."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGxRMTy1gtO_IIGih1QfCYRS2kRb9lPf7K19e5ZlxeMaNtxHcVthnrSWOCvL5o426Nr5RyP9AAUcwD3ZHlnwVkUX3f4YSxYYurqmofNK3ALP0DBH--5AZ2VhPomZwnjF6wAxpw8x1CZ7v-kx-BiDlmB_Oym_JqwvsOz2DmSESb89ZmWHv6BCC2tFYjoPEI9Krd4pgFSPHX0XJInSakkZa1jLxDzODxYkL2wvEPe83dHocQMpz5O4rufg4jt_fNQw7-jE__GOtNNt0">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">ไทยลินดา</h1>
+        </div>
+        <button
+            class="material-symbols-outlined text-primary hover:opacity-80 active:translate-y-1 transition-transform"
+            data-icon="stars">stars</button>
+    </header>
+    <!-- Main Content Canvas -->
+    <main class="flex-grow pt-[88px] pb-[100px] px-margin-mobile max-w-lg mx-auto w-full flex flex-col gap-8">
+
+
+        <!-- Word Building Box -->
+        <div
+            class="relative bg-surface-container-lowest rounded-xl p-8 border-4 border-primary-container shadow-[0_8px_0_0_#ffd93d] flex flex-col items-center justify-center gap-6 min-h-[220px]">
+            <div class="flex items-center gap-4">
+                <!-- Slot for Consonant -->
+                <div class="w-[80px] h-[100px] border-4 border-dashed border-outline-variant rounded-lg flex items-center justify-center bg-surface-container-low transition-all duration-200"
+                    id="consonant-slot">
+                    <span class="font-display-thai text-display-thai text-secondary" id="active-consonant"></span>
+                </div>
+                <!-- Vowel -->
+                <div class="w-[80px] h-[100px] flex items-center justify-center">
+                    <span class="font-display-thai text-display-thai text-primary">า</span>
+                </div>
+            </div>
+            <!-- Result Feedback -->
+            <div class="h-10 font-headline-md text-headline-md text-secondary opacity-0 transition-opacity"
+                id="word-result">
+                <!-- Text populated by JS -->
+            </div>
+        </div>
+        <!-- Action Buttons (Listen & Speak) -->
+        <div class="flex gap-4 justify-center">
+            <button
+                class="flex-1 max-w-[140px] h-touch-target-min bg-secondary-fixed text-on-secondary-fixed rounded-xl flex items-center justify-center gap-2 chunky-shadow active:translate-y-1 active:shadow-none transition-all"
+                onclick="playWordSound()">
+                <span class="material-symbols-outlined" data-icon="hearing">hearing</span>
+                <span class="font-label-lg text-label-lg">ฟัง</span>
+            </button>
+            <button
+                class="flex-1 max-w-[140px] h-touch-target-min bg-tertiary-container text-on-tertiary-container rounded-xl flex items-center justify-center gap-2 chunky-shadow active:translate-y-1 active:shadow-none transition-all"
+                onclick="activateMicrophone()">
+                <span class="material-symbols-outlined" data-icon="mic">mic</span>
+                <span class="font-label-lg text-label-lg">พูด</span>
+            </button>
+        </div>
+        <!-- Consonant Grid -->
+        <div class="grid grid-cols-3 gap-4 pb-4">
+            <!-- Consonant Button Component -->
+            <button
+                class="bg-surface-container-lowest h-[90px] rounded-xl border-2 border-outline-variant flex flex-col items-center justify-center chunky-shadow hover:bg-surface-container-low active:translate-y-1 active:shadow-none transition-all group"
+                onclick="selectConsonant('ม')">
+                <span class="font-headline-lg text-headline-lg text-on-surface">ม</span>
+                <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 text-[18px]"
+                    data-icon="volume_up">volume_up</span>
+            </button>
+            <button
+                class="bg-surface-container-lowest h-[90px] rounded-xl border-2 border-outline-variant flex flex-col items-center justify-center chunky-shadow hover:bg-surface-container-low active:translate-y-1 active:shadow-none transition-all group"
+                onclick="selectConsonant('ห')">
+                <span class="font-headline-lg text-headline-lg text-on-surface">ห</span>
+                <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 text-[18px]"
+                    data-icon="volume_up">volume_up</span>
+            </button>
+            <button
+                class="bg-surface-container-lowest h-[90px] rounded-xl border-2 border-outline-variant flex flex-col items-center justify-center chunky-shadow hover:bg-surface-container-low active:translate-y-1 active:shadow-none transition-all group"
+                onclick="selectConsonant('ร')">
+                <span class="font-headline-lg text-headline-lg text-on-surface">ร</span>
+                <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 text-[18px]"
+                    data-icon="volume_up">volume_up</span>
+            </button>
+            <button
+                class="bg-surface-container-lowest h-[90px] rounded-xl border-2 border-outline-variant flex flex-col items-center justify-center chunky-shadow hover:bg-surface-container-low active:translate-y-1 active:shadow-none transition-all group"
+                onclick="selectConsonant('พ')">
+                <span class="font-headline-lg text-headline-lg text-on-surface">พ</span>
+                <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 text-[18px]"
+                    data-icon="volume_up">volume_up</span>
+            </button>
+            <button
+                class="bg-surface-container-lowest h-[90px] rounded-xl border-2 border-outline-variant flex flex-col items-center justify-center chunky-shadow hover:bg-surface-container-low active:translate-y-1 active:shadow-none transition-all group"
+                onclick="selectConsonant('ก')">
+                <span class="font-headline-lg text-headline-lg text-on-surface">ก</span>
+                <span class="material-symbols-outlined text-secondary opacity-40 group-hover:opacity-100 text-[18px]"
+                    data-icon="volume_up">volume_up</span>
+            </button>
+            <div
+                class="h-[90px] rounded-xl border-2 border-dashed border-outline-variant flex items-center justify-center opacity-40">
+                <span class="material-symbols-outlined text-outline" data-icon="add">add</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentConsonant = "";
+
+        function selectConsonant(char) {
+            currentConsonant = char;
+            const slot = document.getElementById('active-consonant');
+            const slotContainer = document.getElementById('consonant-slot');
+            const resultDisplay = document.getElementById('word-result');
+
+            slot.textContent = char;
+            slotContainer.classList.remove('border-dashed');
+            slotContainer.classList.add('border-solid', 'border-secondary');
+
+            resultDisplay.textContent = char + " + า = " + char + "า";
+            resultDisplay.classList.remove('opacity-0');
+
+            // Interaction feedback
+            slotContainer.style.transform = "scale(1.1)";
+            setTimeout(() => {
+                slotContainer.style.transform = "scale(1)";
+            }, 150);
+
+            // Simple haptic simulation
+            if ('vibrate' in navigator) navigator.vibrate(10);
+        }
+
+        function playWordSound() {
+            if (!currentConsonant) return;
+            // Visual feedback
+            const btn = event.currentTarget;
+            btn.classList.add('pressed');
+            setTimeout(() => btn.classList.remove('pressed'), 100);
+
+            console.log("Playing sound for: " + currentConsonant + "า");
+        }
+
+        function activateMicrophone() {
+            if (!currentConsonant) return;
+            const btn = event.currentTarget;
+            btn.classList.add('bg-error', 'text-on-error');
+            btn.querySelector('span:last-child').textContent = "กำลังฟัง...";
+
+            setTimeout(() => {
+                btn.classList.remove('bg-error', 'text-on-error');
+                btn.querySelector('span:last-child').textContent = "พูด";
+                showCelebration();
+            }, 2000);
+        }
+
+        function showCelebration() {
+            // Create a temporary toast
+            const toast = document.createElement('div');
+            toast.className = "fixed top-20 left-1/2 -translate-x-1/2 bg-tertiary text-on-tertiary px-8 py-4 rounded-full font-label-lg shadow-lg z-[100] animate-bounce";
+            toast.innerHTML = '<div class="flex items-center gap-2"><span class="material-symbols-outlined">stars</span> เก่งมากจ้า!</div>';
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'transition-opacity');
+                setTimeout(() => toast.remove(), 500);
+            }, 2000);
+        }
+    </script>
+</body>
+
+</html>

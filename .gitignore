@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.svelte-kit/
+.vercel/
+build/
+node_modules/
+backend/config/master.key
+backend/log/*
+backend/storage/*.sqlite3*
+backend/tmp/*
+!backend/log/.keep
+!backend/tmp/.keep
+!backend/tmp/pids/.keep

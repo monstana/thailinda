@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>การสั่งงาน | ThaiLinda</title>
+  <link rel="stylesheet" href="../assets/css/teacher.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="t_001.html"><img src="../../assets/images/thailinda-mascot.png" alt=""><span><strong>ThaiLinda</strong><small>พื้นที่คุณครู</small></span></a>
+      <nav class="sidebar-nav" aria-label="เมนูคุณครู"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวมห้องเรียน</a><a class="is-active" href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลของนักเรียน</a></nav>
+      <div class="sidebar-user"><strong data-teacher-name></strong><span data-school-name></span></div>
+    </aside>
+    <header class="topbar"><div class="topbar__title"><h1>การสั่งงาน</h1><p>ห้อง ป.1/2</p></div><div class="topbar__actions"><div class="teacher-pill"><span class="avatar avatar--teacher material-symbols-rounded" aria-hidden="true">school</span><span data-teacher-name></span></div><button class="icon-button" type="button" data-logout title="ออกจากระบบ" aria-label="ออกจากระบบ"><span class="material-symbols-rounded" aria-hidden="true">logout</span></button></div></header>
+    <main class="page">
+      <div class="page-head"><div><h2>รายการสั่งงาน</h2><p>จัดชุดฝึกจากคำศัพท์พื้นฐาน 10 คำและติดตามสถานะงาน</p></div><a class="button button--primary" href="t_006.html"><span class="material-symbols-rounded" aria-hidden="true">add</span><span>สร้างการสั่งงาน</span></a></div>
+      <div class="toolbar"><div class="segmented" aria-label="กรองสถานะงาน"><button class="is-active" type="button" data-filter="all">ทั้งหมด <span id="allCount">0</span></button><button type="button" data-filter="active">ดำเนินการ <span id="activeCount">0</span></button><button type="button" data-filter="completed">เสร็จสิ้น <span id="completedCount">0</span></button></div></div>
+      <section class="assignment-list" id="assignmentList" aria-live="polite"></section>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="เมนูคุณครูบนมือถือ"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a class="is-active" href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลนักเรียน</a></nav>
+  <script type="module" src="../assets/js/assignments.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ภาพรวมบุตรหลาน | ThaiLinda</title>
+  <link rel="stylesheet" href="../assets/css/parent.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="p_003.html"><img src="../../assets/images/thailinda-mascot.png" alt=""><span><strong>ThaiLinda</strong><small>พื้นที่ผู้ปกครอง</small></span></a>
+      <nav class="sidebar-nav" aria-label="เมนูผู้ปกครอง"><a class="is-active" href="p_003.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a href="p_002.html"><span class="material-symbols-rounded" aria-hidden="true">monitoring</span>พัฒนาการ</a><a href="p_001.html"><span class="material-symbols-rounded" aria-hidden="true">person</span>โปรไฟล์</a></nav>
+      <div class="sidebar-user"><strong data-parent-name></strong><span data-school-name></span></div>
+    </aside>
+    <header class="topbar"><div class="topbar__title"><h1>ภาพรวมบุตรหลาน</h1><p data-school-name></p></div><div class="topbar__actions"><div class="parent-pill"><span class="avatar avatar--parent material-symbols-rounded" aria-hidden="true">family_restroom</span><span data-parent-name></span></div><button class="icon-button" type="button" data-logout title="ออกจากระบบ" aria-label="ออกจากระบบ"><span class="material-symbols-rounded" aria-hidden="true">logout</span></button></div></header>
+    <main class="page">
+      <div class="page-head"><div><p class="eyebrow">สำหรับผู้ปกครอง</p><h2>สวัสดี <span data-parent-name></span></h2><p>ติดตามการฝึกออกเสียงจากข้อมูลเดียวกับนักเรียนและคุณครู</p></div><select class="child-select" id="childSelector" aria-label="เลือกบุตรหลาน"></select></div>
+      <section class="empty-state empty-state--large panel" id="noChild" hidden><span class="material-symbols-rounded" aria-hidden="true">person_off</span><strong>ยังไม่มีบัญชีนักเรียนที่เชื่อมต่อ</strong><span>บัญชีนักเรียนต้องอยู่ในโรงเรียนเดียวกับผู้ปกครอง</span></section>
+      <div id="dashboardContent">
+        <section class="welcome-band"><div><p class="eyebrow">ความก้าวหน้าล่าสุด</p><h2><span data-child-name></span> ฝึกไปแล้วกี่คำ</h2><p>ผลผ่านจริงจะแยกจากการฝึกในโหมดทดลองเสมอ</p></div><div class="overall-progress"><div class="overall-progress__line"><span>ความคืบหน้าบทเรียน</span><strong id="progressText">0 จาก 10 คำ</strong></div><div class="progress-track"><span id="progressFill" style="width:0%"></span></div></div></section>
+        <section class="metric-grid" aria-label="ตัวเลขภาพรวม"><article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">verified</span></span><div><strong id="passedCount">0</strong><span>ผ่านจากเสียงจริง</span></div></article><article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">menu_book</span></span><div><strong id="practicedCount">0</strong><span>คำที่ฝึกแล้ว</span></div></article><article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">record_voice_over</span></span><div><strong id="practiceCount">0</strong><span>ควรฝึกเพิ่ม</span></div></article><article class="metric"><span class="metric__icon"><span class="material-symbols-rounded" aria-hidden="true">repeat</span></span><div><strong id="attemptCount">0</strong><span>ครั้งที่ลองพูด</span></div></article></section>
+        <div class="dashboard-grid"><section class="panel"><div class="panel-head"><div><h2>งานจากคุณครู</h2><p>ความคืบหน้าของบุตรหลานในแต่ละงาน</p></div></div><div id="assignmentList"></div></section><section class="panel"><div class="panel-head"><div><h2>ฝึกต่อที่บ้าน</h2><p>คำที่ควรให้กำลังใจและทบทวน</p></div><a class="text-link" href="p_002.html">ดูทั้งหมด</a></div><div id="recommendationList"></div></section></div>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="เมนูผู้ปกครองบนมือถือ"><a class="is-active" href="p_003.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a href="p_002.html"><span class="material-symbols-rounded" aria-hidden="true">monitoring</span>พัฒนาการ</a><a href="p_001.html"><span class="material-symbols-rounded" aria-hidden="true">person</span>โปรไฟล์</a></nav>
+  <script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>

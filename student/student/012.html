@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1559c7">
+  <title>ฝึกออกเสียง | ThaiLinda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/student.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header__inner">
+      <a class="brand" href="007.html" aria-label="กลับหน้าบทเรียน">
+        <span class="brand__mascot"><img src="../../assets/images/thailinda-mascot.png" alt=""></span><span>ThaiLinda</span>
+      </a>
+      <div class="student-pill"><span class="material-symbols-rounded" aria-hidden="true">record_voice_over</span><span>กำลังฝึกกับ <span data-student-name></span></span></div>
+    </div>
+  </header>
+
+  <main class="lesson-shell">
+    <a class="back-link" href="007.html"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>กลับหน้าบทเรียน</a>
+    <div class="lesson-status-bar">
+      <strong id="stepText">คำที่ 1 จาก 10</strong>
+      <div class="progress-track" role="progressbar" aria-label="ลำดับคำในบทเรียน" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+        <span id="lessonProgressBar" style="width:10%"></span>
+      </div>
+    </div>
+
+    <div class="lesson-stage">
+      <section class="word-panel" aria-labelledby="wordText">
+        <div class="word-visual" id="wordVisual"></div>
+        <div class="word-copy"><h1 id="wordText">กา</h1><p id="wordHint">กอ อา กา</p></div>
+      </section>
+
+      <section class="practice-panel" aria-labelledby="practiceTitle">
+        <h2 id="practiceTitle">ฟัง แล้วพูดตาม</h2>
+        <p>กดฟังเสียงตัวอย่างก่อน จากนั้นแตะไมโครโฟนแล้วพูดหนึ่งคำ</p>
+        <button class="secondary-button listen-button" id="listenButton" type="button">
+          <span class="material-symbols-rounded" aria-hidden="true">volume_up</span><span>ฟังเสียงคำนี้</span>
+        </button>
+        <div class="mic-wrap">
+          <button class="mic-button" id="micButton" type="button" aria-label="เริ่มหรือหยุดฟังเสียง">
+            <span class="material-symbols-rounded" aria-hidden="true">mic</span>
+          </button>
+          <p class="mic-label" id="micLabel">แตะแล้วพูด</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="feedback feedback--neutral" id="feedback" aria-live="polite">
+      <span class="material-symbols-rounded" id="feedbackIcon" aria-hidden="true">tips_and_updates</span>
+      <div><strong id="feedbackTitle">ฟังก่อน แล้วค่อยพูด</strong><p id="feedbackDetail">ระบบจะตรวจว่าคำที่ได้ยินตรงกับบัตรคำหรือไม่</p></div>
+    </section>
+
+    <section class="speech-fallback" id="speechFallback" hidden>
+      <div class="speech-fallback__top">
+        <div><h3>ตรวจเสียงจริงไม่ได้ในตอนนี้</h3><p id="fallbackText"></p></div>
+        <button class="icon-button" id="closeFallback" type="button" aria-label="ปิดข้อความ"><span class="material-symbols-rounded" aria-hidden="true">close</span></button>
+      </div>
+      <button class="ghost-button" id="demoButton" type="button"><span class="material-symbols-rounded" aria-hidden="true">science</span>ใช้โหมดทดลอง</button>
+    </section>
+
+    <div class="lesson-actions">
+      <button class="ghost-button" id="skipButton" type="button" hidden>ข้ามก่อน</button>
+      <button class="primary-button" id="nextButton" type="button" hidden>คำถัดไป<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
+    </div>
+  </main>
+
+  <dialog id="completionDialog" aria-labelledby="completeTitle">
+    <div class="dialog-body">
+      <div class="dialog-icon" style="color:var(--green);background:var(--green-soft)"><span class="material-symbols-rounded" aria-hidden="true">workspace_premium</span></div>
+      <h2 id="completeTitle">ฝึกครบทั้ง 10 คำแล้ว!</h2>
+      <p>ไปดูผลรายคำ แล้วกลับมาทบทวนคำที่ยังไม่ผ่านได้เลย</p>
+      <div class="dialog-actions">
+        <a class="ghost-button" href="007.html">กลับหน้าบทเรียน</a>
+        <a class="primary-button" href="010.html">ดูผลการเรียน</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script type="module" src="../assets/js/lesson.js"></script>
+</body>
+</html>
+

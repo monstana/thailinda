@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#221b00",
+                        "surface-tint": "#705d00",
+                        "on-secondary-fixed": "#001b3e",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#554500",
+                        "surface-container": "#ebedff",
+                        "surface-variant": "#dbe1ff",
+                        "surface-container-high": "#e3e7ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#96f89f",
+                        "outline": "#7e7761",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#725e00",
+                        "background": "#faf8ff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "tertiary": "#006e29",
+                        "on-surface": "#131a32",
+                        "on-surface-variant": "#4d4633",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#8ff199",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-background": "#131a32",
+                        "secondary": "#005db8",
+                        "surface-dim": "#d2d9f8",
+                        "surface-container-low": "#f3f3ff",
+                        "inverse-primary": "#e8c426",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dbe1ff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "inverse-surface": "#282f48",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#4c96fe",
+                        "inverse-on-surface": "#eff0ff",
+                        "primary-container": "#ffd93d",
+                        "primary": "#705d00",
+                        "on-tertiary-container": "#00702a",
+                        "surface": "#faf8ff",
+                        "on-tertiary-fixed": "#002107",
+                        "primary-fixed": "#ffe173",
+                        "secondary-fixed": "#d6e3ff",
+                        "outline-variant": "#d0c6ad",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#002e60"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "touch-target-min": "56px",
+                        "card-padding": "20px",
+                        "unit": "8px",
+                        "margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .chunky-shadow {
+            box-shadow: 0 4px 0 0 rgba(126, 119, 97, 0.4);
+        }
+
+        .chunky-shadow-active {
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+
+        .canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+    <!-- TopAppBar -->
+    <header
+        class="bg-background dark:bg-inverse-surface flex justify-between items-center w-full px-margin-mobile h-touch-target-min fixed top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+                <img alt="Mascot" class="w-full h-full object-cover"
+                    data-alt="A cute, friendly 3D elephant mascot with big ears and a happy expression, designed in a soft claymation style. The character is set against a clean, warm pastel background that matches an educational app for children. The lighting is soft and cheerful, emphasizing a safe and joyful learning environment."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP1NvL7--L42cXn3TjVp8o-VtbdLm_LvT1FYYt_mgXWQGyXwTGAIYC4UxEagyW5PVSg0kxS0WMCa7VnNtNBhO4vH8CcFbHu2CDhFhKmu0BoYV00v42FrkqL45JuA5oPmlaQWLIiGjLZHC7Jaw5XAJUVj0nsDZye_xAITonZ2EVz5IJuRqebf_bOhX__fZ7Chap11QijCWi-5mTh0hnSGwsWNilC7OMInlNGV9YBn6J0Pzq81hL2FkjsqpgWbNNgzwtEO5HIKXKwuM">
+            </div>
+            <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-primary-fixed">ไทยลินดา
+        </div>
+        <button
+            class="material-symbols-outlined text-on-surface-variant dark:text-outline-variant hover:opacity-80 transition-transform active:scale-95"
+            data-icon="settings">settings</button>
+    </header>
+    <main class="mt-20 px-margin-mobile">
+        <!-- Instruction Section -->
+        <div class="flex items-start gap-4 mb-8">
+            <div
+                class="relative bg-surface-container-lowest p-card-padding rounded-xl chunky-shadow border border-outline-variant max-w-[80%]">
+                <p class="font-headline-md text-headline-md text-on-surface">จับคู่ภาพกับพยัญชนะไทย</p>
+                <div
+                    class="absolute -left-2 top-4 w-4 h-4 bg-surface-container-lowest rotate-45 border-l border-b border-outline-variant">
+                </div>
+            </div>
+        </div>
+        <!-- Progress Bar -->
+        <div class="w-full bg-surface-variant h-4 rounded-full mb-10 overflow-hidden relative">
+            <div class="bg-tertiary h-full rounded-full w-1/4 transition-all duration-500 relative">
+                <div
+                    class="absolute right-0 top-1/2 -translate-y-1/2 w-6 h-6 bg-primary-fixed rounded-full border-2 border-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[14px] font-bold" data-icon="star"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+            </div>
+        </div>
+        <!-- Game Canvas (SVG for lines) -->
+        <svg class="canvas-container" id="drawing-canvas"></svg>
+        <!-- Matching Grid Wrapper -->
+        <div class="max-w-[340px] sm:max-w-[420px] mx-auto">
+            <!-- Matching Grid -->
+            <div class="grid grid-cols-2 gap-x-6 gap-y-4 relative">
+                <!-- Left Column: Illustrations -->
+                <div class="space-y-4">
+                    <!-- Chicken Card -->
+                    <button
+                        class="match-trigger w-full aspect-square bg-surface-container-lowest p-2 rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex flex-col items-center justify-center gap-1 animate-in fade-in"
+                        data-id="ko-kai">
+                        <div
+                            class="w-14 h-14 sm:w-20 sm:h-20 bg-surface-variant rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                            <img alt="Chicken" class="w-10 h-10 sm:w-16 sm:h-16"
+                                data-alt="A chunky, colorful 3D chicken character with bright red comb and friendly eyes."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFY8Qct5IOqJIRPGOi8sAjSJkTmfVu4zrvM1jcqH0KNkxYA228MXQSF4eY0sT3XSDuPi5bmHuw5fbskHe5eiAbnukFOPhpI1rKdd3SxmWjZNcZQuX9zJ034zX9AuTep6oCv0jTEvNlT3OxoGePVl31bBINi2_atMip0mfT_Me3-why5af5cf0Vd2cal6VqcsM89WkYS3kmehCSWxhUOC3hL6ULjrTdFp54fypLWojwxjHuml2OBg8cUqYQEWil8ofMpuyLpzOmBF8">
+                        </div>
+                        <span class="font-label-lg text-[11px] sm:text-xs text-on-surface truncate">ไก่ (Kai)</span>
+                    </button>
+                    <!-- Egg Card -->
+                    <button
+                        class="match-trigger w-full aspect-square bg-surface-container-lowest p-2 rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex flex-col items-center justify-center gap-1 animate-in fade-in"
+                        data-id="kho-khai">
+                        <div
+                            class="w-14 h-14 sm:w-20 sm:h-20 bg-surface-variant rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                            <img alt="Egg" class="w-10 h-10 sm:w-16 sm:h-16"
+                                data-alt="A stylized, smooth 3D illustration of a white egg in a small wooden nest."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpT9V4WRCS-hAsr84sEfloDdHUwjR_b9BM1pclqdKKlYazn4rArwNrqgTsp0eBhaHziH8eLFSGdhv13offgr6wLM04ExAOudcsPowUwaVjkjVwwLqKsJB95FBMn9IjxSAfKTGuK43yV32shYneDNdsIVHeQ-lM9Qt_3AxU3s2QA0WEVInRa1puED-UP2dCPAf-3vt2Qjl9HDtXNrX4TQH_4LZ6hYVaSOE7YnQnKt1gvBEU9jQGbzdcl1D3kQcVoWDR3QJGji9s8Qg">
+                        </div>
+                        <span class="font-label-lg text-[11px] sm:text-xs text-on-surface truncate">ไข่ (Khai)</span>
+                    </button>
+                    <!-- Bottle Card -->
+                    <button
+                        class="match-trigger w-full aspect-square bg-surface-container-lowest p-2 rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex flex-col items-center justify-center gap-1 animate-in fade-in"
+                        data-id="kho-khuat">
+                        <div
+                            class="w-14 h-14 sm:w-20 sm:h-20 bg-surface-variant rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                            <img alt="Bottle" class="w-10 h-10 sm:w-16 sm:h-16"
+                                data-alt="A playful, rounded 3D blue glass bottle with a cork stopper."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpE8NYUsNl2_TkOiAUwGjr_LEV_jkn2leonXujYM0IlgVQwqu76yGgk4Ht77OppBjax8FgSe927rMm0eyU6eU-y6lSkcTz-0ShUjp33COV74jUD4KA3kJSxh_yOJNp09dx0XRB_4zk0OPYtRDxZNSNO_w_vqoq26xJ4s0vnOk08b7PGX-2oV_hv-_AVS_HWmyffrY9c17BSVVcuwcFHn1-NXxq-tJgYXAF3WZeSgNMiWbfyk_m0DSm_1a35y4L-aEog8BO8BeKGGg">
+                        </div>
+                        <span class="font-label-lg text-[11px] sm:text-xs text-on-surface truncate">ขวด (Khuat)</span>
+                    </button>
+                    <!-- Buffalo Card -->
+                    <button
+                        class="match-trigger w-full aspect-square bg-surface-container-lowest p-2 rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex flex-col items-center justify-center gap-1 animate-in fade-in"
+                        data-id="kho-khwai">
+                        <div
+                            class="w-14 h-14 sm:w-20 sm:h-20 bg-surface-variant rounded-lg overflow-hidden flex items-center justify-center shrink-0">
+                            <img alt="Buffalo" class="w-10 h-10 sm:w-16 sm:h-16"
+                                data-alt="A cute, chubby 3D water buffalo illustration with curved grey horns."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuALLERclf7-2Fi1m9iIa0RNlsTq7w-wMQXM54oqw0HVFPqDFFpd9k-GasgSl-Zk1wAZK3plRxcxlG680PMCbt4DSA32j4Wv0LrwgktKXb8gTyUOAi4mR3XEpY4Nv2YtJAflFAWiNr7XIug2puZOqeLuTRp1Wl2lYnA3C28vEaf6YXzS2-TSC8mil7NkERaZEI1NMCjpFgzdR85Aa7WhBwgqN1vLLBD4hBP7wy6a28Yae1NIf4X40FPCB31BBoAF1mGkXVUt1iKFlwI">
+                        </div>
+                        <span class="font-label-lg text-[11px] sm:text-xs text-on-surface truncate">ควาย (Khwai)</span>
+                    </button>
+                </div>
+                <!-- Right Column: Thai Consonants (Shuffled Order) -->
+                <div class="space-y-4">
+                    <!-- Kho Khuat (ขวด) -->
+                    <button
+                        class="target-trigger w-full aspect-square bg-surface-container-lowest rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex items-center justify-center"
+                        data-match="kho-khuat">
+                        <span class="font-display-thai text-3xl sm:text-4xl text-secondary">ฃ</span>
+                    </button>
+                    <!-- Ko Kai (ไก่) -->
+                    <button
+                        class="target-trigger w-full aspect-square bg-surface-container-lowest rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex items-center justify-center"
+                        data-match="ko-kai">
+                        <span class="font-display-thai text-3xl sm:text-4xl text-secondary">ก</span>
+                    </button>
+                    <!-- Kho Khwai (ควาย) -->
+                    <button
+                        class="target-trigger w-full aspect-square bg-surface-container-lowest rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex items-center justify-center"
+                        data-match="kho-khwai">
+                        <span class="font-display-thai text-3xl sm:text-4xl text-secondary">ค</span>
+                    </button>
+                    <!-- Kho Khai (ไข่) -->
+                    <button
+                        class="target-trigger w-full aspect-square bg-surface-container-lowest rounded-xl chunky-shadow border-2 border-transparent hover:border-secondary transition-all active:translate-y-1 flex items-center justify-center"
+                        data-match="kho-khai">
+                        <span class="font-display-thai text-3xl sm:text-4xl text-secondary">ข</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedStart = null;
+        const svg = document.getElementById('drawing-canvas');
+
+        document.querySelectorAll('.match-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Clear previous selection if clicking another start node
+                document.querySelectorAll('.match-trigger').forEach(b => b.classList.remove('ring-4', 'ring-secondary'));
+
+                selectedStart = btn;
+                btn.classList.add('ring-4', 'ring-secondary');
+            });
+        });
+
+        document.querySelectorAll('.target-trigger').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                if (!selectedStart) return;
+
+                const startId = selectedStart.getAttribute('data-id');
+                const targetMatch = btn.getAttribute('data-match');
+
+                if (startId === targetMatch) {
+                    // Correct Match
+                    createLine(selectedStart, btn, '#006e29'); // Success Green
+                    btn.classList.add('bg-tertiary-container', 'chunky-shadow-active');
+                    selectedStart.classList.add('bg-tertiary-container', 'chunky-shadow-active');
+                    selectedStart.classList.remove('ring-4', 'ring-secondary');
+
+                    // Simple pop effect
+                    btn.style.transform = "scale(1.1)";
+                    setTimeout(() => btn.style.transform = "scale(1)", 200);
+
+                    selectedStart = null;
+                } else {
+                    // Wrong Match
+                    btn.classList.add('bg-error-container');
+                    setTimeout(() => btn.classList.remove('bg-error-container'), 500);
+                }
+            });
+        });
+
+        function createLine(el1, el2, color) {
+            const rect1 = el1.getBoundingClientRect();
+            const rect2 = el2.getBoundingClientRect();
+
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', rect1.right - 10);
+            line.setAttribute('y1', rect1.top + rect1.height / 2);
+            line.setAttribute('x2', rect2.left + 10);
+            line.setAttribute('y2', rect2.top + rect2.height / 2);
+            line.setAttribute('stroke', color);
+            line.setAttribute('stroke-width', '6');
+            line.setAttribute('stroke-linecap', 'round');
+            line.setAttribute('stroke-dasharray', '10, 10');
+
+            svg.appendChild(line);
+        }
+
+        // Handle window resize to clear lines (for simplicity in this demo)
+        window.addEventListener('resize', () => {
+            svg.innerHTML = '';
+            document.querySelectorAll('.match-trigger, .target-trigger').forEach(b => {
+                b.classList.remove('bg-tertiary-container', 'chunky-shadow-active', 'ring-4', 'ring-secondary');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ผลของนักเรียน | ThaiLinda</title>
+  <link rel="stylesheet" href="../assets/css/teacher.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="t_001.html"><img src="../../assets/images/thailinda-mascot.png" alt=""><span><strong>ThaiLinda</strong><small>พื้นที่คุณครู</small></span></a>
+      <nav class="sidebar-nav" aria-label="เมนูคุณครู"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวมห้องเรียน</a><a href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a class="is-active" href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลของนักเรียน</a></nav>
+      <div class="sidebar-user"><strong data-teacher-name></strong><span data-school-name></span></div>
+    </aside>
+    <header class="topbar"><div class="topbar__title"><h1>ผลของนักเรียน</h1><p>ห้อง ป.1/2</p></div><div class="topbar__actions"><div class="teacher-pill"><span class="avatar avatar--teacher material-symbols-rounded" aria-hidden="true">school</span><span data-teacher-name></span></div><button class="icon-button" type="button" data-logout title="ออกจากระบบ" aria-label="ออกจากระบบ"><span class="material-symbols-rounded" aria-hidden="true">logout</span></button></div></header>
+    <main class="page">
+      <div class="page-head"><div><h2>รายงานการฝึกออกเสียง</h2><p>นักเรียนที่เชื่อมกับโรงเรียน <span data-school-name></span> จำนวน <strong id="studentTotal">0</strong> คน</p></div></div>
+      <div class="students-layout">
+        <section class="panel"><div class="panel-head"><div><h2>รายชื่อนักเรียน</h2><p>เลือกเพื่อดูผลรายคำ</p></div></div><div class="student-list" id="studentList"></div></section>
+        <section class="panel" id="studentReport" aria-live="polite"></section>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="เมนูคุณครูบนมือถือ"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a class="is-active" href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลนักเรียน</a></nav>
+  <script type="module" src="../assets/js/students.js"></script>
+</body>
+</html>

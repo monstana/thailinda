@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>สร้างการสั่งงาน | ThaiLinda</title>
+  <link rel="stylesheet" href="../assets/css/teacher.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="t_001.html"><img src="../../assets/images/thailinda-mascot.png" alt=""><span><strong>ThaiLinda</strong><small>พื้นที่คุณครู</small></span></a>
+      <nav class="sidebar-nav" aria-label="เมนูคุณครู"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวมห้องเรียน</a><a class="is-active" href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลของนักเรียน</a></nav>
+      <div class="sidebar-user"><strong data-teacher-name></strong><span data-school-name></span></div>
+    </aside>
+    <header class="topbar"><div class="topbar__title"><h1>สร้างการสั่งงาน</h1><p>ห้อง ป.1/2</p></div><div class="topbar__actions"><div class="teacher-pill"><span class="avatar avatar--teacher material-symbols-rounded" aria-hidden="true">school</span><span data-teacher-name></span></div><button class="icon-button" type="button" data-logout title="ออกจากระบบ" aria-label="ออกจากระบบ"><span class="material-symbols-rounded" aria-hidden="true">logout</span></button></div></header>
+    <main class="page">
+      <div class="form-shell">
+        <div class="page-head"><div><h2>รายละเอียดงานฝึก</h2><p>เลือกคำที่ต้องการให้นักเรียนฝึกออกเสียง</p></div></div>
+        <form id="assignmentForm" novalidate>
+          <section class="form-section"><h2>ข้อมูลงาน</h2><p>ระบุชื่อ ห้องเรียน และกำหนดส่ง</p><div class="field-grid"><div class="field"><label for="assignmentTitle">ชื่อการสั่งงาน</label><input id="assignmentTitle" name="title" type="text" maxlength="80" placeholder="เช่น ทบทวนคำก่อนวันศุกร์" autocomplete="off"></div><div class="field"><label for="classroomId">ห้องเรียน</label><select id="classroomId" name="classroomId"><option value="p1-2">ประถมศึกษาปีที่ 1/2</option></select></div><div class="field"><label for="dueDate">กำหนดส่ง</label><input id="dueDate" name="dueDate" type="date"></div></div></section>
+          <section class="form-section"><div class="word-choice-head"><h2>คำศัพท์</h2><div class="word-choice-actions"><button class="link-button" id="selectAllWords" type="button">เลือกทั้งหมด</button><button class="link-button" id="clearWords" type="button">ล้างการเลือก</button></div></div><div class="word-choices" id="wordChoices"></div><div class="selection-summary" id="selectedCount"></div></section>
+          <p class="form-message" id="formMessage" role="alert"></p>
+          <div class="form-actions"><a class="button button--secondary" href="t_002.html">ยกเลิก</a><button class="button button--primary" type="submit"><span class="material-symbols-rounded" aria-hidden="true">send</span>มอบหมายให้นักเรียน</button></div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <nav class="mobile-nav" aria-label="เมนูคุณครูบนมือถือ"><a href="t_001.html"><span class="material-symbols-rounded" aria-hidden="true">dashboard</span>ภาพรวม</a><a class="is-active" href="t_002.html"><span class="material-symbols-rounded" aria-hidden="true">assignment</span>การสั่งงาน</a><a href="t_003.html"><span class="material-symbols-rounded" aria-hidden="true">group</span>ผลนักเรียน</a></nav>
+  <script type="module" src="../assets/js/create-assignment.js"></script>
+</body>
+</html>

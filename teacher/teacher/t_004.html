@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="light" lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#f8e377",
+                        "inverse-surface": "#213145",
+                        "surface-dim": "#cbdbf5",
+                        "inverse-primary": "#80d1f7",
+                        "on-surface": "#0b1c30",
+                        "surface-variant": "#d3e4fe",
+                        "primary-fixed": "#bfe8ff",
+                        "tertiary-container": "#d1be56",
+                        "secondary": "#396a1f",
+                        "surface-bright": "#f8f9ff",
+                        "on-tertiary-container": "#584c00",
+                        "error": "#ba1a1a",
+                        "primary": "#006686",
+                        "outline-variant": "#bfc8ce",
+                        "background": "#f8f9ff",
+                        "on-tertiary-fixed": "#211b00",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed": "#001f2b",
+                        "tertiary-fixed-dim": "#dbc75e",
+                        "outline": "#6f787e",
+                        "on-background": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary-fixed-variant": "#215106",
+                        "on-secondary-fixed": "#082100",
+                        "on-tertiary-fixed-variant": "#514700",
+                        "tertiary": "#6c5e00",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container": "#e5eeff",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#b9f396",
+                        "primary-fixed-dim": "#80d1f7",
+                        "on-secondary-container": "#3f7024",
+                        "secondary-fixed": "#b9f396",
+                        "secondary-fixed-dim": "#9ed67d",
+                        "on-primary-fixed-variant": "#004d65",
+                        "on-primary-container": "#00536d",
+                        "surface-tint": "#006686",
+                        "surface": "#f8f9ff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#76c7ed",
+                        "on-surface-variant": "#3f484d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "64px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "lg": "40px",
+                        "container-padding": "32px",
+                        "xs": "4px",
+                        "base": "8px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .soft-card-shadow {
+            box-shadow: 0 20px 40px -10px rgba(0, 102, 134, 0.04);
+        }
+
+        .status-stripe-green {
+            border-left: 4px solid #396a1f;
+        }
+
+        .status-stripe-yellow {
+            border-left: 4px solid #6c5e00;
+        }
+
+        .status-stripe-blue {
+            border-left: 4px solid #006686;
+        }
+
+        .progress-bar-fill {
+            transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24 md:pb-0 md:pl-20 lg:pl-64">
+    <!-- TopAppBar -->
+    <header class="bg-background dark:bg-on-surface shadow-sm w-full top-0 z-40 fixed md:static">
+        <div class="flex justify-between items-center px-container-padding py-sm w-full">
+            <div class="flex items-center gap-md">
+                <button
+                    class="material-symbols-outlined text-primary hover:bg-surface-container-highest transition-colors p-2 rounded-full active:scale-95 duration-200">arrow_back</button>
+                <h1 class="font-display-lg text-headline-md text-primary dark:text-primary-fixed-dim">ไทยลินดา</h1>
+            </div>
+            <div class="flex items-center gap-md">
+                <span
+                    class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-highest transition-colors p-2 rounded-full cursor-pointer">notifications</span>
+                <div
+                    class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-primary-fixed shadow-sm">
+                    <img alt="Teacher Profile Photo" class="w-full h-full object-cover"
+                        data-alt="A professional and friendly portrait of a Thai female teacher in a modern studio setting. She is wearing a soft blue academic blazer. The background is a minimalist classroom with soft bokeh, using a light and airy pastel color palette. High-key lighting emphasizes a warm and encouraging atmosphere."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBT3dKsgiLuALttQ0mp9ayi5Z-Ms161HoGmXw2yWJEe8aghdH3GRl8jHCnPY92JE8YIqfArFN5PEeijyNoXtOHvz2V4Uu45u_Z8fSgAyCAFW58_hrqIHfUvsGRZpEiOvvI6CH77aysOAfjXnsQGlw7VVNPGPaE3Uq0ncC1eL1oJlnBIQigPaAmMugZyECiLSb0_aL2sEvqAqpMK6uWivMiXJRPG3I56Eljz6tS30U38FrcprCmxeeiljG8Pe30fPHqC1RTlz9S2vE">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main
+        class="max-w-[1440px] mx-auto px-container-padding pt-24 md:pt-md grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <!-- Student Header Card (Bento Item 1) -->
+        <section
+            class="md:col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl p-md soft-card-shadow flex flex-col md:flex-row items-center md:items-start gap-md border border-outline-variant/30">
+            <div class="relative">
+                <div
+                    class="w-32 h-32 md:w-40 md:h-40 rounded-3xl bg-primary-container overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-500">
+                    <img alt="Student Photo" class="w-full h-full object-cover"
+                        data-alt="A charming digital illustration of a young Thai primary student smiling warmly. The child has short neat hair and is wearing a crisp white school uniform. The artistic style is soft-minimalism with a pastel blue and cream background, reminiscent of a friendly educational app character. Soft, ambient depth lighting."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUD6Fym-u8zMHWGL61Dnff14H18j4Pfhj15kYpYcvabeV8U47KsMWC9VqYDH-UxlFmkcXrRG5IBnPyRfkFWncncnV56XjaV0dqT3at8FgBsQE6Um9sx92EYA28fZQjwsqLjo_EXizaBX3_zFJbeA6zyGr3qRgldeyL4Lwd_1cn7BldVYACv4wfUXKHR5EHyd0WUjmauLJ6X9fNTfJnW4H2ZWJJoeVwAAiJg9D1o_Gh_tpcV9uGlonnAENG6EPdeW12XAmb0uW4Gjk">
+                </div>
+                <div
+                    class="absolute -bottom-2 -right-2 bg-secondary text-on-secondary px-3 py-1 rounded-full text-label-md font-label-md shadow-sm">
+                    Active
+                </div>
+            </div>
+            <div class="flex-1 text-center md:text-left">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-sm mb-base">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">น้องมานะ</h2>
+                        <div class="flex flex-wrap justify-center md:justify-start gap-sm">
+                            <span
+                                class="bg-surface-container-high px-4 py-1 rounded-full text-label-md font-label-md text-primary">ป.1/1</span>
+                            <span
+                                class="bg-surface-container-high px-4 py-1 rounded-full text-label-md font-label-md text-on-surface-variant">ID:
+                                TL-2024-001</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- Overall Skill Index (Bento Item 2) -->
+        <section
+            class="md:col-span-6 lg:col-span-4 bg-primary text-on-primary rounded-xl p-md soft-card-shadow flex flex-col justify-between overflow-hidden relative group">
+            <div
+                class="absolute top-0 right-0 p-lg opacity-10 scale-150 rotate-12 group-hover:rotate-0 transition-transform duration-700">
+                <span class="material-symbols-outlined text-[120px]"
+                    style="font-variation-settings: 'FILL' 1;">auto_graph</span>
+            </div>
+            <div>
+                <h3 class="font-headline-md text-headline-md mb-xs">ดัชนีทักษะรวม</h3>
+                <p class="font-body-md opacity-80">คะแนนประเมินรายสัปดาห์</p>
+            </div>
+            <div class="mt-lg">
+                <div class="text-[64px] font-display-lg leading-none">85<span
+                        class="text-headline-md opacity-60">/100</span></div>
+                <div class="flex items-center gap-xs mt-base text-secondary-container">
+                    <span class="material-symbols-outlined text-body-md">trending_up</span>
+                    <span class="font-label-md">+5.2% จากเดือนที่แล้ว</span>
+                </div>
+            </div>
+        </section>
+        <!-- Skill Breakdown (Bento Item 3) -->
+        <section
+            class="md:col-span-6 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md soft-card-shadow border border-outline-variant/30 flex flex-col gap-md">
+            <h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+                <span
+                    class="w-8 h-8 rounded-full bg-primary-container/30 text-primary flex items-center justify-center material-symbols-outlined text-[20px]"
+                    style="font-variation-settings: 'FILL' 1;">star</span>
+                ทักษะรายด้าน
+            </h3>
+            <div class="space-y-gutter">
+                <div class="space-y-xs">
+                    <div class="flex justify-between items-center text-label-md font-label-md">
+                        <span class="text-on-surface">การอ่าน (Reading)</span>
+                        <span class="text-primary">88%</span>
+                    </div>
+                    <div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+                        <div class="h-full bg-primary progress-bar-fill rounded-full" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="space-y-xs">
+                    <div class="flex justify-between items-center text-label-md font-label-md">
+                        <span class="text-on-surface">การพูด (Speaking)</span>
+                        <span class="text-tertiary">72%</span>
+                    </div>
+                    <div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+                        <div class="h-full bg-tertiary progress-bar-fill rounded-full" style="width: 72%"></div>
+                    </div>
+                </div>
+                <div class="space-y-xs">
+                    <div class="flex justify-between items-center text-label-md font-label-md">
+                        <span class="text-on-surface">ความคล่องแคล่ว (Fluency)</span>
+                        <span class="text-secondary">95%</span>
+                    </div>
+                    <div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+                        <div class="h-full bg-secondary progress-bar-fill rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Current Learning (Bento Item 4) -->
+        <section
+            class="md:col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md soft-card-shadow border border-outline-variant/30 status-stripe-blue flex flex-col justify-between">
+            <div>
+                <span
+                    class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-label-md font-label-md mb-md inline-block">เนื้อหาที่เรียนอยู่</span>
+                <h3 class="font-headline-lg text-headline-lg text-on-surface mb-xs">สระอา หรรษา</h3>
+                <p class="font-body-md text-on-surface-variant">บทที่ 4: การประสมคำสระอาเบื้องต้น</p>
+            </div>
+            <div class="mt-lg bg-surface-container rounded-xl p-sm flex items-center gap-md">
+                <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-primary shadow-sm">
+                    <span class="material-symbols-outlined text-[32px]">menu_book</span>
+                </div>
+                <div class="flex-1">
+                    <div class="text-label-md text-on-surface-variant mb-xs">ความคืบหน้าของบทเรียน</div>
+                    <div class="flex items-center gap-md">
+                        <div class="flex-1 h-2 bg-white rounded-full overflow-hidden">
+                            <div class="h-full bg-primary" style="width: 65%"></div>
+                        </div>
+                        <span class="text-label-md font-bold text-on-surface">65%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Daily Usage Chart (Bento Item 5) -->
+        <section
+            class="md:col-span-12 lg:col-span-4 bg-surface-container-lowest rounded-xl p-md soft-card-shadow border border-outline-variant/30 flex flex-col">
+            <h3 class="font-headline-md text-headline-md text-on-surface mb-gutter">จำนวนการใช้ในแต่ละวัน</h3>
+            <div class="flex-1 flex items-end justify-between gap-base h-48 md:h-full">
+                <!-- Bar 1 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-24 group-hover:h-28 transition-all duration-300">
+                        <div class="w-full bg-primary rounded-t-lg" style="height: 40%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            12m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">จ.</span>
+                </div>
+                <!-- Bar 2 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-32 group-hover:h-36 transition-all duration-300">
+                        <div class="w-full bg-primary rounded-t-lg" style="height: 75%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            25m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">อ.</span>
+                </div>
+                <!-- Bar 3 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-16 group-hover:h-20 transition-all duration-300">
+                        <div class="w-full bg-primary rounded-t-lg" style="height: 30%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            8m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">พ.</span>
+                </div>
+                <!-- Bar 4 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-40 group-hover:h-44 transition-all duration-300">
+                        <div class="w-full bg-primary rounded-t-lg" style="height: 90%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            32m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">พฤ.</span>
+                </div>
+                <!-- Bar 5 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-28 group-hover:h-32 transition-all duration-300">
+                        <div class="w-full bg-primary rounded-t-lg" style="height: 60%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            20m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">ศ.</span>
+                </div>
+                <!-- Bar 6 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-12 group-hover:h-16 transition-all duration-300">
+                        <div class="w-full bg-tertiary rounded-t-lg" style="height: 20%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            5m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">ส.</span>
+                </div>
+                <!-- Bar 7 -->
+                <div class="flex flex-col items-center flex-1 gap-base group">
+                    <div
+                        class="w-full bg-primary-container/40 rounded-t-lg relative flex items-end overflow-hidden h-20 group-hover:h-24 transition-all duration-300">
+                        <div class="w-full bg-tertiary rounded-t-lg" style="height: 50%"></div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-white text-[10px] font-bold">
+                            15m</div>
+                    </div>
+                    <span class="text-label-md text-on-surface-variant">อา.</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-md py-sm bg-surface-container-lowest dark:bg-on-surface border-t border-outline-variant shadow-[0_-4px_20px_0_rgba(0,102,134,0.04)] rounded-t-xl">
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-all active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="school">school</span>
+            <span class="font-label-md text-label-md">ห้องเรียน</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high transition-all active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+            <span class="font-label-md text-label-md">การสั่งงาน</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-primary-container dark:bg-on-primary-fixed-variant text-on-primary-container dark:text-primary-fixed rounded-full px-4 py-1 active:scale-90 duration-150"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="account_circle"
+                style="font-variation-settings: 'FILL' 1;">account_circle</span>
+            <span class="font-label-md text-label-md">โปรไฟล์</span>
+        </a>
+    </nav>
+    <!-- Desktop Navigation Side Rail -->
+    <aside
+        class="hidden md:flex fixed left-0 top-0 h-full w-20 lg:w-64 bg-surface-container-low border-r border-outline-variant/30 flex-col py-md z-30">
+        <div class="px-md mb-xl flex items-center gap-sm overflow-hidden">
+            <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary shrink-0">
+                <span class="material-symbols-outlined">auto_stories</span>
+            </div>
+            <span class="font-display-lg text-headline-md text-primary hidden lg:block">ไทยลินดา</span>
+        </div>
+        <nav class="flex-1 px-sm space-y-base">
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-md hidden lg:block">แดชบอร์ด</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span class="font-label-md hidden lg:block">รายชื่อนักเรียน</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm bg-primary/10 text-primary rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+                <span class="font-label-md hidden lg:block font-bold">ข้อมูลนักเรียน</span>
+            </a>
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">analytics</span>
+                <span class="font-label-md hidden lg:block">สถิติการสอน</span>
+            </a>
+        </nav>
+        <div class="px-sm">
+            <a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all"
+                href="#">
+                <span class="material-symbols-outlined">settings</span>
+                <span class="font-label-md hidden lg:block">ตั้งค่า</span>
+            </a>
+        </div>
+    </aside>
+    <script>
+        // Micro-interaction: Animated bars on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 300);
+            });
+
+            // Smooth entrance for cards
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+
+</html>

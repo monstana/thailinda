@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1266d6">
+  <title>เข้าสู่ระบบ | ThaiLinda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:FILL@0..1" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+  <div class="splash" id="splash" aria-label="กำลังเปิด ThaiLinda">
+    <div class="splash__mark" aria-hidden="true">
+      <span class="brand-letter">ท</span>
+      <span class="sound-ring sound-ring--one"></span>
+      <span class="sound-ring sound-ring--two"></span>
+    </div>
+    <div class="splash__wordmark">Thai<span>Linda</span></div>
+    <p>เรียนรู้ภาษาไทยอย่างมั่นใจ</p>
+    <div class="splash__loader" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+
+  <main class="auth-shell is-hidden" id="authShell">
+    <section class="brand-panel" aria-labelledby="brandTitle">
+      <header class="brand-bar">
+        <a class="brand" href="index.html" aria-label="ThaiLinda หน้าหลัก">
+          <span class="brand__mark" aria-hidden="true">ท</span>
+          <span id="brandTitle">Thai<span>Linda</span></span>
+        </a>
+        <span class="brand-bar__tag">ฝึกออกเสียงภาษาไทย</span>
+      </header>
+
+      <div class="brand-visual">
+        <div class="brand-copy">
+          <p class="eyebrow">พูดชัด อ่านคล่อง</p>
+          <h1>ทุกคำใหม่<br>เริ่มจากความกล้า</h1>
+          <p>พื้นที่ฝึกภาษาไทยที่เด็ก ๆ ครู และผู้ปกครองเรียนรู้ไปด้วยกัน</p>
+        </div>
+        <figure class="mascot-frame">
+          <img src="assets/images/thailinda-mascot.png" alt="ลินดาถือบัตรพยัญชนะ ก">
+        </figure>
+      </div>
+
+      <div class="role-strip" aria-label="ผู้ใช้งาน ThaiLinda">
+        <span><span class="material-symbols-rounded" aria-hidden="true">child_care</span> นักเรียน</span>
+        <span><span class="material-symbols-rounded" aria-hidden="true">school</span> คุณครู</span>
+        <span><span class="material-symbols-rounded" aria-hidden="true">family_restroom</span> ผู้ปกครอง</span>
+      </div>
+    </section>
+
+    <section class="form-panel">
+      <div class="mobile-brand">
+        <span class="brand__mark" aria-hidden="true">ท</span>
+        <span>Thai<span>Linda</span></span>
+      </div>
+
+      <div class="auth-view" id="loginView">
+        <div class="profile-block">
+          <button class="avatar-button" type="button" id="switchUserButton" aria-label="เปลี่ยนผู้ใช้งาน">
+            <span class="profile-avatar profile-avatar--student" id="profileAvatar">
+              <span class="material-symbols-rounded" id="profileIcon" aria-hidden="true">child_care</span>
+            </span>
+            <span class="avatar-button__edit material-symbols-rounded" aria-hidden="true">swap_horiz</span>
+          </button>
+          <p class="eyebrow" id="roleGreeting">ยินดีต้อนรับกลับมา</p>
+          <h2>สวัสดี <span id="profileName">น้องมานะ</span></h2>
+          <button class="text-button" type="button" id="switchUserText">ไม่ใช่คุณใช่ไหม? เปลี่ยนผู้ใช้</button>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <fieldset class="pin-fieldset">
+            <legend>ใส่รหัส PIN 4 หลัก</legend>
+            <div class="pin-group" id="loginPin" data-pin-group>
+              <input aria-label="PIN หลักที่ 1" inputmode="numeric" autocomplete="one-time-code" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 2" inputmode="numeric" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 3" inputmode="numeric" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 4" inputmode="numeric" maxlength="1" data-pin-input>
+            </div>
+            <p class="form-message" id="loginMessage" role="alert"></p>
+          </fieldset>
+
+          <button class="primary-button" type="submit" id="loginButton">
+            <span>เข้าสู่ระบบ</span>
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          <p>ยังไม่มีบัญชี?</p>
+          <button class="secondary-button" type="button" id="showRegister">
+            <span class="material-symbols-rounded" aria-hidden="true">person_add</span>
+            สมัครสมาชิก
+          </button>
+        </div>
+
+        <details class="demo-access">
+          <summary>รหัสสำหรับทดลองใช้งาน</summary>
+          <div class="demo-access__list">
+            <button type="button" data-demo-user="student"><span>นักเรียน</span><strong>1234</strong></button>
+            <button type="button" data-demo-user="teacher"><span>คุณครู</span><strong>2345</strong></button>
+            <button type="button" data-demo-user="parent"><span>ผู้ปกครอง</span><strong>3456</strong></button>
+          </div>
+        </details>
+      </div>
+
+      <div class="auth-view is-hidden" id="registerView">
+        <header class="register-header">
+          <button class="icon-button" type="button" id="backToLogin" aria-label="กลับไปหน้าเข้าสู่ระบบ" title="กลับ">
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+          </button>
+          <div>
+            <p class="eyebrow">เริ่มต้นใช้งาน</p>
+            <h2>สมัครสมาชิกใหม่</h2>
+          </div>
+        </header>
+
+        <form class="register-form" id="registerForm" novalidate>
+          <fieldset class="role-fieldset">
+            <legend>ฉันคือ</legend>
+            <div class="role-selector">
+              <label>
+                <input type="radio" name="role" value="student" checked>
+                <span><span class="material-symbols-rounded" aria-hidden="true">child_care</span>นักเรียน</span>
+              </label>
+              <label>
+                <input type="radio" name="role" value="teacher">
+                <span><span class="material-symbols-rounded" aria-hidden="true">school</span>คุณครู</span>
+              </label>
+              <label>
+                <input type="radio" name="role" value="parent">
+                <span><span class="material-symbols-rounded" aria-hidden="true">family_restroom</span>ผู้ปกครอง</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="field-grid field-grid--two">
+            <label class="field">
+              <span>ชื่อ</span>
+              <input type="text" name="firstName" autocomplete="given-name" placeholder="เช่น มานะ" required>
+            </label>
+            <label class="field">
+              <span>นามสกุล</span>
+              <input type="text" name="lastName" autocomplete="family-name" placeholder="เช่น รักเรียน" required>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>โรงเรียน</span>
+            <span class="field__control">
+              <span class="material-symbols-rounded" aria-hidden="true">account_balance</span>
+              <input type="text" name="school" autocomplete="organization" placeholder="ชื่อโรงเรียน" required>
+            </span>
+          </label>
+
+          <label class="field">
+            <span>อีเมล</span>
+            <span class="field__control">
+              <span class="material-symbols-rounded" aria-hidden="true">mail</span>
+              <input type="email" name="email" autocomplete="email" placeholder="name@example.com" required>
+            </span>
+          </label>
+
+          <fieldset class="pin-fieldset pin-fieldset--register">
+            <legend>ตั้งรหัส PIN 4 หลัก</legend>
+            <div class="pin-group pin-group--small" id="registerPin" data-pin-group>
+              <input aria-label="PIN หลักที่ 1" inputmode="numeric" autocomplete="new-password" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 2" inputmode="numeric" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 3" inputmode="numeric" maxlength="1" data-pin-input>
+              <input aria-label="PIN หลักที่ 4" inputmode="numeric" maxlength="1" data-pin-input>
+            </div>
+          </fieldset>
+
+          <label class="terms-check">
+            <input type="checkbox" name="terms" required>
+            <span>ฉันยอมรับ <a href="#terms">ข้อกำหนดการใช้งาน</a> และ <a href="#privacy">นโยบายความเป็นส่วนตัว</a> ของ ThaiLinda</span>
+          </label>
+          <p class="form-message" id="registerMessage" role="alert"></p>
+
+          <button class="primary-button" type="submit">
+            <span>สร้างบัญชี</span>
+            <span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="user-picker is-hidden" id="userPicker" role="dialog" aria-modal="true" aria-labelledby="userPickerTitle">
+    <button class="user-picker__backdrop" type="button" data-close-picker aria-label="ปิดหน้าต่าง"></button>
+    <section class="user-picker__sheet">
+      <header>
+        <div>
+          <p class="eyebrow">บัญชีในเครื่องนี้</p>
+          <h2 id="userPickerTitle">เลือกผู้ใช้งาน</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-picker aria-label="ปิด" title="ปิด">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+      </header>
+      <div class="user-list" id="userList"></div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="assets/js/login.js"></script>
+</body>
+</html>

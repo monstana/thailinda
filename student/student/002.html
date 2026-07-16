@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="light" lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Thai Linda - Register</title>
+    <!-- Material Symbols -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans (matching config) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#00468c",
+                        "surface-dim": "#d2d9f8",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#554500",
+                        "tertiary-fixed": "#96f89f",
+                        "on-background": "#131a32",
+                        "on-primary-container": "#725e00",
+                        "primary": "#705d00",
+                        "background": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff0ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#002107",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#dbe1ff",
+                        "outline-variant": "#d0c6ad",
+                        "on-tertiary-fixed-variant": "#00531d",
+                        "inverse-surface": "#282f48",
+                        "outline": "#7e7761",
+                        "on-primary-fixed": "#221b00",
+                        "on-surface-variant": "#4d4633",
+                        "on-secondary-fixed": "#001b3e",
+                        "tertiary": "#006e29",
+                        "surface-container": "#ebedff",
+                        "secondary-fixed-dim": "#a9c7ff",
+                        "tertiary-container": "#8ff199",
+                        "primary-fixed": "#ffe173",
+                        "secondary": "#005db8",
+                        "on-surface": "#131a32",
+                        "secondary-fixed": "#d6e3ff",
+                        "primary-container": "#ffd93d",
+                        "on-tertiary-container": "#00702a",
+                        "secondary-container": "#4c96fe",
+                        "surface-container-high": "#e3e7ff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed-dim": "#7bdb85",
+                        "surface-container-low": "#f3f3ff",
+                        "surface-tint": "#705d00",
+                        "inverse-primary": "#e8c426",
+                        "surface": "#faf8ff",
+                        "on-secondary-container": "#002e60",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#dbe1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "24px",
+                        "touch-target-min": "56px",
+                        "card-padding": "20px",
+                        "unit": "8px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-thai": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "label-lg": ["16px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["20px", { "lineHeight": "30px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-thai": ["48px", { "lineHeight": "60px", "fontWeight": "800" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "fontWeight": "500" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Chunky Button Shadow */
+        .chunky-button {
+            transition: all 0.1s ease;
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .chunky-button:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 0 transparent;
+        }
+
+        /* Learning Card Aesthetics */
+        .learning-card {
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col">
+    <!-- Top AppBar (Generated from JSON guidance, suppressed Shell for focused task) -->
+    <header
+        class="w-full top-0 sticky z-40 bg-background flex justify-between items-center px-margin-mobile h-touch-target-min">
+        <a aria-label="Back" href="001.html"
+            class="w-touch-target-min h-touch-target-min flex items-center justify-center text-primary active:translate-y-1 transition-transform">
+            <span class="material-symbols-outlined text-[32px]">arrow_back</span>
+        </a>
+        <h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary">สมัครสมาชิกใหม่</h1>
+        <div class="w-touch-target-min h-touch-target-min flex items-center justify-center">
+            <!-- Leading spacing to balance -->
+            <span class="material-symbols-outlined text-primary-fixed-dim opacity-0">stars</span>
+        </div>
+    </header>
+    <main class="flex-1 flex flex-col px-margin-mobile pb-12 overflow-y-auto">
+        <!-- Hero Mascot Section -->
+        <div class="flex flex-col items-center justify-center py-6">
+            <div
+                class="relative w-48 h-48 bg-secondary-container/20 rounded-full flex items-center justify-center mb-4">
+
+            </div>
+            <div class="bg-surface-container-high rounded-xl p-4 relative mb-6">
+                <p class="text-on-surface font-label-lg text-label-lg">มาเป็นเพื่อนกับลินดานะ!</p>
+                <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-surface-container-high rotate-45">
+                </div>
+            </div>
+        </div>
+        <!-- Registration Form -->
+        <form class="space-y-6" action="003.html" method="GET">
+            <!-- First Name & Last Name (Responsive Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label class="block font-label-lg text-label-lg text-primary px-2">ชื่อ</label>
+                    <input
+                        class="w-full h-touch-target-min px-6 rounded-lg border-2 border-outline-variant bg-surface-bright focus:border-primary focus:ring-0 transition-colors"
+                        placeholder="น้องปู" type="text" required>
+                </div>
+                <div class="space-y-2">
+                    <label class="block font-label-lg text-label-lg text-primary px-2">นามสกุล</label>
+                    <input
+                        class="w-full h-touch-target-min px-6 rounded-lg border-2 border-outline-variant bg-surface-bright focus:border-primary focus:ring-0 transition-colors"
+                        placeholder="รักเรียน" type="text" required>
+                </div>
+            </div>
+            <!-- School -->
+            <div class="space-y-2">
+                <label class="block font-label-lg text-label-lg text-primary px-2">โรงเรียน</label>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">school</span>
+                    <input
+                        class="w-full h-touch-target-min pl-14 pr-6 rounded-lg border-2 border-outline-variant bg-surface-bright focus:border-primary focus:ring-0 transition-colors"
+                        placeholder="ชื่อโรงเรียนของคุณ" type="text" required>
+                </div>
+            </div>
+            <!-- Email -->
+            <div class="space-y-2">
+                <label class="block font-label-lg text-label-lg text-primary px-2">อีเมล</label>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">mail</span>
+                    <input
+                        class="w-full h-touch-target-min pl-14 pr-6 rounded-lg border-2 border-outline-variant bg-surface-bright focus:border-primary focus:ring-0 transition-colors"
+                        placeholder="example@email.com" type="email" required>
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="space-y-2">
+                <label class="block font-label-lg text-label-lg text-primary px-2">รหัสผ่าน</label>
+                <div class="relative">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                    <input
+                        class="w-full h-touch-target-min pl-14 pr-14 rounded-lg border-2 border-outline-variant bg-surface-bright focus:border-primary focus:ring-0 transition-colors"
+                        placeholder="••••••••" type="password" required>
+                    <button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-primary"
+                        type="button">
+                        <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Terms & Conditions -->
+            <div class="flex items-start space-x-3 py-2">
+                <div class="relative flex items-center h-touch-target-min">
+                    <input
+                        class="w-8 h-8 rounded-md border-2 border-primary-container text-primary focus:ring-primary-container"
+                        id="terms" type="checkbox" required>
+                </div>
+                <label class="text-label-lg font-label-lg text-on-surface-variant pt-4 select-none" for="terms">
+                    ยอมรับ <span class="text-secondary underline decoration-2 underline-offset-4">เงื่อนไขการใช้งานและนโยบายความเป็นส่วนตัว</span>
+                </label>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit"
+                class="chunky-button w-full h-touch-target-min bg-primary-container text-on-primary-container font-headline-md text-headline-md rounded-lg shadow-[0_4px_0_0_#725e00] flex items-center justify-center gap-2 mt-6">
+                <span class="">สมัครสมาชิก</span>
+                <span class="material-symbols-outlined">person_add</span>
+            </button>
+        </form>
+        <!-- Footer / Link to login page 003.html -->
+        <p class="text-center font-body-md text-on-surface-variant mt-8">
+            มีบัญชีอยู่แล้ว?
+            <a class="text-secondary font-label-lg text-label-lg hover:underline ml-1" href="003.html">เข้าสู่ระบบ</a>
+        </p>
+    </main>
+
+    <!-- Decorative Elements (Lanna Style Bubbles) -->
+    <div class="fixed top-20 -left-10 w-32 h-32 bg-primary-container/20 rounded-full blur-3xl -z-10"></div>
+    <div class="fixed bottom-10 -right-10 w-48 h-48 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+
+    <script>
+        // Toggle Password Visibility
+        const passInput = document.querySelector('input[type="password"]');
+        const passToggleBtn = document.querySelector('button[type="button"]');
+        const passToggleIcon = passToggleBtn ? passToggleBtn.querySelector('.material-symbols-outlined') : null;
+
+        if (passToggleBtn && passInput && passToggleIcon) {
+            passToggleBtn.addEventListener('click', () => {
+                const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passInput.setAttribute('type', type);
+                passToggleIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+            });
+        }
+    </script>
+</body>
+</html>
