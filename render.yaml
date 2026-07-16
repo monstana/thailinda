@@ -3,10 +3,10 @@ services:
     name: thailinda-api
     runtime: ruby
     region: singapore
+    plan: free
     rootDir: backend
     buildCommand: bundle install
-    preDeployCommand: bin/rails db:migrate && bin/rails db:seed
-    startCommand: bundle exec puma -C config/puma.rb
+    startCommand: bin/rails db:migrate && bin/rails db:seed && bundle exec puma -C config/puma.rb
     healthCheckPath: /up
     envVars:
       - key: DATABASE_URL
@@ -27,5 +27,6 @@ services:
 databases:
   - name: thailinda-db
     region: singapore
+    plan: free
     databaseName: thailinda_production
     user: thailinda
