@@ -1,0 +1,6 @@
+backend/
+screenCapture/
+render.yaml
+.env
+.env.*
+!.env.example
