@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :children, through: :guardian_links_as_parent, source: :student
   has_many :guardians, through: :guardian_links_as_student, source: :parent
   has_many :speech_attempts, foreign_key: :student_id, inverse_of: :student, dependent: :destroy
+  has_one :placement_assessment, foreign_key: :student_id, inverse_of: :student, dependent: :destroy
   has_many :api_sessions, dependent: :destroy
 
   before_validation :assign_external_id, on: :create

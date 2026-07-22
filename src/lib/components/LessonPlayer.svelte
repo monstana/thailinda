@@ -11,7 +11,20 @@
     prepareMouthEvaluation
   } from '$lib/mouth-evaluation.js';
 
-  let { items, index, user, basePath, exitHref = '/student', assignmentTitle = '' } = $props();
+  let {
+    items,
+    index,
+    user,
+    basePath,
+    exitHref = '/student',
+    assignmentTitle = '',
+    onAssessment = null,
+    requireCamera = false,
+    singleAttempt = false,
+    captureMouthWithoutReference = false,
+    completionHref = exitHref,
+    completionLabel = 'จบบทเรียน'
+  } = $props();
   let current = $derived(items[index]);
   let status = $state('idle');
   let cameraOn = $state(false);
@@ -126,8 +139,14 @@
   }
 
   async function startSpeaking(event) {
-    if (!current || status === 'analyzing' || isHolding) return;
+    if (!current || status === 'analyzing' || isHolding || (singleAttempt && (status === 'correct' || status === 'incorrect'))) return;
     event?.preventDefault();
+    if (requireCamera && (!cameraOn || !mouthFaceDetected)) {
+      micMessage = cameraOn
+        ? 'กรุณาจัดใบหน้าให้อยู่กลางกรอบ รอจนระบบพบรูปปาก แล้วจึงเริ่มพูด'
+        : 'แบบประเมินระดับต้องเปิดกล้องเพื่อเก็บรูปปากก่อนเริ่มพูด';
+      return;
+    }
     if (event?.pointerId != null) event.currentTarget.setPointerCapture?.(event.pointerId);
     stopAudio();
     micMessage = '';
@@ -138,7 +157,7 @@
     mouthFrames = [];
     mouthAnalyzedFrames = 0;
     mouthDetectedFrames = 0;
-    mouthCaptureActive = cameraOn && Boolean(mouthReferenceKey(current));
+    mouthCaptureActive = cameraOn && (Boolean(mouthReferenceKey(current)) || captureMouthWithoutReference);
     analysisStarted = false;
     isHolding = true;
     status = 'preparing';
@@ -441,6 +460,16 @@
         mouthVisualWeight: localMouthEvaluation?.visualWeight ?? 0
       });
       status = result.passed ? 'correct' : 'incorrect';
+      onAssessment?.({
+        itemId: current.id,
+        passed: Boolean(result.passed),
+        transcript: recognizedText,
+        matchType: speechMatch.type,
+        matchConfidence: speechMatch.confidence,
+        mouthStatus: localMouthEvaluation?.status || (mouthFrames.length >= 5 ? 'observed' : 'unavailable'),
+        mouthScore: localMouthEvaluation?.score ?? null,
+        mouthFrames: localMouthEvaluation?.capturedFrames ?? mouthFrames.length
+      });
     } catch (error) {
       status = 'idle';
       micMessage = error?.message || 'เชื่อมต่อบริการประเมินเสียงไม่ได้ กรุณาลองใหม่';
@@ -488,17 +517,13 @@
   }
 
   async function initializeMouthTracking() {
-    if (!mouthReferenceKey(current)) {
-      mouthModelStatus = 'no-reference';
-      return;
-    }
     mouthModelStatus = 'loading';
     try {
       const prepared = await prepareMouthEvaluation();
       if (!cameraOn) return;
       mouthLandmarker = prepared.landmarker;
       mouthReferences = prepared.references;
-      mouthModelStatus = 'ready';
+      mouthModelStatus = mouthReferenceKey(current) ? 'ready' : 'observation-only';
       lastMouthVideoTime = -1;
       lastMouthSampleAt = 0;
       runMouthTracking();
@@ -622,8 +647,8 @@
         <aside class="camera-panel">
           <div class="camera-head">
             <span><strong>ตรวจรูปปากด้วย MediaPipe</strong><small>ขยับหน้าให้อยู่กลางกรอบ</small></span>
-            <span class="mouth-tracking-badge" class:is-ready={mouthModelStatus === 'ready' && mouthFaceDetected}>
-              {mouthModelStatus === 'loading' ? 'กำลังโหลด' : mouthModelStatus === 'error' ? 'ใช้ไม่ได้' : mouthModelStatus === 'no-reference' ? 'ไม่มีต้นแบบ' : mouthFaceDetected ? 'พบรูปปาก' : 'จัดตำแหน่งหน้า'}
+            <span class="mouth-tracking-badge" class:is-ready={(mouthModelStatus === 'ready' || mouthModelStatus === 'observation-only') && mouthFaceDetected}>
+              {mouthModelStatus === 'loading' ? 'กำลังโหลด' : mouthModelStatus === 'error' ? 'ใช้ไม่ได้' : mouthFaceDetected ? 'พบรูปปาก' : 'จัดตำแหน่งหน้า'}
             </span>
           </div>
           <div class="camera-frame" class:is-face-ready={mouthFaceDetected}>
@@ -634,18 +659,22 @@
           <p>
             {current.mouthCue}
             {#if mouthEvaluation?.score != null}<strong class="mouth-score">คะแนนรูปปาก {mouthEvaluation.score}%</strong>{/if}
-            {#if mouthModelStatus === 'ready' && mouthAnalyzedFrames > 0}<small>ตรวจพบใบหน้า {mouthDetectedFrames} / {mouthAnalyzedFrames} เฟรม</small>{/if}
+            {#if (mouthModelStatus === 'ready' || mouthModelStatus === 'observation-only') && mouthAnalyzedFrames > 0}<small>ตรวจพบใบหน้า {mouthDetectedFrames} / {mouthAnalyzedFrames} เฟรม</small>{/if}
           </p>
         </aside>
       {/if}
     </main>
 
     <footer class="lesson-footer">
-      <button class="button button--secondary" type="button" onclick={() => move(-1)} disabled={index === 0}><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>ก่อนหน้า</button>
+      <button class="button button--secondary" type="button" onclick={() => move(-1)} disabled={index === 0 || singleAttempt}><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>ก่อนหน้า</button>
       {#if index < items.length - 1}
-        <button class="button button--primary" type="button" onclick={() => move(1)}>ข้อต่อไป<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
+        <button class="button button--primary" type="button" onclick={() => move(1)} disabled={singleAttempt && status !== 'correct' && status !== 'incorrect'}>ข้อต่อไป<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></button>
       {:else}
-        <a class="button button--primary" href={exitHref}>จบบทเรียน<span class="material-symbols-rounded" aria-hidden="true">celebration</span></a>
+        {#if singleAttempt && status !== 'correct' && status !== 'incorrect'}
+          <button class="button button--primary" type="button" disabled>{completionLabel}<span class="material-symbols-rounded" aria-hidden="true">celebration</span></button>
+        {:else}
+          <a class="button button--primary" href={completionHref}>{completionLabel}<span class="material-symbols-rounded" aria-hidden="true">celebration</span></a>
+        {/if}
       {/if}
     </footer>
   </div>

@@ -1,6 +1,7 @@
 import { env } from '$env/dynamic/public';
 import { saveApiAccounts } from '$lib/data/users.js';
 import { hydrateAssignments, hydrateClassrooms, hydrateLearningProgress } from '$lib/storage.js';
+import { savePlacementAssessment } from '$lib/placement-assessment.js';
 
 const API_BASE_URL = (env.PUBLIC_API_BASE_URL || '').replace(/\/$/, '');
 
@@ -45,6 +46,17 @@ export function registerApiAccount(values) {
   return apiRequest('/registrations', { method: 'POST', body: JSON.stringify(values) });
 }
 
+export function fetchPlacementAssessment(studentId) {
+  return apiRequest(`/students/${encodeURIComponent(studentId)}/placement_assessment`);
+}
+
+export function submitPlacementAssessment(studentId, results) {
+  return apiRequest(`/students/${encodeURIComponent(studentId)}/placement_assessment`, {
+    method: 'PATCH',
+    body: JSON.stringify({ results })
+  });
+}
+
 export function createApiClassroom(values) {
   return apiRequest('/classrooms', { method: 'POST', body: JSON.stringify(values) });
 }
@@ -79,5 +91,6 @@ export async function syncApiData(user) {
   await Promise.all([...studentIds].map(async (studentId) => {
     const progress = await apiRequest(`/students/${encodeURIComponent(studentId)}/progress`);
     hydrateLearningProgress(studentId, progress);
+    if (progress.placementAssessment) savePlacementAssessment(progress.placementAssessment);
   }));
 }

@@ -17,6 +17,8 @@ module Api
           learning_item: item,
           passed: result.fetch(:passed),
           transcript: result.fetch(:transcript),
+          match_type: result[:matchType],
+          match_confidence: result[:matchConfidence],
           mode: "typhoon-asr",
           attempted_at: Time.current
         )

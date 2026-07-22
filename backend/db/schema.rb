@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_17_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_22_090000) do
   create_table "api_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "expires_at", null: false
@@ -100,6 +100,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_17_000000) do
     t.index ["category", "position"], name: "index_learning_items_on_category_and_position", unique: true
   end
 
+  create_table "placement_assessments", force: :cascade do |t|
+    t.json "category_scores", default: {}, null: false
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.json "item_ids", default: [], null: false
+    t.string "level"
+    t.string "level_code"
+    t.integer "mouth_average"
+    t.text "recommendation"
+    t.json "results", default: {}, null: false
+    t.integer "score"
+    t.string "status", default: "pending", null: false
+    t.integer "student_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_placement_assessments_on_student_id", unique: true
+  end
+
   create_table "schools", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
@@ -111,6 +128,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_17_000000) do
     t.datetime "attempted_at", null: false
     t.datetime "created_at", null: false
     t.string "learning_item_id", null: false
+    t.decimal "match_confidence", precision: 5, scale: 4
+    t.string "match_type"
     t.string "mode", default: "typhoon-asr", null: false
     t.boolean "passed", default: false, null: false
     t.integer "student_id", null: false
@@ -147,6 +166,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_17_000000) do
   add_foreign_key "classrooms", "users", column: "teacher_id"
   add_foreign_key "guardian_links", "users", column: "parent_id"
   add_foreign_key "guardian_links", "users", column: "student_id"
+  add_foreign_key "placement_assessments", "users", column: "student_id"
   add_foreign_key "speech_attempts", "learning_items"
   add_foreign_key "speech_attempts", "users", column: "student_id"
   add_foreign_key "users", "schools"

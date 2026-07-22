@@ -16,7 +16,13 @@ module Api
           pin: registration_params[:pin]
         )
         user.save!
-        render json: { user: user.api_json }, status: :created
+        placement_assessment = PlacementAssessment.create_for!(user) if user.student?
+        _, token = ApiSession.issue_for(user)
+        render json: {
+          user: user.api_json,
+          token: token,
+          placementAssessment: placement_assessment&.api_json
+        }, status: :created
       end
 
       private

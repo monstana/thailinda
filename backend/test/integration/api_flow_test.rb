@@ -60,6 +60,52 @@ class ApiFlowTest < ActionDispatch::IntegrationTest
     TyphoonSpeechEvaluator.define_singleton_method(:new, original_constructor) if original_constructor
   end
 
+  test "new student receives and completes a six item placement assessment" do
+    post "/api/v1/registrations", params: {
+      role: "student",
+      firstName: "เด็กใหม่",
+      lastName: "ทดสอบ",
+      school: "โรงเรียนบ้านแสนสุข",
+      email: "new-student-#{SecureRandom.hex(4)}@example.test",
+      pin: "6789"
+    }, as: :json
+
+    assert_response :created
+    token = response.parsed_body.fetch("token")
+    student = User.find_by!(external_id: response.parsed_body.dig("user", "id"))
+    assessment = response.parsed_body.fetch("placementAssessment")
+    items = LearningItem.where(id: assessment.fetch("itemIds")).group_by(&:category)
+    assert_equal 3, items.fetch("consonants").length
+    assert_equal 2, items.fetch("vowels").length
+    assert_equal 1, items.fetch("words").length
+
+    assessment.fetch("itemIds").each do |item_id|
+      SpeechAttempt.create!(
+        student: student,
+        learning_item_id: item_id,
+        passed: true,
+        transcript: LearningItem.find(item_id).sound,
+        mode: "typhoon-asr",
+        match_type: "exact",
+        match_confidence: 0.9,
+        attempted_at: Time.current
+      )
+    end
+    results = assessment.fetch("itemIds").map do |item_id|
+      { itemId: item_id, mouthStatus: "matched", mouthScore: 80, mouthFrames: 12 }
+    end
+
+    patch "/api/v1/students/#{student.external_id}/placement_assessment",
+      params: { results: results }, headers: auth_headers(token), as: :json
+
+    assert_response :success
+    completed = response.parsed_body.fetch("placementAssessment")
+    assert_equal "completed", completed.fetch("status")
+    assert_equal 89, completed.fetch("score")
+    assert_equal "ระดับคล่องแคล่ว", completed.fetch("level")
+    assert_equal 6, completed.fetch("results").length
+  end
+
   private
 
   def login_as(account_id, pin)

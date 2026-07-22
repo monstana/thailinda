@@ -2,11 +2,14 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import AppShell from '$lib/components/AppShell.svelte';
+  import PlacementSummaryCard from '$lib/components/PlacementSummaryCard.svelte';
   import { allLearningItems, getCategoryItems, learningCategories } from '$lib/data/learning.js';
+  import { getPlacementAssessment } from '$lib/placement-assessment.js';
   import { getLearningProgress, getSessionUser, summarizeLearning } from '$lib/storage.js';
 
   let user = null;
   let progress = null;
+  let placementAssessment = null;
   let category = 'consonants';
   $: items = getCategoryItems(category);
   $: selectedCategory = learningCategories.find((item) => item.id === category) || learningCategories[0];
@@ -16,6 +19,7 @@
     user = getSessionUser('student');
     if (!user) return goto('/');
     progress = getLearningProgress(user.id);
+    placementAssessment = getPlacementAssessment(user.id);
   });
 
   function stateFor(id) {
@@ -29,6 +33,9 @@
 {#if user}
   <AppShell role="student" {user} active="lessons">
     <section class="student-welcome"><div><p class="eyebrow">บทเรียนของฉัน</p><h1>สวัสดี {user.firstName}</h1><p>เลือกพยัญชนะ สระ หรือคำศัพท์ที่อยากฝึกได้เลย</p></div><div class="welcome-stat"><strong>{summary.practiced} / {allLearningItems.length}</strong><span>รายการที่ฝึกแล้ว</span></div></section>
+
+    <PlacementSummaryCard assessment={placementAssessment} />
+    {#if placementAssessment?.status === 'pending'}<a class="button button--primary" href="/student/placement/0">ทำแบบประเมินต่อให้ครบ 6 ข้อ<span class="material-symbols-rounded" aria-hidden="true">arrow_forward</span></a>{/if}
 
     <section class="student-game-banner"><span class="game-banner-icon material-symbols-rounded" aria-hidden="true">hearing</span><div><p class="eyebrow">เกมฝึกทักษะการฟัง</p><h2>ฟังเสียง แล้วเลือกคำตอบ</h2><span>ทายพยัญชนะและสระจากเสียงตัวอย่าง เก็บคะแนนให้ครบ 10 ข้อ</span></div><a class="button button--primary" href="/student/game"><span class="material-symbols-rounded" aria-hidden="true">play_arrow</span>เริ่มเล่นเกม</a></section>
 

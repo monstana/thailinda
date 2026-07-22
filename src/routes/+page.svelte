@@ -4,6 +4,7 @@
   import { demoUsers, getAllUsers, roleMeta, saveRegisteredUser } from '$lib/data/users.js';
   import { createApiSession, isApiEnabled, refreshApiAccounts, registerApiAccount, syncApiData } from '$lib/api.js';
   import { saveSession } from '$lib/storage.js';
+  import { createPlacementAssessment, getPlacementAssessment, savePlacementAssessment } from '$lib/placement-assessment.js';
 
   let role = 'student';
   let pinDigits = ['', '', '', ''];
@@ -125,6 +126,12 @@
         saveSession(session.user, session.token);
         message = `ถูกต้อง กำลังเข้าสู่ระบบ${roleMeta[session.user.role].label}`;
         try { await syncApiData(session.user); } catch { /* The API remains authoritative; cached screens can refresh later. */ }
+        const placement = session.user.role === 'student' ? getPlacementAssessment(session.user.id) : null;
+        if (placement?.status === 'pending') {
+          const nextStep = Math.max(0, placement.itemIds.findIndex((itemId) => !placement.results?.[itemId]));
+          await goto(`/student/placement/${nextStep}`);
+          return;
+        }
         await goto(roleMeta[session.user.role].route);
       } catch (error) {
         message = error?.message || 'เข้าสู่ระบบไม่สำเร็จ';
@@ -134,6 +141,12 @@
     if (selectedUser.pin !== pin) { message = `PIN ไม่ถูกต้องสำหรับบัญชี ${selectedUser.firstName}`; return; }
     saveSession(selectedUser);
     message = `ถูกต้อง กำลังเข้าสู่ระบบ${roleMeta[selectedUser.role].label}`;
+    const placement = selectedUser.role === 'student' ? getPlacementAssessment(selectedUser.id) : null;
+    if (placement?.status === 'pending') {
+      const nextStep = Math.max(0, placement.itemIds.findIndex((itemId) => !placement.results?.[itemId]));
+      await goto(`/student/placement/${nextStep}`);
+      return;
+    }
     await goto(roleMeta[selectedUser.role].route);
   }
 
@@ -192,6 +205,12 @@
       try {
         const result = await registerApiAccount(userValues);
         user = result.user;
+        if (user.role === 'student') {
+          if (result.placementAssessment) savePlacementAssessment(result.placementAssessment);
+          saveSession(user, result.token);
+          await goto('/student/placement/0');
+          return;
+        }
         await refreshApiAccounts();
       } catch (error) {
         registerMessage = error?.message || 'สร้างบัญชีไม่สำเร็จ';
@@ -199,6 +218,12 @@
       }
     } else {
       saveRegisteredUser(user);
+      if (user.role === 'student') {
+        createPlacementAssessment(user.id);
+        saveSession(user);
+        await goto('/student/placement/0');
+        return;
+      }
     }
     accounts = getAllUsers();
     role = user.role;

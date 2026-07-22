@@ -26,6 +26,7 @@ class StudentProgressQuery
       userId: @student.external_id,
       items: items,
       updatedAt: states.filter_map { |state| state[:lastAttemptAt] }.max,
+      placementAssessment: @student.placement_assessment&.api_json,
       summary: {
         total: states.size,
         practiced: states.count { |state| state[:status] != "notStarted" },

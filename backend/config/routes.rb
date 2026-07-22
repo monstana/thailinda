@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       end
       resources :students, only: [] do
         get :progress, on: :member
+        resource :placement_assessment, only: [ :show, :update ], controller: :placement_assessments
       end
       resources :assignments, only: [ :index, :create ]
       post "speech/evaluate", to: "speech_evaluations#create"

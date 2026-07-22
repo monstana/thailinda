@@ -3,7 +3,9 @@
   import { goto } from '$app/navigation';
   import { page } from '$app/state';
   import AppShell from '$lib/components/AppShell.svelte';
+  import PlacementSummaryCard from '$lib/components/PlacementSummaryCard.svelte';
   import { allLearningItems, consonants, vowels, words } from '$lib/data/learning.js';
+  import { getPlacementAssessment } from '$lib/placement-assessment.js';
   import { getClassroomAssignments, getClassroomById, getClassroomStudents, getLearningProgress, getSessionUser, summarizeLearning } from '$lib/storage.js';
 
   const rewardLevels = [
@@ -21,6 +23,7 @@
   let student = $state(null);
   let progress = $state(null);
   let assignments = $state([]);
+  let placementAssessment = $state(null);
   let avatarUrl = $state('');
 
   let summary = $derived(progress ? summarizeLearning(progress) : { practiced: 0, passed: 0, needsPractice: 0, attempts: 0 });
@@ -43,6 +46,7 @@
     student = getClassroomStudents(classroom).find((account) => account.id === page.params.studentId) || null;
     if (!student) return goto(`/teacher/classrooms/${classroom.id}`);
     progress = getLearningProgress(student.id);
+    placementAssessment = getPlacementAssessment(student.id);
     assignments = getClassroomAssignments(classroom, user.id);
     avatarUrl = localStorage.getItem(`thailinda.studentAvatar.${student.id}`) || '';
   });
@@ -81,6 +85,8 @@
       <article><span class="material-symbols-rounded" aria-hidden="true">refresh</span><div><strong>{summary.needsPractice}</strong><small>ควรฝึกเพิ่ม</small></div></article>
       <article><span class="material-symbols-rounded" aria-hidden="true">record_voice_over</span><div><strong>{summary.attempts}</strong><small>จำนวนครั้งที่พูด</small></div></article>
     </section>
+
+    <PlacementSummaryCard assessment={placementAssessment} title={`ระดับแรกเข้าของ ${student.firstName}`} />
 
     <section class="category-results teacher-report-categories">
       <article><span class="category-icon">ก</span><div><strong>พยัญชนะไทย</strong><small>ผ่าน {consonantSummary.passed} · ฝึกแล้ว {consonantSummary.practiced} จาก 44</small><div><i style:width={`${(consonantSummary.passed / 44) * 100}%`}></i></div></div></article>

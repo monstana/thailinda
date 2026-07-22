@@ -2,8 +2,10 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import AppShell from '$lib/components/AppShell.svelte';
+  import PlacementSummaryCard from '$lib/components/PlacementSummaryCard.svelte';
   import { getAllUsers } from '$lib/data/users.js';
   import { allLearningItems, consonants, vowels, words } from '$lib/data/learning.js';
+  import { getPlacementAssessment } from '$lib/placement-assessment.js';
   import { getLearningProgress, getSessionUser, summarizeLearning } from '$lib/storage.js';
 
   const rewardLevels = [
@@ -23,6 +25,7 @@
 
   $: child = children.find((account) => account.id === selectedChildId) || children[0] || null;
   $: progress = child ? getLearningProgress(child.id) : null;
+  $: placementAssessment = child ? getPlacementAssessment(child.id) : null;
   $: summary = progress ? summarizeLearning(progress) : { practiced: 0, passed: 0, needsPractice: 0, attempts: 0 };
   $: weeklyDays = progress ? buildWeek(progress, 0) : [];
   $: previousDays = progress ? buildWeek(progress, 7) : [];
@@ -81,6 +84,8 @@
 
     {#if child && progress}
       <section class="development-banner"><div><small>รายงานของ</small><h2>{child.firstName} {child.lastName}</h2><p>ข้อมูลล่าสุดจากการฝึกบนอุปกรณ์นี้</p></div><button class="button button--secondary" type="button" onclick={() => showFullReport = !showFullReport}><span class="material-symbols-rounded" aria-hidden="true">description</span>{showFullReport ? 'ปิดรายงานฉบับเต็ม' : 'รายงานฉบับเต็ม'}</button></section>
+
+      <PlacementSummaryCard assessment={placementAssessment} title={`ระดับแรกเข้าของ ${child.firstName}`} />
 
       <section class="parent-development-grid">
         <article><span class="material-symbols-rounded" aria-hidden="true">spellcheck</span><div><strong>{summary.practiced}</strong><small>รายการที่ฝึก</small><em>{comparison(weeklyAttempts, previousAttempts)} จากสัปดาห์ก่อน</em></div></article>
