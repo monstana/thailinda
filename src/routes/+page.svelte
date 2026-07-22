@@ -205,8 +205,8 @@
       try {
         const result = await registerApiAccount(userValues);
         user = result.user;
-        if (user.role === 'student') {
-          if (result.placementAssessment) savePlacementAssessment(result.placementAssessment);
+        if (user.role === 'student' && result.token && result.placementAssessment) {
+          savePlacementAssessment(result.placementAssessment);
           saveSession(user, result.token);
           await goto('/student/placement/0');
           return;
@@ -229,7 +229,7 @@
     role = user.role;
     activeUserId = user.id;
     accountPickerOpen = false;
-    pinDigits = Array.from({ length: 4 }, (_, index) => user.pin[index] || '');
+    pinDigits = Array.from({ length: 4 }, (_, index) => (user.pin || registerPin)[index] || '');
     firstName = '';
     lastName = '';
     school = '';
