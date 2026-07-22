@@ -1,5 +1,8 @@
 backend/
+VDO/
 screenCapture/
+.public-demo-staging-*/
+.worktrees/
 render.yaml
 .env
 .env.*

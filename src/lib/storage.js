@@ -30,7 +30,28 @@ export function clearSession() {
 }
 
 function emptyItemState() {
-  return { status: 'notStarted', attempts: 0, correct: 0, incorrect: 0, lastResult: null, lastAttemptAt: null, mode: 'notEvaluated' };
+  return {
+    status: 'notStarted',
+    attempts: 0,
+    correct: 0,
+    incorrect: 0,
+    lastResult: null,
+    lastAttemptAt: null,
+    mode: 'notEvaluated',
+    lastRecognizedText: '',
+    lastMatchType: '',
+    lastMatchConfidence: null,
+    lastAudioDurationMs: null,
+    lastAudioRms: null,
+    lastAudioPeak: null,
+    lastAudioSnrDb: null,
+    lastAudioQualityStatus: '',
+    lastMouthStatus: 'not-used',
+    lastMouthScore: null,
+    lastMouthDistance: null,
+    lastMouthFrames: 0,
+    mouthVisualWeight: 0
+  };
 }
 
 function emptyProgress() {
@@ -80,6 +101,18 @@ export function recordAssessment(userId, itemId, isCorrect, details = {}) {
   state.lastAttemptAt = new Date().toISOString();
   state.mode = details.mode || 'speech';
   state.lastRecognizedText = details.transcript || '';
+  state.lastMatchType = details.matchType || '';
+  state.lastMatchConfidence = Number.isFinite(details.matchConfidence) ? details.matchConfidence : null;
+  state.lastAudioDurationMs = Number.isFinite(details.audioDurationMs) ? details.audioDurationMs : null;
+  state.lastAudioRms = Number.isFinite(details.audioRms) ? details.audioRms : null;
+  state.lastAudioPeak = Number.isFinite(details.audioPeak) ? details.audioPeak : null;
+  state.lastAudioSnrDb = Number.isFinite(details.audioSnrDb) ? details.audioSnrDb : null;
+  state.lastAudioQualityStatus = details.audioQualityStatus || '';
+  state.lastMouthStatus = details.mouthStatus || 'not-used';
+  state.lastMouthScore = Number.isFinite(details.mouthScore) ? details.mouthScore : null;
+  state.lastMouthDistance = Number.isFinite(details.mouthDistance) ? details.mouthDistance : null;
+  state.lastMouthFrames = Number.isFinite(details.mouthFrames) ? details.mouthFrames : 0;
+  state.mouthVisualWeight = Number.isFinite(details.mouthVisualWeight) ? details.mouthVisualWeight : 0;
   progress.items[itemId] = state;
   progress.updatedAt = state.lastAttemptAt;
   root.users[userId] = progress;

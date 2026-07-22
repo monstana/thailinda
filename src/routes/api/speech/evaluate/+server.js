@@ -1,23 +1,11 @@
 import { env } from '$env/dynamic/private';
 import { json } from '@sveltejs/kit';
 import { itemById } from '$lib/data/learning.js';
+import { matchThaiSpeech } from '$lib/speech-matching.js';
 
 const TYPHOON_TRANSCRIPTION_URL = 'https://api.opentyphoon.ai/v1/audio/transcriptions';
 const MAX_AUDIO_BYTES = 5 * 1024 * 1024;
 const ALLOWED_AUDIO_TYPES = new Set(['audio/wav', 'audio/wave', 'audio/x-wav', 'audio/mpeg', 'audio/mp3', 'audio/ogg', 'audio/opus', 'audio/flac']);
-
-function normalizeThai(value) {
-  return String(value || '').normalize('NFC').toLowerCase().replace(/[^\p{Script=Thai}\p{Letter}\p{Number}]/gu, '');
-}
-
-function acceptedAnswers(item) {
-  const answers = item.category === 'words'
-    ? [item.display, `คำว่า${item.display}`]
-    : item.category === 'vowels'
-      ? [item.sound, item.audioText, item.name, item.example]
-      : [item.sound, item.name];
-  return new Set(answers.map(normalizeThai).filter(Boolean));
-}
 
 function errorResponse(message, status = 500) {
   return json({ error: message }, { status });
@@ -62,14 +50,15 @@ export async function POST({ request, fetch }) {
 
     const result = await response.json();
     const transcript = String(result?.text || '').trim();
-    const normalizedTranscript = normalizeThai(transcript);
-    const passed = Boolean(normalizedTranscript && acceptedAnswers(target).has(normalizedTranscript));
+    const match = matchThaiSpeech(target, transcript);
 
     return json({
-      passed,
+      passed: match.passed,
       transcript,
       targetId: target.id,
-      mode: 'typhoon-asr'
+      mode: 'typhoon-asr',
+      matchType: match.matchType,
+      matchConfidence: match.confidence
     });
   } catch (error) {
     return errorResponse(error?.name === 'AbortError'

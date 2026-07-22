@@ -3,28 +3,54 @@
   import { goto } from '$app/navigation';
   import { evaluateSpeechWithApi, isApiEnabled } from '$lib/api.js';
   import { recordAssessment } from '$lib/storage.js';
+  import {
+    evaluateMouthSequence,
+    extractMouthFeatures,
+    mouthReferenceKey,
+    mouthResultMessage,
+    prepareMouthEvaluation
+  } from '$lib/mouth-evaluation.js';
 
   let { items, index, user, basePath, exitHref = '/student', assignmentTitle = '' } = $props();
   let current = $derived(items[index]);
   let status = $state('idle');
   let cameraOn = $state(false);
   let cameraError = $state('');
+  let mouthModelStatus = $state('idle');
+  let mouthFaceDetected = $state(false);
+  let mouthEvaluation = $state(null);
   let micMessage = $state('');
   let recognizedText = $state('');
   let audioMessage = $state('');
   let isSpeaking = $state(false);
   let videoElement = $state();
   let cameraStream;
+  let mouthLandmarker;
+  let mouthReferences;
+  let mouthAnimationFrame;
+  let mouthFrames = [];
+  let mouthCaptureActive = $state(false);
+  let mouthAnalyzedFrames = $state(0);
+  let mouthDetectedFrames = $state(0);
+  let lastMouthSampleAt = 0;
+  let lastMouthVideoTime = -1;
   let currentAudio;
   let thaiVoice;
   let volume = 0.8;
   let micStream;
+  let micPreparingPromise;
+  let micReady = $state(false);
+  let micPreparing = $state(false);
   let recordingContext;
   let recordingSource;
   let recordingProcessor;
   let recordingChunks = [];
+  let preRollChunks = [];
+  let recordingActive = false;
   let recordingSampleRate = 44100;
-  let holdStartedAt = 0;
+  let recordingStartedAt = 0;
+  let audioQuality = $state(null);
+  let speechMatch = $state(null);
   let captureToken = 0;
   let isHolding = $state(false);
   let analysisStarted = false;
@@ -99,30 +125,64 @@
     window.speechSynthesis.speak(utterance);
   }
 
-  function startSpeaking(event) {
+  async function startSpeaking(event) {
     if (!current || status === 'analyzing' || isHolding) return;
     event?.preventDefault();
     if (event?.pointerId != null) event.currentTarget.setPointerCapture?.(event.pointerId);
     stopAudio();
     micMessage = '';
     recognizedText = '';
+    speechMatch = null;
+    audioQuality = null;
+    mouthEvaluation = null;
+    mouthFrames = [];
+    mouthAnalyzedFrames = 0;
+    mouthDetectedFrames = 0;
+    mouthCaptureActive = cameraOn && Boolean(mouthReferenceKey(current));
     analysisStarted = false;
     isHolding = true;
-    holdStartedAt = Date.now();
-    status = 'listening';
+    status = 'preparing';
     const token = ++captureToken;
 
     if (!navigator.mediaDevices?.getUserMedia) {
+      isHolding = false;
+      status = 'idle';
       micMessage = 'อุปกรณ์นี้ไม่รองรับไมโครโฟน กรุณาใช้ Chrome หรือ Edge รุ่นปัจจุบัน';
       return;
     }
 
-    navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true } }).then(async (stream) => {
-      if (token !== captureToken || !isHolding || status !== 'listening') {
-        stream.getTracks().forEach((track) => track.stop());
-        return;
-      }
+    const ready = await prepareMicrophone();
+    if (!ready || token !== captureToken || !isHolding) {
+      if (token === captureToken) status = 'idle';
+      return;
+    }
+
+    // ให้ AudioContext เก็บเสียงนำสั้น ๆ ก่อน เพื่อไม่ตัดพยัญชนะต้นคำ
+    await new Promise((resolve) => setTimeout(resolve, 180));
+    if (token !== captureToken || !isHolding) return;
+    recordingChunks = preRollChunks.map((chunk) => new Float32Array(chunk));
+    preRollChunks = [];
+    recordingActive = true;
+    recordingStartedAt = Date.now();
+    status = 'listening';
+    micMessage = 'ไมโครโฟนพร้อมแล้ว พูดได้เลย';
+  }
+
+  async function prepareMicrophone() {
+    if (micStream?.active && recordingContext && recordingProcessor) {
+      await recordingContext.resume().catch(() => {});
+      micReady = recordingContext.state === 'running';
+      return micReady;
+    }
+    if (micPreparingPromise) return micPreparingPromise;
+
+    micPreparing = true;
+    micMessage = 'กำลังเตรียมไมโครโฟน กรุณากดค้างไว้';
+    micPreparingPromise = (async () => {
       try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true }
+        });
         const AudioContextClass = window.AudioContext || window.webkitAudioContext;
         if (!AudioContextClass) throw new Error('audio-context-unavailable');
         micStream = stream;
@@ -130,24 +190,43 @@
         await recordingContext.resume();
         recordingSampleRate = recordingContext.sampleRate;
         recordingChunks = [];
+        preRollChunks = [];
         recordingSource = recordingContext.createMediaStreamSource(stream);
         recordingProcessor = recordingContext.createScriptProcessor(4096, 1, 1);
         recordingProcessor.onaudioprocess = (audioEvent) => {
-          if (!isHolding) return;
-          recordingChunks.push(new Float32Array(audioEvent.inputBuffer.getChannelData(0)));
+          const chunk = new Float32Array(audioEvent.inputBuffer.getChannelData(0));
+          preRollChunks.push(chunk);
+          trimPreRoll();
+          if (recordingActive) recordingChunks.push(chunk);
         };
         recordingSource.connect(recordingProcessor);
         recordingProcessor.connect(recordingContext.destination);
-      } catch {
+        micReady = true;
+        return true;
+      } catch (error) {
         releaseMicrophone();
-        if (token === captureToken) micMessage = 'อุปกรณ์นี้ไม่สามารถบันทึกเสียงได้ กรุณาลองใช้ Chrome หรือ Edge';
+        micMessage = error?.name === 'NotAllowedError'
+          ? 'ไม่สามารถใช้ไมโครโฟนได้ กรุณาอนุญาตสิทธิ์ไมโครโฟนแล้วลองใหม่'
+          : 'อุปกรณ์นี้ไม่สามารถบันทึกเสียงได้ กรุณาลองใช้ Chrome หรือ Edge';
+        return false;
+      } finally {
+        micPreparing = false;
+        micPreparingPromise = null;
       }
-    }).catch(() => {
-      if (token === captureToken) micMessage = 'ไม่สามารถใช้ไมโครโฟนได้ กรุณาอนุญาตสิทธิ์ไมโครโฟนแล้วลองใหม่';
-    });
+    })();
+    return micPreparingPromise;
+  }
+
+  function trimPreRoll() {
+    const maximumSamples = Math.round(recordingSampleRate * 0.35);
+    let sampleCount = preRollChunks.reduce((sum, chunk) => sum + chunk.length, 0);
+    while (preRollChunks.length > 1 && sampleCount > maximumSamples) {
+      sampleCount -= preRollChunks.shift().length;
+    }
   }
 
   function releaseMicrophone() {
+    recordingActive = false;
     if (recordingProcessor) {
       recordingProcessor.onaudioprocess = null;
       recordingProcessor.disconnect();
@@ -156,18 +235,94 @@
     recordingContext?.close().catch(() => {});
     micStream?.getTracks().forEach((track) => track.stop());
     micStream = null;
+    micReady = false;
+    micPreparing = false;
+    micPreparingPromise = null;
     recordingProcessor = null;
     recordingSource = null;
     recordingContext = null;
+    recordingChunks = [];
+    preRollChunks = [];
   }
 
   function finishRecording() {
+    recordingActive = false;
     const chunks = recordingChunks;
     const sampleRate = recordingSampleRate;
     recordingChunks = [];
-    releaseMicrophone();
     if (!chunks.length) return null;
-    return encodeWav(chunks, sampleRate);
+    const analyzed = analyzeAndTrimRecording(chunks, sampleRate);
+    return { ...analyzed, blob: encodeWav([analyzed.samples], sampleRate) };
+  }
+
+  function analyzeAndTrimRecording(chunks, sampleRate) {
+    const sampleCount = chunks.reduce((sum, chunk) => sum + chunk.length, 0);
+    const samples = new Float32Array(sampleCount);
+    let writeOffset = 0;
+    for (const chunk of chunks) {
+      samples.set(chunk, writeOffset);
+      writeOffset += chunk.length;
+    }
+
+    const windowSize = Math.max(1, Math.round(sampleRate * 0.02));
+    const windows = [];
+    let peak = 0;
+    let energy = 0;
+    for (let offset = 0; offset < samples.length; offset += windowSize) {
+      let windowEnergy = 0;
+      const end = Math.min(samples.length, offset + windowSize);
+      for (let index = offset; index < end; index += 1) {
+        const absolute = Math.abs(samples[index]);
+        peak = Math.max(peak, absolute);
+        energy += samples[index] * samples[index];
+        windowEnergy += samples[index] * samples[index];
+      }
+      windows.push(Math.sqrt(windowEnergy / Math.max(1, end - offset)));
+    }
+
+    const sortedWindows = [...windows].sort((left, right) => left - right);
+    const noiseFloor = sortedWindows[Math.floor((sortedWindows.length - 1) * 0.2)] || 0;
+    const voiceThreshold = Math.max(0.012, noiseFloor * 2.8);
+    const activeWindows = windows
+      .map((value, index) => ({ value, index }))
+      .filter(({ value }) => value >= voiceThreshold)
+      .map(({ index }) => index);
+    const voiceDetected = activeWindows.length > 0;
+    const padding = Math.round(sampleRate * 0.18);
+    const start = voiceDetected ? Math.max(0, activeWindows[0] * windowSize - padding) : 0;
+    const end = voiceDetected
+      ? Math.min(samples.length, (activeWindows.at(-1) + 1) * windowSize + padding)
+      : samples.length;
+    const trimmed = samples.slice(start, end);
+    const rms = Math.sqrt(energy / Math.max(1, samples.length));
+    const voicedEnergy = activeWindows.reduce((sum, windowIndex) => sum + windows[windowIndex] ** 2, 0);
+    const voicedRms = Math.sqrt(voicedEnergy / Math.max(1, activeWindows.length));
+    const snrDb = voiceDetected
+      ? Math.min(40, 20 * Math.log10(Math.max(voicedRms, 0.000001) / Math.max(noiseFloor, 0.0001)))
+      : 0;
+    const durationMs = Math.round((trimmed.length / sampleRate) * 1000);
+    const qualityStatus = !voiceDetected || voicedRms < 0.018
+      ? 'too-quiet'
+      : peak >= 0.99
+        ? 'clipping'
+        : snrDb < 8
+          ? 'noisy'
+          : durationMs < 450
+            ? 'too-short'
+            : 'good';
+
+    return {
+      samples: trimmed,
+      metrics: {
+        durationMs,
+        rms: Number(rms.toFixed(4)),
+        peak: Number(peak.toFixed(3)),
+        noiseFloor: Number(noiseFloor.toFixed(4)),
+        snrDb: Number(snrDb.toFixed(1)),
+        voiceDetected,
+        qualityStatus
+      }
+    };
   }
 
   function encodeWav(chunks, sampleRate) {
@@ -203,20 +358,50 @@
 
   async function finishSpeaking(event) {
     event?.preventDefault();
-    if (!isHolding || status !== 'listening' || analysisStarted) return;
+    if (!isHolding || analysisStarted) return;
     isHolding = false;
+    mouthCaptureActive = false;
     captureToken += 1;
-    const audioBlob = finishRecording();
-
-    if (Date.now() - holdStartedAt < 500) {
+    if (status === 'preparing') {
       status = 'idle';
-      micMessage = 'กดปุ่มค้างไว้แล้วพูด เมื่อพูดจบจึงปล่อยปุ่ม';
+      micMessage = micPreparing
+        ? 'ปล่อยก่อนที่ไมค์จะพร้อม กรุณารอข้อความ “พูดได้เลย” แล้วลองอีกครั้ง'
+        : 'ไมโครโฟนพร้อมแล้ว กรุณากดค้างและพูดอีกครั้ง';
+      return;
+    }
+    if (status !== 'listening') return;
+
+    const recording = finishRecording();
+    const localMouthEvaluation = cameraOn
+      ? evaluateMouthSequence(current, mouthFrames, mouthReferences)
+      : null;
+    mouthEvaluation = localMouthEvaluation;
+
+    if (!recording) {
+      status = 'idle';
+      micMessage = 'ยังไม่ได้รับข้อมูลเสียง กรุณากดค้างแล้วพูดอีกครั้ง';
       return;
     }
 
-    if (!audioBlob || audioBlob.size < 1200) {
+    const audioBlob = recording.blob;
+    audioQuality = recording.metrics;
+    preRollChunks = [];
+
+    if (Date.now() - recordingStartedAt < 300 || recording.metrics.durationMs < 350) {
       status = 'idle';
-      micMessage = micMessage || 'ยังไม่ได้ยินเสียง กรุณากดค้าง รอให้ไมโครโฟนพร้อม แล้วพูดอีกครั้ง';
+      micMessage = 'เสียงสั้นเกินไป กรุณาพูดให้ครบทั้งเสียง เช่น “กอ ไก่”';
+      return;
+    }
+
+    if (!recording.metrics.voiceDetected || recording.metrics.qualityStatus === 'too-quiet') {
+      status = 'idle';
+      micMessage = 'เสียงเบาเกินไป กรุณาเข้าใกล้ไมโครโฟนและพูดใหม่';
+      return;
+    }
+
+    if (recording.metrics.qualityStatus === 'clipping') {
+      status = 'idle';
+      micMessage = 'เสียงดังจนแตก กรุณาถอยจากไมโครโฟนเล็กน้อยแล้วลองใหม่';
       return;
     }
 
@@ -235,7 +420,26 @@
         if (!response.ok) throw new Error(result?.error || 'ประเมินเสียงไม่สำเร็จ');
       }
       recognizedText = result.transcript || '';
-      recordAssessment(user.id, current.id, result.passed, { mode: result.mode, transcript: recognizedText });
+      speechMatch = {
+        type: result.matchType || (result.passed ? 'exact' : 'different'),
+        confidence: Number.isFinite(result.matchConfidence) ? result.matchConfidence : null
+      };
+      recordAssessment(user.id, current.id, result.passed, {
+        mode: result.mode,
+        transcript: recognizedText,
+        matchType: speechMatch.type,
+        matchConfidence: speechMatch.confidence,
+        audioDurationMs: recording.metrics.durationMs,
+        audioRms: recording.metrics.rms,
+        audioPeak: recording.metrics.peak,
+        audioSnrDb: recording.metrics.snrDb,
+        audioQualityStatus: recording.metrics.qualityStatus,
+        mouthStatus: localMouthEvaluation?.status || 'not-used',
+        mouthScore: localMouthEvaluation?.score ?? null,
+        mouthDistance: localMouthEvaluation?.distance ?? null,
+        mouthFrames: localMouthEvaluation?.capturedFrames ?? 0,
+        mouthVisualWeight: localMouthEvaluation?.visualWeight ?? 0
+      });
       status = result.passed ? 'correct' : 'incorrect';
     } catch (error) {
       status = 'idle';
@@ -266,17 +470,79 @@
     }
     cameraError = '';
     try {
-      cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+      cameraStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+        audio: false
+      });
       cameraOn = true;
       await new Promise((resolve) => requestAnimationFrame(resolve));
-      if (videoElement) videoElement.srcObject = cameraStream;
+      if (videoElement) {
+        videoElement.srcObject = cameraStream;
+        await videoElement.play().catch(() => {});
+      }
+      initializeMouthTracking();
     } catch {
       cameraError = 'เปิดกล้องไม่ได้ กรุณาตรวจสิทธิ์กล้องของเบราว์เซอร์';
       cameraOn = false;
     }
   }
 
+  async function initializeMouthTracking() {
+    if (!mouthReferenceKey(current)) {
+      mouthModelStatus = 'no-reference';
+      return;
+    }
+    mouthModelStatus = 'loading';
+    try {
+      const prepared = await prepareMouthEvaluation();
+      if (!cameraOn) return;
+      mouthLandmarker = prepared.landmarker;
+      mouthReferences = prepared.references;
+      mouthModelStatus = 'ready';
+      lastMouthVideoTime = -1;
+      lastMouthSampleAt = 0;
+      runMouthTracking();
+    } catch {
+      if (!cameraOn) return;
+      mouthModelStatus = 'error';
+      cameraError = 'เปิดกล้องได้ แต่โหลดระบบตรวจรูปปากไม่สำเร็จ เสียงยังตรวจได้ตามปกติ';
+    }
+  }
+
+  function runMouthTracking(timestamp = performance.now()) {
+    if (!cameraOn) return;
+    if (
+      mouthLandmarker
+      && videoElement?.readyState >= 2
+      && videoElement.currentTime !== lastMouthVideoTime
+      && timestamp - lastMouthSampleAt >= 80
+    ) {
+      lastMouthSampleAt = timestamp;
+      lastMouthVideoTime = videoElement.currentTime;
+      try {
+        const result = mouthLandmarker.detectForVideo(videoElement, timestamp);
+        mouthAnalyzedFrames += 1;
+        mouthFaceDetected = Boolean(result.faceLandmarks?.length);
+        if (mouthFaceDetected) {
+          mouthDetectedFrames += 1;
+          if (mouthCaptureActive) {
+            const features = extractMouthFeatures(result.faceLandmarks[0]);
+            if (features) mouthFrames.push(features);
+          }
+        }
+      } catch {
+        mouthFaceDetected = false;
+      }
+    }
+    mouthAnimationFrame = requestAnimationFrame(runMouthTracking);
+  }
+
   function stopCamera() {
+    if (mouthAnimationFrame) cancelAnimationFrame(mouthAnimationFrame);
+    mouthAnimationFrame = null;
+    mouthCaptureActive = false;
+    mouthFaceDetected = false;
+    mouthFrames = [];
     cameraStream?.getTracks().forEach((track) => track.stop());
     cameraStream = null;
     cameraOn = false;
@@ -293,6 +559,11 @@
     analysisStarted = false;
     captureToken += 1;
     recognizedText = '';
+    speechMatch = null;
+    audioQuality = null;
+    mouthEvaluation = null;
+    mouthFrames = [];
+    mouthCaptureActive = false;
     recordingChunks = [];
     releaseMicrophone();
     stopAudio();
@@ -321,7 +592,7 @@
 
         <div class="lesson-actions">
           <button class="action-button action-button--listen" type="button" onclick={listen} disabled={isSpeaking}><span class="material-symbols-rounded" aria-hidden="true">{isSpeaking ? 'graphic_eq' : 'volume_up'}</span><span>{isSpeaking ? 'กำลังเล่น...' : 'ฟังเสียง'}</span></button>
-          <button class="action-button action-button--speak" class:is-holding={isHolding} type="button" onpointerdown={startSpeaking} onpointerup={finishSpeaking} onpointercancel={finishSpeaking} onkeydown={handleSpeakKeyDown} onkeyup={handleSpeakKeyUp} oncontextmenu={(event) => event.preventDefault()} disabled={status === 'analyzing'} aria-label="กดค้างเพื่อพูดตาม"><span class="material-symbols-rounded" aria-hidden="true">{isHolding ? 'graphic_eq' : 'mic'}</span><span>{status === 'listening' ? 'ปล่อยเพื่อประมวลผล' : status === 'analyzing' ? 'กำลังวิเคราะห์...' : 'กดค้างเพื่อพูด'}</span></button>
+          <button class="action-button action-button--speak" class:is-holding={isHolding} type="button" onpointerdown={startSpeaking} onpointerup={finishSpeaking} onpointercancel={finishSpeaking} onkeydown={handleSpeakKeyDown} onkeyup={handleSpeakKeyUp} oncontextmenu={(event) => event.preventDefault()} disabled={status === 'analyzing'} aria-label="กดค้างเพื่อพูดตาม"><span class="material-symbols-rounded" aria-hidden="true">{isHolding ? 'graphic_eq' : 'mic'}</span><span>{status === 'preparing' ? 'กำลังเตรียมไมค์...' : status === 'listening' ? 'ปล่อยเพื่อประมวลผล' : status === 'analyzing' ? 'กำลังวิเคราะห์...' : 'กดค้างเพื่อพูด'}</span></button>
           <button class="action-button action-button--camera" class:is-active={cameraOn} type="button" onclick={toggleCamera}><span class="material-symbols-rounded" aria-hidden="true">{cameraOn ? 'videocam_off' : 'videocam'}</span><span>{cameraOn ? 'ปิดกล้อง' : 'ดูรูปปาก'}</span></button>
         </div>
 
@@ -329,26 +600,42 @@
         {#if micMessage}<p class="permission-note">{micMessage}</p>{/if}
         {#if cameraError}<p class="permission-note permission-note--error">{cameraError}</p>{/if}
 
-        <div class="ai-result" class:ai-result--listening={status === 'listening' || status === 'analyzing'} class:ai-result--correct={status === 'correct'} class:ai-result--incorrect={status === 'incorrect'} aria-live="polite">
+        <div class="ai-result" class:ai-result--listening={status === 'preparing' || status === 'listening' || status === 'analyzing'} class:ai-result--correct={status === 'correct'} class:ai-result--incorrect={status === 'incorrect'} aria-live="polite">
           {#if status === 'idle'}
-            <span class="material-symbols-rounded" aria-hidden="true">touch_app</span><div><strong>กดปุ่ม “พูดตาม” ค้างไว้</strong><p>พูดตามเสียงตัวอย่าง แล้วปล่อยปุ่มเมื่อพูดจบ</p></div>
+            <span class="material-symbols-rounded" aria-hidden="true">touch_app</span><div><strong>กดปุ่ม “พูดตาม” ค้างไว้</strong><p>{micReady ? 'ไมโครโฟนพร้อมแล้ว พูดให้ครบแล้วจึงปล่อยปุ่ม' : cameraOn ? 'Typhoon ตรวจเสียงเป็นหลัก และ MediaPipe ตรวจรูปปากเสริม' : 'รอให้ไมค์พร้อม พูดตามเสียงตัวอย่าง แล้วปล่อยปุ่มเมื่อพูดจบ'}</p></div>
+          {:else if status === 'preparing'}
+            <span class="material-symbols-rounded spin" aria-hidden="true">progress_activity</span><div><strong>กำลังเตรียมไมโครโฟน</strong><p>กดค้างไว้ และเริ่มพูดเมื่อเห็นข้อความ “พูดได้เลย”</p></div>
           {:else if status === 'listening'}
             <span class="listening-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><strong>กำลังฟังเสียงของหนู</strong><p>กดค้างไว้ พูดช้า ๆ แล้วปล่อยเพื่อประมวลผล</p></div>
           {:else if status === 'analyzing'}
             <span class="material-symbols-rounded spin" aria-hidden="true">progress_activity</span><div><strong>กำลังประมวลผล</strong></div>
           {:else if status === 'correct'}
-            <span class="material-symbols-rounded" aria-hidden="true">check_circle</span><div><strong>ถูกต้อง</strong></div>
+            <span class="material-symbols-rounded" aria-hidden="true">check_circle</span><div><strong>ถูกต้อง</strong><p>{mouthResultMessage(mouthEvaluation, true)}</p></div>
           {:else}
-            <span class="material-symbols-rounded" aria-hidden="true">refresh</span><div><strong>ลองใหม่อีกครั้ง</strong></div>
+            <span class="material-symbols-rounded" aria-hidden="true">refresh</span><div><strong>ลองใหม่อีกครั้ง</strong><p>{mouthResultMessage(mouthEvaluation, false)}</p></div>
           {/if}
         </div>
+
       </section>
 
       {#if cameraOn}
         <aside class="camera-panel">
-          <div class="camera-head"><span><strong>กระจกดูรูปปาก</strong><small>ขยับหน้าให้อยู่กลางกรอบ</small></span><span class="live-badge">LIVE</span></div>
-          <div class="camera-frame"><video bind:this={videoElement} autoplay muted playsinline aria-label="ภาพจากกล้องสำหรับดูรูปปาก"></video><div class="mouth-guide"><span></span></div></div>
-          <p>{current.mouthCue}</p>
+          <div class="camera-head">
+            <span><strong>ตรวจรูปปากด้วย MediaPipe</strong><small>ขยับหน้าให้อยู่กลางกรอบ</small></span>
+            <span class="mouth-tracking-badge" class:is-ready={mouthModelStatus === 'ready' && mouthFaceDetected}>
+              {mouthModelStatus === 'loading' ? 'กำลังโหลด' : mouthModelStatus === 'error' ? 'ใช้ไม่ได้' : mouthModelStatus === 'no-reference' ? 'ไม่มีต้นแบบ' : mouthFaceDetected ? 'พบรูปปาก' : 'จัดตำแหน่งหน้า'}
+            </span>
+          </div>
+          <div class="camera-frame" class:is-face-ready={mouthFaceDetected}>
+            <video bind:this={videoElement} autoplay muted playsinline aria-label="ภาพจากกล้องสำหรับตรวจรูปปาก"></video>
+            <div class="mouth-guide"><span></span></div>
+            {#if mouthCaptureActive}<span class="mouth-recording-indicator">กำลังเก็บลำดับรูปปาก</span>{/if}
+          </div>
+          <p>
+            {current.mouthCue}
+            {#if mouthEvaluation?.score != null}<strong class="mouth-score">คะแนนรูปปาก {mouthEvaluation.score}%</strong>{/if}
+            {#if mouthModelStatus === 'ready' && mouthAnalyzedFrames > 0}<small>ตรวจพบใบหน้า {mouthDetectedFrames} / {mouthAnalyzedFrames} เฟรม</small>{/if}
+          </p>
         </aside>
       {/if}
     </main>

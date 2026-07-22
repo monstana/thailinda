@@ -92,9 +92,9 @@ const vowelRows = [
   ['lue-long', 'ฦๅ', 'สระฦๅ', 'ลือ', 'ปลายลิ้นแตะปุ่มเหงือกแล้วลากเสียงยาว']
 ];
 
-const vowelSoundOverrides = {
-  'ai-maimuan': 'สะ ใอ ไม้ม้วน',
-  'ai-maimalai': 'สะ ไอ ไม้มลาย'
+const vowelNames = {
+  'ai-maimuan': 'ใอ ไม้ม้วน',
+  'ai-maimalai': 'ไอ ไม้มลาย'
 };
 
 export const vowels = vowelRows.map(([id, display, name, pronunciation, mouthCue], index) => ({
@@ -103,8 +103,10 @@ export const vowels = vowelRows.map(([id, display, name, pronunciation, mouthCue
   order: index + 1,
   display,
   name,
-  sound: vowelSoundOverrides[id] || `สระ - ${pronunciation}`,
-  audioText: vowelSoundOverrides[id] || `สระ ${pronunciation}`,
+  sound: `สระ - ${vowelNames[id] || pronunciation}`,
+  // TTS normally reads "สระ" as one syllable ("สะ"). Spell it phonetically and
+  // add short boundaries so every learning clip says: "สะ-หระ-...".
+  audioText: `สะ... หระ... ${vowelNames[id] || pronunciation}`,
   example: pronunciation,
   audioPath: `/audio/learning/v-${id}.mp3`,
   mouthCue

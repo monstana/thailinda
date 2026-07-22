@@ -7,7 +7,8 @@ import { allLearningItems } from '../src/lib/data/learning.js';
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const projectRoot = resolve(scriptDir, '..');
 const outputDir = join(projectRoot, 'static', 'audio', 'learning');
-const voice = 'th-TH-PremwadeeNeural';
+const voice = process.env.THAI_TTS_VOICE || 'th-TH-PremwadeeNeural';
+const rate = process.env.THAI_TTS_RATE || '-10%';
 const force = process.argv.includes('--force');
 const category = process.argv.find((argument) => argument.startsWith('--category='))?.split('=')[1];
 const itemIds = process.argv.find((argument) => argument.startsWith('--ids='))?.split('=')[1].split(',').filter(Boolean);
@@ -27,7 +28,7 @@ for (const [index, item] of items.entries()) {
     result = spawnSync('python', [
       '-m', 'edge_tts',
       '--voice', voice,
-      '--rate=-10%',
+      `--rate=${rate}`,
       '--text', item.audioText || item.sound,
       '--write-media', temporaryPath
     ], { stdio: 'inherit', env: process.env });

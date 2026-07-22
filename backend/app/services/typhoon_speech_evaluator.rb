@@ -27,7 +27,7 @@ class TyphoonSpeechEvaluator
     raise Error, upstream_error(response) unless response.is_a?(Net::HTTPSuccess)
 
     transcript = JSON.parse(response.body).fetch("text", "").to_s.strip
-    { passed: transcript.present? && accepted_answers.include?(normalize(transcript)), transcript: transcript }
+    ThaiSpeechMatcher.new(item: @item, transcript: transcript).call.merge(transcript: transcript)
   rescue JSON::ParserError, KeyError
     raise Error, "บริการประเมินเสียงส่งข้อมูลกลับมาไม่สมบูรณ์"
   rescue Net::OpenTimeout, Net::ReadTimeout
@@ -37,22 +37,6 @@ class TyphoonSpeechEvaluator
   end
 
   private
-
-  def accepted_answers
-    values = case @item.category
-    when "words"
-      [ @item.display, "คำว่า#{@item.display}" ]
-    when "vowels"
-      [ @item.sound, @item.audio_text, @item.name, @item.example ]
-    else
-      [ @item.sound, @item.name ]
-    end
-    values.filter_map { |value| normalize(value).presence }.to_set
-  end
-
-  def normalize(value)
-    value.to_s.unicode_normalize(:nfc).downcase.gsub(/[^\p{Thai}\p{L}\p{N}]/u, "")
-  end
 
   def normalized_content_type
     @upload.content_type == "audio/mpeg" ? "audio/mp3" : (@upload.content_type.presence || "audio/wav")

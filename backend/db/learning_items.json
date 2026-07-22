@@ -534,7 +534,7 @@
     "display": "-ะ",
     "name": "สระอะ",
     "sound": "สระ - อะ",
-    "audio_text": "สระ อะ",
+    "audio_text": "สะ... หระ... อะ",
     "example": "อะ",
     "mouth_cue": "ปากอ้าเล็กน้อย ลิ้นวางต่ำ ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-a-short.mp3"
@@ -546,7 +546,7 @@
     "display": "-า",
     "name": "สระอา",
     "sound": "สระ - อา",
-    "audio_text": "สระ อา",
+    "audio_text": "สะ... หระ... อา",
     "example": "อา",
     "mouth_cue": "ปากอ้ากว้างขึ้นเล็กน้อย ลากเสียงยาว",
     "audio_path": "/audio/learning/v-a-long.mp3"
@@ -558,7 +558,7 @@
     "display": "-ิ",
     "name": "สระอิ",
     "sound": "สระ - อิ",
-    "audio_text": "สระ อิ",
+    "audio_text": "สะ... หระ... อิ",
     "example": "อิ",
     "mouth_cue": "ริมฝีปากแย้มคล้ายยิ้ม ลิ้นอยู่สูง ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-i-short.mp3"
@@ -570,7 +570,7 @@
     "display": "-ี",
     "name": "สระอี",
     "sound": "สระ - อี",
-    "audio_text": "สระ อี",
+    "audio_text": "สะ... หระ... อี",
     "example": "อี",
     "mouth_cue": "ริมฝีปากแย้มคล้ายยิ้ม ลิ้นอยู่สูง ลากเสียงยาว",
     "audio_path": "/audio/learning/v-i-long.mp3"
@@ -582,7 +582,7 @@
     "display": "-ึ",
     "name": "สระอึ",
     "sound": "สระ - อึ",
-    "audio_text": "สระ อึ",
+    "audio_text": "สะ... หระ... อึ",
     "example": "อึ",
     "mouth_cue": "ริมฝีปากผ่อน ลิ้นอยู่สูงค่อนไปกลาง ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-ue-short.mp3"
@@ -594,7 +594,7 @@
     "display": "-ื",
     "name": "สระอือ",
     "sound": "สระ - อือ",
-    "audio_text": "สระ อือ",
+    "audio_text": "สะ... หระ... อือ",
     "example": "อือ",
     "mouth_cue": "ริมฝีปากผ่อน ลิ้นอยู่สูงค่อนไปกลาง ลากเสียงยาว",
     "audio_path": "/audio/learning/v-ue-long.mp3"
@@ -606,7 +606,7 @@
     "display": "-ุ",
     "name": "สระอุ",
     "sound": "สระ - อุ",
-    "audio_text": "สระ อุ",
+    "audio_text": "สะ... หระ... อุ",
     "example": "อุ",
     "mouth_cue": "ห่อริมฝีปากเล็กน้อย ลิ้นอยู่ด้านหลัง ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-u-short.mp3"
@@ -618,7 +618,7 @@
     "display": "-ู",
     "name": "สระอู",
     "sound": "สระ - อู",
-    "audio_text": "สระ อู",
+    "audio_text": "สะ... หระ... อู",
     "example": "อู",
     "mouth_cue": "ห่อริมฝีปาก ลิ้นอยู่ด้านหลัง ลากเสียงยาว",
     "audio_path": "/audio/learning/v-u-long.mp3"
@@ -630,7 +630,7 @@
     "display": "เ-ะ",
     "name": "สระเอะ",
     "sound": "สระ - เอะ",
-    "audio_text": "สระ เอะ",
+    "audio_text": "สะ... หระ... เอะ",
     "example": "เอะ",
     "mouth_cue": "แย้มริมฝีปาก ลิ้นส่วนหน้าอยู่ระดับกลาง ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-e-short.mp3"
@@ -642,7 +642,7 @@
     "display": "เ-",
     "name": "สระเอ",
     "sound": "สระ - เอ",
-    "audio_text": "สระ เอ",
+    "audio_text": "สะ... หระ... เอ",
     "example": "เอ",
     "mouth_cue": "แย้มริมฝีปาก ลิ้นส่วนหน้าอยู่ระดับกลาง ลากเสียงยาว",
     "audio_path": "/audio/learning/v-e-long.mp3"
@@ -654,7 +654,7 @@
     "display": "แ-ะ",
     "name": "สระแอะ",
     "sound": "สระ - แอะ",
-    "audio_text": "สระ แอะ",
+    "audio_text": "สะ... หระ... แอะ",
     "example": "แอะ",
     "mouth_cue": "อ้าปากกว้างกว่าสระเอะ ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-ae-short.mp3"
@@ -666,7 +666,7 @@
     "display": "แ-",
     "name": "สระแอ",
     "sound": "สระ - แอ",
-    "audio_text": "สระ แอ",
+    "audio_text": "สะ... หระ... แอ",
     "example": "แอ",
     "mouth_cue": "อ้าปากกว้างกว่าสระเอ ลากเสียงยาว",
     "audio_path": "/audio/learning/v-ae-long.mp3"
@@ -678,7 +678,7 @@
     "display": "โ-ะ",
     "name": "สระโอะ",
     "sound": "สระ - โอะ",
-    "audio_text": "สระ โอะ",
+    "audio_text": "สะ... หระ... โอะ",
     "example": "โอะ",
     "mouth_cue": "ห่อริมฝีปากกลม ลิ้นอยู่ด้านหลัง ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-o-short.mp3"
@@ -690,7 +690,7 @@
     "display": "โ-",
     "name": "สระโอ",
     "sound": "สระ - โอ",
-    "audio_text": "สระ โอ",
+    "audio_text": "สะ... หระ... โอ",
     "example": "โอ",
     "mouth_cue": "ห่อริมฝีปากกลม ลากเสียงยาว",
     "audio_path": "/audio/learning/v-o-long.mp3"
@@ -702,7 +702,7 @@
     "display": "เ-าะ",
     "name": "สระเอาะ",
     "sound": "สระ - เอาะ",
-    "audio_text": "สระ เอาะ",
+    "audio_text": "สะ... หระ... เอาะ",
     "example": "เอาะ",
     "mouth_cue": "อ้าปากเล็กน้อยและห่อริมฝีปาก ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-aw-short.mp3"
@@ -714,7 +714,7 @@
     "display": "-อ",
     "name": "สระออ",
     "sound": "สระ - ออ",
-    "audio_text": "สระ ออ",
+    "audio_text": "สะ... หระ... ออ",
     "example": "ออ",
     "mouth_cue": "อ้าปากเล็กน้อยและห่อริมฝีปาก ลากเสียงยาว",
     "audio_path": "/audio/learning/v-aw-long.mp3"
@@ -726,7 +726,7 @@
     "display": "เ-อะ",
     "name": "สระเออะ",
     "sound": "สระ - เออะ",
-    "audio_text": "สระ เออะ",
+    "audio_text": "สะ... หระ... เออะ",
     "example": "เออะ",
     "mouth_cue": "ริมฝีปากผ่อน ลิ้นอยู่กลางปาก ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-oe-short.mp3"
@@ -738,7 +738,7 @@
     "display": "เ-อ",
     "name": "สระเออ",
     "sound": "สระ - เออ",
-    "audio_text": "สระ เออ",
+    "audio_text": "สะ... หระ... เออ",
     "example": "เออ",
     "mouth_cue": "ริมฝีปากผ่อน ลิ้นอยู่กลางปาก ลากเสียงยาว",
     "audio_path": "/audio/learning/v-oe-long.mp3"
@@ -750,7 +750,7 @@
     "display": "เ-ียะ",
     "name": "สระเอียะ",
     "sound": "สระ - เอียะ",
-    "audio_text": "สระ เอียะ",
+    "audio_text": "สะ... หระ... เอียะ",
     "example": "เอียะ",
     "mouth_cue": "เริ่มจากยิ้มเล็กน้อยแล้วอ้าปาก เสียงสั้น",
     "audio_path": "/audio/learning/v-ia-short.mp3"
@@ -762,7 +762,7 @@
     "display": "เ-ีย",
     "name": "สระเอีย",
     "sound": "สระ - เอีย",
-    "audio_text": "สระ เอีย",
+    "audio_text": "สะ... หระ... เอีย",
     "example": "เอีย",
     "mouth_cue": "เริ่มจากยิ้มเล็กน้อยแล้วอ้าปาก ลากเสียง",
     "audio_path": "/audio/learning/v-ia-long.mp3"
@@ -774,7 +774,7 @@
     "display": "เ-ือะ",
     "name": "สระเอือะ",
     "sound": "สระ - เอือะ",
-    "audio_text": "สระ เอือะ",
+    "audio_text": "สะ... หระ... เอือะ",
     "example": "เอือะ",
     "mouth_cue": "ริมฝีปากผ่อนแล้วห่อเล็กน้อย เสียงสั้น",
     "audio_path": "/audio/learning/v-uea-short.mp3"
@@ -786,7 +786,7 @@
     "display": "เ-ือ",
     "name": "สระเอือ",
     "sound": "สระ - เอือ",
-    "audio_text": "สระ เอือ",
+    "audio_text": "สะ... หระ... เอือ",
     "example": "เอือ",
     "mouth_cue": "ริมฝีปากผ่อนแล้วห่อเล็กน้อย ลากเสียง",
     "audio_path": "/audio/learning/v-uea-long.mp3"
@@ -798,7 +798,7 @@
     "display": "-ัวะ",
     "name": "สระอัวะ",
     "sound": "สระ - อัวะ",
-    "audio_text": "สระ อัวะ",
+    "audio_text": "สะ... หระ... อัวะ",
     "example": "อัวะ",
     "mouth_cue": "เริ่มห่อปากแล้วอ้าปาก เสียงสั้น",
     "audio_path": "/audio/learning/v-ua-short.mp3"
@@ -810,7 +810,7 @@
     "display": "-ัว",
     "name": "สระอัว",
     "sound": "สระ - อัว",
-    "audio_text": "สระ อัว",
+    "audio_text": "สะ... หระ... อัว",
     "example": "อัว",
     "mouth_cue": "เริ่มห่อปากแล้วอ้าปาก ลากเสียง",
     "audio_path": "/audio/learning/v-ua-long.mp3"
@@ -822,7 +822,7 @@
     "display": "-ำ",
     "name": "สระอำ",
     "sound": "สระ - อำ",
-    "audio_text": "สระ อำ",
+    "audio_text": "สะ... หระ... อำ",
     "example": "อำ",
     "mouth_cue": "อ้าปากเล็กน้อย แล้วปิดท้ายเสียงผ่านจมูก",
     "audio_path": "/audio/learning/v-am.mp3"
@@ -833,8 +833,8 @@
     "position": 26,
     "display": "ใ-",
     "name": "สระใอ ไม้ม้วน",
-    "sound": "สะ ใอ ไม้ม้วน",
-    "audio_text": "สะ ใอ ไม้ม้วน",
+    "sound": "สระ - ใอ ไม้ม้วน",
+    "audio_text": "สะ... หระ... ใอ ไม้ม้วน",
     "example": "ใอ",
     "mouth_cue": "อ้าปากจากเสียงอะแล้วเลื่อนไปยิ้ม",
     "audio_path": "/audio/learning/v-ai-maimuan.mp3"
@@ -845,8 +845,8 @@
     "position": 27,
     "display": "ไ-",
     "name": "สระไอ ไม้มลาย",
-    "sound": "สะ ไอ ไม้มลาย",
-    "audio_text": "สะ ไอ ไม้มลาย",
+    "sound": "สระ - ไอ ไม้มลาย",
+    "audio_text": "สะ... หระ... ไอ ไม้มลาย",
     "example": "ไอ",
     "mouth_cue": "อ้าปากจากเสียงอะแล้วเลื่อนไปยิ้ม",
     "audio_path": "/audio/learning/v-ai-maimalai.mp3"
@@ -858,7 +858,7 @@
     "display": "เ-า",
     "name": "สระเอา",
     "sound": "สระ - เอา",
-    "audio_text": "สระ เอา",
+    "audio_text": "สะ... หระ... เอา",
     "example": "เอา",
     "mouth_cue": "เริ่มแย้มปากแล้วค่อยห่อริมฝีปาก",
     "audio_path": "/audio/learning/v-ao.mp3"
@@ -870,7 +870,7 @@
     "display": "ฤ",
     "name": "สระฤ",
     "sound": "สระ - รึ",
-    "audio_text": "สระ รึ",
+    "audio_text": "สะ... หระ... รึ",
     "example": "รึ",
     "mouth_cue": "ริมฝีปากผ่อน ยกลิ้นเล็กน้อย ออกเสียงสั้น",
     "audio_path": "/audio/learning/v-rue-short.mp3"
@@ -882,7 +882,7 @@
     "display": "ฤๅ",
     "name": "สระฤๅ",
     "sound": "สระ - รือ",
-    "audio_text": "สระ รือ",
+    "audio_text": "สะ... หระ... รือ",
     "example": "รือ",
     "mouth_cue": "ริมฝีปากผ่อน ยกลิ้นเล็กน้อย ลากเสียงยาว",
     "audio_path": "/audio/learning/v-rue-long.mp3"
@@ -894,7 +894,7 @@
     "display": "ฦ",
     "name": "สระฦ",
     "sound": "สระ - ลึ",
-    "audio_text": "สระ ลึ",
+    "audio_text": "สะ... หระ... ลึ",
     "example": "ลึ",
     "mouth_cue": "ปลายลิ้นแตะปุ่มเหงือกแล้วออกเสียงสั้น",
     "audio_path": "/audio/learning/v-lue-short.mp3"
@@ -906,7 +906,7 @@
     "display": "ฦๅ",
     "name": "สระฦๅ",
     "sound": "สระ - ลือ",
-    "audio_text": "สระ ลือ",
+    "audio_text": "สะ... หระ... ลือ",
     "example": "ลือ",
     "mouth_cue": "ปลายลิ้นแตะปุ่มเหงือกแล้วลากเสียงยาว",
     "audio_path": "/audio/learning/v-lue-long.mp3"
